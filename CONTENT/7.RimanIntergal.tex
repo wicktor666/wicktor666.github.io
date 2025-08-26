@@ -1,0 +1,1057 @@
+\chapter{Интегрирование на компактном промежутке}
+
+\section{Интеграл Римана}
+
+
+В этой главе мы будем интегрировать на отрезке (=компактный промежуток). Конструкция интеграла которая будет описана тут восходит ещё к Древней Греции, но строгое обоснование было проделано в работах Римана. Как потом оказалось, существует, для многих целей, более удобная конструкция, которая называется интегралом Лебега. Мы не будем подробно обсуждать тут интеграл Лебега, а лишь покажем его преимущества перед конструкцией интеграла Римана. 
+
+\subsection{Разбиения, верхний и нижний интегралы Римана}
+
+
+\begin{definition}
+    Пусть $I =[a,b]$ -- заданный отрезок конечной длины. \textit{Разбиением $\mathsf{P}(I)$ отрезка называется} называется конечное множество точек $x_0,x_2,\ldots, x_n$, где
+    \[
+     a = x_0 \le x_1 \le x_2 \le \cdots \le x_{n-1} \le x_n =b
+    \]
+    
+\end{definition}
+
+\begin{mydangerr}{\bf !}
+ Всюду в этой главе, если не оговорено противное, мы будем рассматривать ограниченные функции которые принимают положительные значения.    
+\end{mydangerr}
+
+\begin{definition}\label{Rieman_sums_and_int}
+    Пусть $I$ -- отрезок конечной длины и $f:I \to \mathbb{R}$ -- ограниченная функция. Каждому разбиению $\mathsf{P} = \{x_0,x_1,\ldots, x_n\}$ отрезка $I$ определим \textit{верхнюю и нижнюю суммы Римана} следующим образом
+    \begin{eqnarray*}
+        \overline{\mathcal{R}}(f, \mathsf{P}) &:=& \sum_{k=1}^n \sup_{x \in [x_{i-1}, x_i]} f(x) \cdot \Delta x_i, \\
+        \underline{\mathcal{R}}(f, \mathsf{P}) &:=& \sum_{k=1}^n \inf_{x \in [x_{i-1}, x_i]} f(x) \cdot \Delta x_i,
+    \end{eqnarray*}
+соответственно, где $\Delta x_i: = x_i -x_{i-1}$.
+
+Наконец, числа
+
+\begin{eqnarray*}
+ \overline{\int_I} f &:=& \inf_\mathsf{P} \left\{\overline{\mathcal{R}} (f, \mathsf{P}) \right\} \\
+ \underline{\int_I} f &:=& \sup_\mathsf{P} \left\{\underline{\mathcal{R}} (f, \mathsf{P}) \right\}
+\end{eqnarray*}
+где $\inf, \sup$ берутся по всем разбиениям отрезка $I$, называются \textit{верхним и нижним интегралом Римана}, соответственно. 
+
+Если для функции $f$ верхний и нижний интегралы Римана совпадают, то говорят,\textit{что функция интегрируема по Римана на отрезке $I$} и в таком случае, общее значение этих величин обозначают так
+\[
+ \int_I f.
+\]
+\end{definition}
+
+\begin{mydanger}{\bf !}
+    Мы специально не пишем $\int_I f\mathrm{d}x$ давая тем самым понять, что это пока не связано с интегрированием дифференциальных форм.
+\end{mydanger}
+
+\begin{remark}\label{good_remark_for_Rieman}
+    Поскольку функция предполагается ограниченной, то существуют два числа $m, M$, такие, что
+    \[
+     m \le f(x) \le M, \qquad x \in I.
+    \]
+
+    Тогда при любом разбиении $\mathsf{P}$, имеем
+    \[
+     m \cdot |I| \le \underline{\mathcal{R}}(f,\mathsf{P}) \le \overline{\mathcal{R}}(\mathsf{P},f) \le M \cdot |I|.
+    \]
+
+    Это влечёт то, что числа $\underline{\mathcal{R}}(f,\mathsf{P})$, $\overline{\mathcal{R}}(f,\mathsf{P})$ образуют ограниченное множество и тогда, согласно принципу полноты Вейерштрасса (см. Теорема \ref{W=complete}), верхний и нижний интегралы для ограниченной функции всегда существуют.
+\end{remark}
+
+\begin{mydanger}{\bf !}
+    Вопрос о совпадении нижнего и верхнего интеграла Римана уже более тонкий и требует развитие определённой техники, которая и будет здесь разработана.
+\end{mydanger}
+
+\begin{definition}
+    Говорят, что разбиение $\mathsf{P}'$ \textit{тоньше разбиения} $\mathsf{P}$ одного и того же отрезка $I$, если $\mathsf{P} \subseteq \mathsf{P}'$. Другими словами, это значит, что каждая точка разбиения $\mathsf{P}'$ служит также точкой разбиения $\mathsf{P}$. В случае, когда заданы два разбиения $\mathsf{P}_1, \mathsf{P}_2$, то говорят, что $\mathsf{P}$ есть их общее \textit{утоньшение} (= \textit{измельчение}), если $\mathsf{P } = \mathsf{P}_1 \cup \mathsf{P}_2.$
+\end{definition}
+
+
+\begin{proposition}\label{R<R'}
+    Если $ \mathsf{P} \subseteq \mathsf{P}'$, то $\underline{\mathcal{R}}(f,\mathsf{P}) \le \underline{\mathcal{R}}(f,\mathsf{P}')$ и $\overline{\mathcal{R}}(f,\mathsf{P}') \le \overline{\mathcal{R}}(f,\mathsf{P})$, для любой ограниченной положительной функции $f: I \to \mathbb{R}.$
+\end{proposition}
+
+\begin{proof}
+Допустим, что $\mathsf{P}'$ содержит ровно на одну точку больше, чем $\mathsf{P}$. Обозначим эту точку через $x'$ и пусть это точка расположена так $x_{i-1} < x' < x_i$, где точки $x_{i-1}, x_i$ -- две последовательные точки разбиения $\mathsf{P}.$
+
+ Тогда, имеем
+ \[
+  \underline{\mathcal{R}}(f,\mathsf{P}') - \underline{\mathcal{R}}(f,\mathsf{P}) = \inf_{x_{i-1} \le x \le x'} f(x) \cdot (x'-x_{i-1}) + \inf_{x' \le x \le x_i} f(x) \cdot (x_i -x') - \inf_{x_{i-1} \le x \le x_i}f(x) \cdot (x_i - x_{i-1}),
+ \]
+ далее, так как $x_i- x_{i-1} = (x_i-x') + (x' - x_{i-1})$, то можно записать
+ \begin{eqnarray*}
+     \underline{\mathcal{R}}(f,\mathsf{P}') - \underline{\mathcal{R}}(f,\mathsf{P}) &=& \inf_{x_{i-1} \le x \le x'} f(x) \cdot (x'-x_{i-1}) + \inf_{x' \le x \le x_i} f(x) \cdot (x_i -x')\\
+     &&- \inf_{x_{i-1} \le x \le x_i}f(x) \cdot (x_i - x') - \inf_{x_{i-1} \le x \le x_i}f(x) \cdot (x' - x_{i-1}),
+ \end{eqnarray*}
+ тогда, приводя подобные, получаем
+ \[
+    \underline{\mathcal{R}}(f,\mathsf{P}') - \underline{\mathcal{R}}(f,\mathsf{P}) = \left( \inf_{x_{i-1} \le x \le x'} f(x) - \inf_{x_{i-1} \le x \le x_i} f(x) \right)\cdot (x'-x_{i-1}) + \left( \inf_{x' \le x \le x_i} f(x) - \inf_{x_{i-1} \le x \le x_i} f(x) \right)\cdot (x_i-x').
+ \]
+
+ Аналогично рассуждая, получаем
+  \[
+    \overline{\mathcal{R}}(f,\mathsf{P}') - \overline{\mathcal{R}}(f,\mathsf{P}) = \left( \sup_{x_{i-1} \le x \le x'} f(x) - \sup_{x_{i-1} \le x \le x_i} f(x) \right)\cdot (x'-x_{i-1}) + \left( \sup_{x' \le x \le x_i} f(x) - \sup_{x_{i-1} \le x \le x_i} f(x) \right)\cdot (x_i-x').
+ \]
+
+Далее, так как $\inf_{\alpha \le x \le \beta} f(x) = \inf f([\alpha, \beta])$ и $\sup_{\alpha \le x \le \beta} f(x) = \sup f([\alpha, \beta])$, и если $[\alpha, \beta] \subseteq [a,b]$, то (см. Лемму \ref{A<B=sup(A)<sup(B)})
+\[
+ \inf_{\alpha \le x \le \beta} f(x)  \ge \inf_{a \le x \le b} f(x), \qquad  \sup_{\alpha \le x \le \beta} f(x)  \ge \sup_{a \le x \le b} f(x).
+\]
+
+Ввиду того, что $[x_{i-1},x'], [x',x_i] \subseteq [x_{i-1},x_i]$, то $\underline{\mathcal{R}}(f,\mathsf{P}') - \underline{\mathcal{R}}(f,\mathsf{P}) \ge 0$, и $\overline{\mathcal{R}}(f,\mathsf{P}') - \overline{\mathcal{R}}(f,\mathsf{P}) \le 0$.
+
+Если $\mathsf{P}'$ содержит на $k$ точек больше, чем $\mathsf{P}$, то мы повторим только что проведённое рассуждение $k$ раз\footnote{так как разбиение состоит из конечного числа точек, то это рассуждение корректно.} и получим требуемое неравенство. Второе неравенство доказывается аналогично. Это завершает доказательство.
+\end{proof}
+
+\subsection{Критерий интегрируемости}
+
+
+\begin{theorem}\label{Lint<=Uint}
+ \[
+  \underline{\int_I}f \le \overline{\int_I}f.
+ \]
+\end{theorem}
+\begin{proof}
+ Рассмотрим два произвольных разбиения $\mathsf{P}_1, \mathsf{P}_2$ отрезка $I$, и пусть далее $\mathsf{P}: = \mathsf{P}_1 \cup \mathsf{P}_2$. Так как $\mathsf{P}_1, \mathsf{P}_2 \subseteq \mathsf{P}$, то по предложению \ref{R<R'},
+ \[
+  \underline{\mathcal{R}}(\mathsf{P}_1,f) \le \underline{\mathcal{R}}(\mathsf{P},f) \le \overline{\mathcal{R}}(\mathsf{P},f) \le \overline{\mathcal{R}}(\mathsf{P}_2,f).
+ \]
+Тогда
+\[
+ \underline{\mathcal{R}}(\mathsf{P}_1,f) \le  \overline{\mathcal{R}}(\mathsf{P}_2,f).
+\]
+
+Считая $\mathsf{P}_2$ фиксированным и вычисляя верхнюю грань по всем $\mathsf{P}_1$, получаем тогда
+\[
+ \underline{\int_I}f \le \overline{\mathcal{R}}(\mathsf{P}_2,f)
+\]
+
+Вычисляя нижнюю грань по всем $\mathsf{P}_2$ получаем утверждение теоремы.
+
+\end{proof}
+
+\begin{theorem}[Критерий интегрируемости по Риманау]\label{criteria_for_Rieman}
+    Функция $f:I \to \mathbb{R}$ интегрируема по Риману, тогда и только тогда, когда для любого $\varepsilon>0$ найдётся такое разбиение $\mathsf{P}$, что
+    \[
+     \overline{\mathcal{R}}(f,\mathsf{P}) - \underline{\mathcal{R}}(f,\mathsf{P})<\varepsilon.
+    \]
+\end{theorem}
+
+\begin{proof}~
+
+(1) При любом разбиении $\mathsf{P}$, согласно предыдущей теореме имеем
+ \[
+  \underline{\mathcal{R}}(\mathsf{P},f) \le \underline{\int_I}f \le \overline{\int_I}f \le \overline{\mathcal{R}}(\mathsf{P},f),
+ \]
+ тогда, если для разбиения $\mathsf{P}$ имеет место неравенство
+ \[
+     \overline{\mathcal{R}}(f,\mathsf{P}) - \underline{\mathcal{R}}(f,\mathsf{P})<\varepsilon,
+    \]
+то мы получаем неравенство
+\[
+ 0 \le \overline{\int_I}f - \underline{\int_I}f < \varepsilon,
+\]
+которое верно для любого $\varepsilon>0$. Но это и означает, что эти числа равны, иначе ведь они будут отличаться друг от друга на разность между ними, \textit{т.е.,} уже не для всех $\varepsilon>0$ это будет верно.
+
+Таким образом $\underline{\int_I}f = \overline{\int_I}f$, что и означает интегрируемость функции $f.$
+
+(2) Пусть теперь $f$ интегрируема и пусть задано число $\varepsilon>0$, тогда в силу определения $\sup$ и $\inf$, существуют разбиения $\mathsf{P}_1,\mathsf{P}_2$, такие что
+\begin{align*}
+    & \overline{\mathcal{R}}(\mathsf{P}_2,f) - \int_I f < \frac{\varepsilon}{2},\\
+    & \int_I f - \underline{\mathcal{R}}(\mathsf{P}_1,f) < \frac{\varepsilon}{2}.
+\end{align*}
+
+Тогда для разбиения $\mathsf{P} : = \mathsf{P}_1 \cup \mathsf{P}_2$, учитывая теорему \ref{R<R'}, получаем
+\begin{eqnarray*}
+    \overline{\mathcal{R}}(\mathsf{P},f) &\le &   \overline{\mathcal{R}}(\mathsf{P}_2,f) \\
+    &<& \int_I f + \frac{\varepsilon}{2} < \underline{\mathcal{R}}(\mathsf{P}_1,f) + \frac{\varepsilon}{2} + \frac{\varepsilon}{2} \\
+    &=& \underline{\mathcal{R}}(\mathsf{P}_1,f) + \varepsilon \le \underline{\mathcal{R}}(\mathsf{P},f) +\varepsilon.
+\end{eqnarray*}
+
+Итак, для интегрируемой функции $f$ и для заданного числа $\varepsilon>0$ мы нашли такое разбиение $\mathsf{P}$, что
+\[
+ \overline{\mathcal{R}}(f,\mathsf{P}) - \underline{\mathcal{R}}(f,\mathsf{P})<\varepsilon.
+\]
+
+Это завершает доказательство теоремы.
+\end{proof}
+
+\subsection{Аппроксимация интеграла Римана суммами}
+
+
+\begin{definition}
+    Для любого разбиения $\mathsf{P}$ положим
+    \[
+     \|\mathsf{P}\|:=\max \{ \Delta x_1,\ldots, \Delta x_n \}
+    \]
+    и назовём это число \textit{нормой разбиения $\mathsf{P}$.}
+\end{definition}
+
+
+\begin{theorem}\label{continous=integrable}
+    Если функция $f:I \to \mathbb{R}$ непрерывна, то она интегрируема по Римана и более того, для каждого $\varepsilon>0$ можно найти такое $\delta>0$, что
+    \[
+     \left| \sum_{i=1}^n f(\xi_i) \Delta x_i - \int_I f \right| < \varepsilon
+    \]
+    для любого разбиения $\mathsf{P} = \{x_0,x_1,\ldots, x_n\}$ отрезка $I$, удовлетворяющего условию $\| \mathsf{P} \| < \delta$, и при произвольном выборе точек $\xi_1 \in [a,x_1],\, \xi_2 \in [x_1,x_2], \ldots, \xi_n \in [x_{n-1},b].$
+\end{theorem}
+\begin{proof}~
+
+(1)  Так как функция $f:I \to \mathbb{R}$ непрерывна в каждой точке отрезке, то это значит, что для любого $\eta>0$ можно найти точку $x \in I$ и такое число\footnote{этим мы хотим сказать, что это число зависит от точки $x$ \textit{т.е.,} в разных точках, будет своё число $\delta$.} $\delta(x) >0$, что неравенство $|x - x'|< \delta(x)$ влечёт $|f(x) - f(x')|<\frac{1}{2}\eta.$
+
+Покажем, что на самом деле, для любого $\eta>0$ можно выбрать для всех точек отрезка одно число $\delta>0$, такое что из неравенства $|x-x'| < \delta$ будет следовать неравенство $|f(x) - f(x')| < \eta.$ 
+
+Для этого рассмотрим открытые в $I$ множества (=$\delta(x)$-окрестности)
+\[
+ I(x): = \left(x-\frac{1}{2}\delta(x), x + \frac{1}{2}\delta(x) \right) \cap I,
+\]
+тогда $I = \cup_{x\in I}I(x)$, \textit{т.е.,} $\{I(x)\}_{x\in I}$ -- открытое покрытие отрезка $I$, а так как $I$ -- компактен, то из этого покрытия можно найти конечное подпокрытие, скажем 
+\[
+ I = I(x_1) \cup \cdots \cup I(x_n),
+\]
+пусть теперь
+\[
+ \delta:=\frac{1}{2}\min \left\{ \delta(x_1),\ldots, \delta(x_n)  \right\}.
+\]
+
+Покажем теперь, что если $|x-x'| < \delta$, то $|f(x)- f(x')| < \eta$. Так как $x' \in I$, то согласно нашему конечному покрытию найдётся такое число $1 \le j \le n$, что $x ' \in I(x_j)$, но это значит, что $|x'-x_j| < \frac{1}{2}\delta(x_j)$.
+
+Далее, используя неравенство треугольника, получаем
+\begin{eqnarray*}
+    |x-x_j| &\le& |x-x'| + |x'-x_j| \\
+       &<& \delta + \frac{1}{2}\delta(x_j) \\
+       &\le & \frac{1}{2}\delta(x_j) + \frac{1}{2}\delta(x_j)  =\delta(x_j).
+\end{eqnarray*}
+
+Наконец, в силу непрерывности $f$ имеем, что для любого $\eta>0$ из неравенств $|x-x_j| < \delta(x_j)$, $|x_j - x'| < \delta(x_j)$ следуют неравенства $|f(x)-f(x_j)|, |f(x_j) - f(x')|<\frac{1}{2}\eta$. Но тогда получаем
+\[
+ |f(x) - f(x')| \le |f(x)- f(x_j)| + |f(x_j) - f(x')| < \frac{1}{2} \eta + \frac{1}{2} \eta = \eta.
+\]
+
+Итак, мы показали, что для любого $\eta>0$ можно найти такое $\delta>0$ что из неравенства $|x-x'|<\delta$ следует неравенство $|f(x) - f(x')| < \eta.$
+
+
+(2) Далее, для заданного числа $\varepsilon>0$ возьмём такое число $\eta>0$, чтобы $|I|\cdot \eta < \varepsilon.$ 
+
+Возьмём теперь произвольное разбиение $\mathsf{P} = \{x_0,x_1,\ldots, x_n\}$ с условием $\|\mathsf{P}\| < \delta$ и возьмём произвольно числа $\xi_1 \in [a,x_1],\, \xi_2 \in [x_1,x_2], \ldots, \xi_n \in [x_{n-1},b].$
+
+Так как $\| \mathsf{P}\| < \delta$, то это также означает, что $|x_i - \xi_i|, |\xi_i-x_{i+1}|, |x_{i+1} - x_i| < \delta$, для всех $i=1,2,\ldots, n$. Но тогда, как мы уже показали в пункте (1), из этих неравенств следуют неравенства 
+\[
+ |f(x_i) - f(\xi_i)|, |f(\xi_i) - f(x_{i+1})|, |f(x_{i+1}) - f(x_i)| < \eta, \qquad i =1,2, \ldots, n
+\]
+
+Далее, так как каждый $[x_i,x_{i+1}]$ компактен, а $f$ непрерывна на каждом из них (потому что $f$ непрерывна на всём $I$, см. Следствие \ref{restriction_on_R}), то в силу теоремы Вейерштрасса \ref{W2_on_R}, существуют точки $y_i,y_i' \in [x_i,x_{i+1}]$, такие что
+\[
+f(y_i) =  \sup_{x \in [x_i, x_{i+1}]}f(x),\quad f(y_i') = \inf_{x \in [x_i,x_{i+1}]}f(x).
+\]
+
+Тогда, получаем, что для каждого $i=1,2,\ldots, n$
+\[
+ \sup_{x \in [x_i, x_{i+1}]}f(x) - \inf_{x \in [x_i,x_{i+1}]}f(x) \le \eta.
+\]
+
+Но тогда получаем
+\begin{eqnarray*}
+ \overline{\mathcal{R}}(\mathsf{P},f) - \underline{\mathcal{R}}(\mathsf{P},f) &=& \sum_{i=1}^n  \sup_{x \in [x_i, x_{i+1}]}f(x) \cdot \Delta x_i - \sum_{i=1}^n  \inf_{x \in [x_i, x_{i+1}]}f(x) \cdot \Delta x_i \\
+ &=& \sum_{i=1}^n \left( \sup_{x \in [x_i, x_{i+1}]}f(x) - \inf_{x \in [x_i, x_{i+1}]}f(x) \right)\cdot \Delta x_i \\
+ &\le& \eta \sum_{i=1}^n \Delta x_i = \eta \cdot |I| < \varepsilon.
+\end{eqnarray*}
+
+Используя теперь теорему \ref{criteria_for_Rieman} мы завершаем доказательство.
+\end{proof}
+
+Доказанная теорема приводит к другому определению интеграла Римана, как аппроксимация суммами, при этом мы уже не будем выбирать максимальное и минимальное значения функции на элементе разбиения. В случае непрерывной функции, как показывает предыдущий результат, выбирать теперь можно любую точку в отрезке $\xi_i \in [x_i, x_{i+1}]$ и рассматривать соответствующие суммы.
+
+Оказывается такой же подход корректен и в более общем случае, \textit{т.е.,} когда функция необязательно непрерывная. Сейчас мы и покажем, что интеграл Римана можно рассмотреть как аппроксимацию суммами. Более точно это выглядит следующим образом.
+
+\begin{definition}\label{def_of_Rieman_via_lim}
+    Пусть $\mathsf{P}$ -- какое-нибудь разбиение отрезка $I$. Выберем точки $\xi_1,\ldots, \xi_n$ так, чтобы $\xi_i \in [x_{i-1},x_i]$ для всех $i =1,2,\ldots, n$, будем такой выбор называть \textit{допустимым.} Рассмотрим сумму
+    \[
+     \mathcal{S}(\mathsf{P}, f):= \sum_{i=1}^n f(\xi_i)\cdot \Delta x_i.
+    \]
+
+Тогда, если существует число $\mathcal{S}$, такое что, для любого $\varepsilon>0$ можно найти такое $\delta >0$, и такое разбиение $\mathsf{P}$, у которого $\| \mathsf{P}\| <\delta$, что верно неравенство
+\[
+ \left| \mathcal{S}(\mathsf{P}, f) - \mathcal{S} \right|<\varepsilon,
+\]
+то пишут
+\[
+ \lim_{\|\mathsf{P}\| \to 0} \mathcal{S}(\mathsf{P},f) :=\mathcal{S},
+\]
+при этом сумму $\mathcal{S}(\mathsf{P},f)$ называют \textit{интегральной суммой}.
+\end{definition}
+
+\begin{mydangerr}{\bf !}
+    Нужно отметить, что последнюю формулу действительно можно понимать как предел, это то, что называют предел по базе. Но мы не будем на этом останавливаться, пока что для нас это всего лишь символ. Тем не менее, как мы увидим далее, в некоторых случаях это формула превратиться в предел последовательности.
+\end{mydangerr}
+
+\begin{remark}
+    Обозначение $\mathcal{S}(\mathsf{P}, f)$ на самом деле неполное, так как эта сумма зависит ещё и от выбора точек $\xi_1,\ldots, \xi_n$. Но, это не приводит ни к какому недоразумению, так как мы требуем чтобы неравенство $\left| \mathcal{S}(\mathsf{P}, f) - \mathcal{S} \right|<\varepsilon$ выполнялось \textbf{при всяком} $\mathsf{P}$ \textbf{и при всяком допустимом выборе точек} $\xi_i$, если только $\| \mathsf{P}\| < \delta.$
+\end{remark}
+
+\begin{theorem}\label{int_Rimean_as_limit}
+ Функция $f:I \to \mathbb{R}$ интегрируема на отрезке $I$ тогда и только тогда, когда предел $\lim\limits_{\|\mathsf{P}\| \to 0} \mathcal{S}(\mathsf{P},f)$ существует в смысле определения \ref{def_of_Rieman_via_lim}, и более того
+    \[
+     \int_I f = \lim_{\|\mathsf{P}\| \to 0} \mathcal{S}(\mathsf{P},f).
+    \]
+\end{theorem}
+\begin{proof}~
+
+(1)  Пусть $\lim\limits_{\|\mathsf{P}\| \to 0} \mathcal{S}(\mathsf{P},f) = \mathcal{S}$, тогда для заданного $\varepsilon>0$ существует $\delta>0$, такое, что найдётся разбиение $\mathsf{P}$ при $\|\mathsf{P}\| <\delta$ имеем
+    \[
+     \mathcal{S} - \frac{\varepsilon}{2} < \mathcal{S}(\mathsf{P},f) < \mathcal{S} + \frac{\varepsilon}{2}.
+    \]
+
+Так как 
+\[
+ \overline{\mathcal{R}}(\mathsf{P},f) = \sup_{\xi_1,\ldots, \xi_n} \{ \mathcal{S}(\mathsf{P},f) \}, \qquad  \underline{\mathcal{R}}(\mathsf{P},f) = \inf_{\xi_1,\ldots, \xi_n} \{ \mathcal{S}(\mathsf{P},f) \}, 
+\]
+где рассматриваются все возможные допустимые выборы точек $\xi_1,\ldots, \xi_n$. Так как все элементы $\mathcal{S}(\mathsf{P},f)$ множества 
+\[
+ \Bigl\{ \mathcal{S}(\mathsf{P},f)\, :\, \xi_1 \in [x_0,x_1], \ldots, \xi_n\in [x_{n-1},x_n]  \Bigr\}
+\]
+удовлетворяют неравенству
+\[
+ \mathcal{S} - \frac{\varepsilon}{2} < \mathcal{S}(\mathsf{P},f) < \mathcal{S} + \frac{\varepsilon}{2},
+\]
+то, принимая во внимание замечание \ref{good_remark_for_Rieman}, получаем
+\[
+ \mathcal{S} - \frac{\varepsilon}{2} \le \underline{\mathcal{R}}(\mathsf{P},f) \le \overline{\mathcal{R}}(\mathsf{P},f) \le \mathcal{S} + \frac{\varepsilon}{2},
+\]
+\textit{т.е.,} для любого $\varepsilon >0$
+\[
+  \overline{\mathcal{R}}(\mathsf{P},f) - \underline{\mathcal{R}}(\mathsf{P},f) < \varepsilon,
+\]
+тогда по критерию интегрируемости (теорема \ref{criteria_for_Rieman}), получаем, что $f$ -- интегрируема.
+
+(2) Пусть $f\in \mathscr{R}(I)$, тогда $\overline{\int_I}f = \underline{\int_I}f$. Так как 
+\[
+ \overline{\int_I}f: = \inf_\mathsf{P} \left\{ \overline{\mathcal{R}}(\mathsf{P},f) \ \right\},
+\]
+то для любого $\varepsilon_1 >0$ найдётся такое разбиение $\mathsf{P}_1$, что
+\[
+ \int_I f + \varepsilon_1 > \overline{\mathcal{R}}(\mathsf{P}_1,f).
+\]
+
+Аналогично, используя теперь равенство $\int_I f = \underline{\int_I}f$ и определение нижнего интеграла, мы для любого $\varepsilon_2>0$ найдём такое разбиение $\mathsf{P}_2$, что 
+\[
+ \underline{\mathcal{R}}(\mathsf{P}_2,f) > \int_I f -\varepsilon_2.
+\]
+
+
+Пусть $\mathsf{P}: = \mathsf{P}_1 \cup \mathsf{P}_2$, тогда $\mathsf{P}_1,\mathsf{P}_2 \subseteq \mathsf{P}$. Тогда, используя предложению \ref{R<R'}, получаем
+\[
+\int_I f - \varepsilon_2 < \underline{\mathcal{R}}(\mathsf{P}_2,f) \le \underline{\mathcal{R}}(\mathsf{P},f) \le \overline{\mathcal{R}}(\mathsf{P},f) \le \overline{\mathcal{R}}(\mathsf{P}_1,f) < \int_I f + \varepsilon_1,
+\]
+
+Пусть теперь $\varepsilon: = \max\{\varepsilon_1, \varepsilon_2\}$, тогда имеем
+\[
+ \int_I f - \varepsilon < \underline{\mathcal{R}}(\mathsf{P},f) \le \overline{\mathcal{R}}(\mathsf{P},f) < \int_I f + \varepsilon.
+\]
+
+Тогда для любой интегральной суммы $\mathcal{S}(\mathsf{P},f )$ получаем
+\[
+ \int_I f -\varepsilon < \mathcal{S}(\mathsf{P},f ) < \int_I f + \varepsilon,
+\]
+так как $\underline{\mathcal{R}}(\mathsf{P},f) \le \mathcal{S}(\mathsf{P},f ) \le \overline{\mathcal{R}}(\mathsf{P},f)$.
+
+Далее, пусть $\|\mathsf{P}\| < \delta$, тогда наш результат говорит, что мы для любого $\varepsilon>0$ нашли такое $\delta>0$ и такое разбиение $\| \mathsf{P}\| < \delta$, что
+\[
+ \left| \mathcal{S}(\mathsf{P}, f) - \int_I f \right|< \varepsilon,
+\]
+что и доказывает утверждение.
+\end{proof}
+
+\subsection{Основная теорема интегрального исчисления}
+
+\begin{theorem}[Основная теорема интегрального исчисления]\label{the_general_theorem_of_int}
+    Если $f \in \mathscr{R}([a,b])$ и существует такая дифференцируемая функция $F$ на отрезке $[a,b]$, такая, что $F'(x) =f(x)$ при всех $x \in [a,b]$, то
+    \[
+     \int_{[a,b]}f = F(b)  -F(a).
+    \]
+\end{theorem}
+
+
+\begin{proof}
+    Пусть $\mathsf{P} = \{a,x_1,\ldots, x_{n-1}, b\}$ произвольное разбиение отрезка $[a,b]$. Так как $F$ -- дифференцируема в каждом точке отрезка, то она дифференцируема на каждом отрезке $[x_i,x_{i+1}]$. Тогда, согласно теореме Лагранжа \ref{Langrange}, существует такое $\xi_i \in [x_i, x_{i+1}]$, что
+    \[
+     F(x_{i+1}) - F(x_i) = F'(\xi_i)\cdot (x_{i+1} - x_i), \qquad i =0,1,\ldots, n-1.
+    \]
+
+    Так как $F'(\xi_i) =f(\xi_i)$, то получаем
+    \begin{eqnarray*}
+        F(b) - F(a) &=& (F(b) - F(x_{n-1})) + (F(x_{n-1}) - F(x_{n-2})) + \cdots + (F(x_2) - F(x_1)) + (F(x_1) - F(a))\\ 
+        &=& \sum_{i=0}^{n-1} \left( F(x_{i+1}) - F(x_i)\right) \\
+        &=&\sum_{i=0}^{n-1} f(\xi_i) \cdot (x_{i+1} - x_i),
+    \end{eqnarray*}
+последнее выражение есть интегральная сумма, и если $\|\mathsf{P}\| \to 0$, то согласно теореме \ref{int_Rimean_as_limit}, эта сумма стремится к $\int_{[a,b]}f$, что и доказывает утверждение.
+\end{proof}
+
+\section{Основные свойства интеграла}
+
+Нам понадобятся некоторые факты для $\inf, \sup$.
+
+\begin{definition}
+ Пусть $A,B \subseteq \mathbb{R}$, \textit{суммой Минковского этих множеств} называется множество
+ \[
+  A+B:=\{a+b\, :\, a\in A, b\in B\}
+ \]
+\end{definition}
+
+\begin{lemma}\label{inf(A+B)}
+    Для любых ограниченных множеств $A,B\subseteq \mathbb{R}$,
+    \begin{align*}
+        & \inf(A+B) = \inf(A) + \inf(B),\\
+        & \sup(A+B) = \sup(A) + \sup(B).
+    \end{align*}
+\end{lemma}
+
+\begin{proof}
+Мы докажем только первое равенство, так как второе доказывается аналогично.
+
+Так как, $a\ge \inf(A)$ и $b \ge \inf(B)$ для любых $a \in A, b\in B$, то $a+b \ge \inf(A) + \inf(B)$, но тогда и $\inf(A+B) \ge \inf(A) + \inf(B).$
+
+Далее, согласно определению $\inf$ (см. Определение \ref{sup,inf} и леммы которые ниже него), для любого $\varepsilon>0$, найдутся такие $a\in A$, $b\in B$, что $a-\frac{\varepsilon}{2} \le \inf(A)$ и $b - \frac{\varepsilon}{2} \le \inf(B)$, а тогда $a+b \le \inf(A) + \inf(B) + \varepsilon$.
+
+Таким образом, для любого $\varepsilon>0$ имеем неравенство $\inf(A+B) \le \inf(A) + \inf(B) + \varepsilon$, но это означает, что $\inf(A+B) \le \inf(A) + \inf(B)$. Принимая во внимание противоположное неравенство, мы завершаем доказательство.
+\end{proof}
+
+\begin{lemma}\label{sup(aA)}
+    Для любого $\alpha \in \mathbb{R}$ и любого ограниченного множества $A \subseteq \mathbb{R}$,
+    \[
+     \sup(\alpha \cdot A) = \begin{cases}
+         \alpha \cdot \sup(A), & \alpha \ge 0,\\
+         \alpha \cdot \inf(A), & \alpha \le 0,
+     \end{cases} \qquad  \inf(\alpha \cdot A) = \begin{cases}
+         \alpha \cdot \inf(A), & \alpha \ge 0,\\
+         \alpha \cdot \sup(A), & \alpha \le 0,
+     \end{cases} 
+    \]
+\end{lemma}
+
+
+\begin{corollary}
+Для любого ограниченного множества $A \subseteq \mathbb{R}$,
+    \[
+     \sup(A) - \inf(A) \ge 0.
+    \]
+    
+\end{corollary}
+
+\subsection{Линейность интеграла}
+
+Пусть $I$ -- отрезок конечной длины, обозначим через $\mathscr{R}(I)$ множество всех функций которые интегрируемы по Риману на этом отрезке. Мы по прежнему продолжаем считать что все функции ограничены на отрезке.
+
+\begin{theorem}\label{int(f+g)=int(f)+int(g)}
+    Если $f_1,f_2 \in \mathscr{R}(I)$, то $f_1 +f_2 \in \mathscr{R}(I)$ и более того
+    \[
+     \int_I(f_1 + f_2) = \int_I f_1 + \int_I f_2.
+    \]
+\end{theorem}
+\begin{proof}~
+
+(1) Покажем, что сумма интегрируемых функций является интегрируемой. Так как $f_1,f_2 \in \mathscr{R}(I)$, то согласно критерию интегрируемости (см. Теореме \ref{criteria_for_Rieman}), для любого $\varepsilon>0$ можно найти такие разбиения $\mathsf{P}_1, \mathsf{P}_2$ отрезка $I$, что
+\begin{align}
+    & \overline{\mathcal{R}}(\mathsf{P}_1,f_1) - \underline{\mathcal{R}}(\mathsf{P}_1,f_1) < \frac{\varepsilon}{2}, \label{R1-R1'<}\\
+    & \overline{\mathcal{R}}(\mathsf{P}_2,f_2) - \underline{\mathcal{R}}(\mathsf{P}_2,f_2) < \frac{\varepsilon}{2}. \label{R2-R2'<}
+\end{align}
+
+Пусть $\mathsf{P}: = \mathsf{P}_1 \cup \mathsf{P}_2$, тогда $\mathsf{P}_1,\mathsf{P}_2 \subseteq \mathsf{P}$. По предложению \ref{R<R'},
+\[
+ \underline{\mathcal{R}}(\mathsf{P}_1,f_1) \le \underline{\mathcal{R}}(\mathsf{P},f_1) \le \overline{\mathcal{R}}(\mathsf{P},f) \le \overline{\mathcal{R}}(\mathsf{P}_1,f_1),
+\]
+но тогда и $\overline{\mathcal{R}}(\mathsf{P},f_1) - \underline{\mathcal{R}}(\mathsf{P},f_1) < \frac{\varepsilon}{2}$. Аналогично рассуждая, имеем $\overline{\mathcal{R}}(\mathsf{P},f_2) - \underline{\mathcal{R}}(\mathsf{P},f_2) < \frac{\varepsilon}{2}$.
+
+
+Далее, согласно определению сумм Римана (см. Определение \ref{Rieman_sums_and_int}) и лемме \ref{inf(A+B)}, 
+\begin{eqnarray*}
+    \overline{\mathcal{R}}(f_1+f_2, \mathsf{P}) &:=& \sum_{k=1}^n \sup_{x \in [x_{i-1}, x_i]} (f_1(x) + f_2(x)) \cdot \Delta x_i \\
+    &=& \sum_{k=1}^n \sup_{x \in [x_{i-1}, x_i]} f_1(x)  \cdot \Delta x_i + \sum_{k=1}^n \sup_{x \in [x_{i-1}, x_i]} f_2(x)  \cdot \Delta x_i \\
+    &=& \overline{\mathcal{R}}(f_1, \mathsf{P}) + \overline{\mathcal{R}}(f_2, \mathsf{P}),
+\end{eqnarray*}
+аналогично получаем
+\[
+  \underline{\mathcal{R}}(f_1+f_2, \mathsf{P}) =  \underline{\mathcal{R}}(f_1, \mathsf{P}) +\underline{\mathcal{R}}(f_2, \mathsf{P}).
+\]
+
+Наконец, учитывая неравенства (\ref{R1-R1'<}), (\ref{R2-R2'<}), получаем, что для любого $\varepsilon>0$ мы предъявили такое разбиение $\mathsf{P}$, что
+\[
+ \overline{\mathcal{R}}(f_1+f_2, \mathsf{P}) - \underline{\mathcal{R}}(f_1+f_2, \mathsf{P}) = \left( \overline{\mathcal{R}}(f_1, \mathsf{P}) - \underline{\mathcal{R}}(f_1, \mathsf{P}) \right) - \left( \overline{\mathcal{R}}(f_2, \mathsf{P}) - \underline{\mathcal{R}}(f_2, \mathsf{P}) \right) < \varepsilon,
+\]
+а тогда по критерию интегрируемости (см. Теорема \ref{criteria_for_Rieman}), получаем, что $f_1+f_2 \in \mathscr{R}(I).$
+
+(2) Докажем теперь второе утверждение. Согласно определению верхних и нижних интегралов, а также определению $\inf, \sup$, для любого $\varepsilon>$ существуют такие разбиения $\mathsf{P}_1, \mathsf{P}_2$ отрезка $I$, что
+\[
+ \overline{\int_I}f_1 + \frac{\varepsilon}{2} > \overline{\mathcal{R}}(\mathsf{P}_1,f_1), \qquad  \overline{\int_I}f_2 + \frac{\varepsilon}{2} > \overline{\mathcal{R}}(\mathsf{P}_2,f_2),
+\]
+положив $\mathsf{P}: = \mathsf{P}_1 \cup \mathsf{P}_2$ и воспользовавшись предложением \ref{R<R'}, получаем
+\[
+ \overline{\int_I}f_1 + \frac{\varepsilon}{2} > \overline{\mathcal{R}}(\mathsf{P},f_1), \qquad  \overline{\int_I}f_2 + \frac{\varepsilon}{2} > \overline{\mathcal{R}}(\mathsf{P},f_2).
+\]
+
+Имеем
+\begin{eqnarray*}
+    \overline{\int_I}(f_1 +f_2) &\le& \overline{\mathcal{R}}(f_1 + f_2, \mathsf{P}) \\
+    &=& \overline{\mathcal{R}}(f_1, \mathsf{P}) + \overline{\mathcal{R}}(f_2, \mathsf{P}) \\
+    &<& \overline{\int_I}f_1 + \overline{\int_I}f_2 + \varepsilon.
+\end{eqnarray*}
+
+
+
+Работая теперь с нижними суммами и вспоминая определение $\sup$, получаем
+\[
+ \underline{\int_I}(f_1+f_2) > \underline{\int_I}f_1 + \underline{\int_I}f_2 - \varepsilon.
+\]
+
+Так как мы уже показали, что функция $f_1+f_2 \in \mathscr{R}(I)$, то $\underline{\int}_I(f_1+f+2) = \overline{\int_I}(f_1+f+2)$. Далее, по условию $f_1,f_2 \in \mathscr{R}(I)$, то $\underline{\int_I}f_1 = \overline{\int_I}f_1 = \int_I f_1$, $\underline{\int_I}f_2 = \overline{\int_I}f_2 = \int_I f_2$.
+
+Поэтому для любого $\varepsilon>0$ имеем
+\[
+{\int_I}f_1 + {\int_I}f_2 - \varepsilon < \int_I(f_1+f_2) < {\int_I}f_1 + {\int_I}f_2 + \varepsilon 
+\]
+откуда
+\[
+ \int_I(f_1+f_2) = \int_I f_1 + \int_I f_2.
+\]
+\end{proof}
+
+
+\begin{theorem}\label{int(af)=a*int(f)}
+Если $f\in \mathscr{R}(I)$, то для любого числа $\alpha \in \mathbb{R}$, функция $\alpha\cdot f \in \mathscr{R}(I)$ и более того
+\[
+ \int_I\alpha\cdot f = \alpha \cdot \int_I f.
+\]
+\end{theorem}
+
+\begin{proof} Нам нужно рассмотреть три случая в зависимости от числа $\alpha.$
+
+(1) Если $\alpha =0$, то $\alpha f =0$ и $\int_I 0 = 0$, поэтому утверждение теоремы справедливо.
+
+(2) Пусть $\alpha >0$. Так как функция $f$ интегрируема на $I$, то $\underline{\int_I}f = \overline{\int_I}f = \int_I f$. Далее, согласно определению \ref{Rieman_sums_and_int}
+ \begin{eqnarray*}
+ \overline{\int_I} f &:=& \inf_\mathsf{P} \left\{\overline{\mathcal{R}} (f, \mathsf{P}) \right\} \\
+ \underline{\int_I} f &:=& \sup_\mathsf{P} \left\{\underline{\mathcal{R}} (f, \mathsf{P}) \right\},
+\end{eqnarray*}
+а также определениям $\inf,\sup$ (см. Определение \ref{sup,inf}), для любого $\varepsilon>0$ можно найти такое разбиение $\mathsf{P}$ отрезка $I$, что\footnote{на самом деле для такого $\varepsilon>0$ у нас имеются два разбиения $\mathsf{P_1}$, $\mathsf{P}_2$, такие что \[
+  \overline{\int_I}f + \frac{\varepsilon}{\alpha} = \int_I f + \frac{\varepsilon}{\alpha} > \overline{\mathcal{R}}(\mathsf{P}_1,f), \qquad \underline{\mathcal{R}}(\mathsf{P}_2,f) > \int_I f - \frac{\varepsilon}{\alpha} = \underline{\int_I}f - \frac{\varepsilon}{\alpha},
+\]
+но взяв $\mathsf{P}:=\mathsf{P}_1 \cup \mathsf{P}_2$ и воспользовавшись предложением \ref{R<R'} мы получим то что нужно.
+}
+\[
+  \overline{\int_I}f + \frac{\varepsilon}{\alpha} = \int_I f + \frac{\varepsilon}{\alpha} > \overline{\mathcal{R}}(\mathsf{P},f), \qquad \underline{\mathcal{R}}(\mathsf{P},f) > \int_I f - \frac{\varepsilon}{\alpha} = \underline{\int_I}f - \frac{\varepsilon}{\alpha}.
+\]
+
+Так как $\alpha>0$, то $\sup(\alpha \cdot A) = \alpha \cdot \sup(A)$ для любого ограниченного множества $A\subseteq \mathbb{R}$, тогда получаем
+\[
+ \overline{\int_I}\alpha f \le \overline{\mathcal{R}}(\mathsf{P},\alpha f) = \alpha \cdot \overline{\mathcal{R}}(\mathsf{P},f) < \alpha \cdot \int_I f + \varepsilon,
+\]
+и
+\[
+ \underline{\int_I}\alpha f \ge \underline{\mathcal{R}}(\mathsf{P},\alpha f) = \alpha \cdot \underline{\mathcal{R}}(\mathsf{P},f) > \alpha \cdot \int_I f - \varepsilon.
+\]
+
+Таким образом, для любого $\varepsilon>0$ имеем
+\[
+ \alpha \cdot \int_I f - \varepsilon < \int_I \alpha \cdot f < \alpha \cdot \int_I f + \varepsilon,
+\]
+откуда и следует, что 
+\[
+ \int_I \alpha \cdot f = \alpha \cdot \int_I f.
+\]
+
+(3) Пусть $\alpha <0$, тогда, согласно лемме \ref{sup(aA)}, $\sup(\alpha A) = \alpha \cdot \inf(A)$ и $\inf(\alpha \cdot A) = \alpha \cdot \sup(A)$, поэтому
+\[
+ \overline{\mathcal{R}}(\mathsf{P}, \alpha f) = \alpha \cdot \underline{\mathcal{R}}(\mathsf{P}, f), \qquad \underline{\mathcal{R}}(\mathsf{P},  f) = \alpha \cdot \overline{\mathcal{R}}(\mathsf{P}, f),
+\]
+для любого разбиения $\mathsf{P}$ отрезка $I.$
+
+Используя те же рассуждения, что и в пункте (2), получаем, что для любого $\varepsilon>0$ можно найти такое разбиение $\mathsf{P}$ отрезка $I$, что 
+\[
+  \overline{\int_I}f + \frac{\varepsilon}{|\alpha|} = \int_I f + \frac{\varepsilon}{|\alpha|} > \overline{\mathcal{R}}(\mathsf{P},f), \qquad \underline{\mathcal{R}}(\mathsf{P},f) > \int_I f - \frac{\varepsilon}{|\alpha|} = \underline{\int_I}f - \frac{\varepsilon}{|\alpha|}.
+\]
+
+Тогда, получаем
+\[
+ \overline{\int_I}\alpha f \le \overline{\mathcal{R}}(\mathsf{P},\alpha f) = \alpha\cdot \underline{\mathcal{R}}(\mathsf{P},f) < \alpha \cdot \left( \underline{\int_I}f - \frac{\varepsilon}{|\alpha|} \right) = \alpha \cdot \int_I f + \varepsilon,
+\]
+потому что $\alpha<0$, поэтому знак неравенства разворачивается, $\frac{\alpha}{|\alpha|} = -1$ и $\int_I f = \underline{\int_I}f$ так как $f$ -- интегрируема на $I$ по условию.
+
+Аналогично, получаем
+\[
+ \underline{\int_I} \alpha f> \alpha \cdot \int_I f - \varepsilon,
+\]
+\textit{т.е.,} для любого $\varepsilon>0$ получаем
+\[
+ \alpha \cdot \int_I f - \varepsilon < \int_I \alpha f < \alpha \cdot \int_I f + \varepsilon,
+\]
+откуда и следует, что $\int_I \alpha f = \alpha \cdot \int_I f.$ Это завершает доказательство.
+\end{proof}
+
+\begin{corollary}[Монотонность интеграла]\label{int>0}
+ Если $f,g \in \mathscr{R}(I)$ и $f(x) \ge g(x)$ для всех $x \in I$, то
+    \[
+     \int_I f \le \int_I g,
+    \]
+    в частности, если $f(x) \ge 0$ для всех $x \in I$, то
+    \[
+     \int_I f \ge 0.
+    \]
+\end{corollary}
+\begin{proof}
+ Пусть $f(x) \ge 0$ для всех $x \in I = [a,b]$, так как $f\in \mathscr{R}(I)$, то $\int_I f = \overline{\int_I}f = \underline{\int_I}f$, тогда для любого разбиения $\mathsf{P} = \{a,x_1,\ldots, x_{n-1},b\}$ отрезка $I$, имеем
+ \[
+  \int_I f = \underline{\int_I} f \ge \underline{\mathcal{R}}(\mathsf{P},f) = \sum_{i=1}^{n-1} \inf_{x \in [x_i,x_{i+1}]} f(x) \cdot (x_{i+1}-x_i) \ge  0
+ \]
+ так как все $\inf f(x) \ge 0$.
+
+ Далее, если $f(x) \ge g(x)$, то $h(x):=f(x) - g(x)$, и тогда по только что доказанному 
+ \[
+  \int_I(f(x) -g(x)) \ge 0,
+ \]
+ теперь используя линейность интеграла, мы завершаем доказательство.
+\end{proof}
+
+
+
+\subsection{Аддитивность интеграла}
+
+\begin{lemma}\label{restriction_of_int}
+    Пусть функция $f:I \to \mathbb{R}$ -- интегрируема на $I$, тогда она интегрируема и на любом отрезке $J \subseteq I$. 
+\end{lemma}
+
+\begin{proof}
+Пусть $I = [a,b]$, $J = [c,d]$, тогда $a \le c < d \le b$, пусть
+\end{proof}
+
+\begin{lemma}\label{int_of_extension_by_0}
+    Пусть дана интегрируемая функция $f: I \to \mathbb{R}$, пусть $\widetilde{I}$ -- отрезок, такой что $I \subseteq \widetilde{I}$. Распространим нулём эту функцию $f$ на $\widetilde{I}$ \textit{т.е.,} положим
+    \[
+     \widetilde{f}(x): = \begin{cases}
+         f(x), & x \in I,\\
+         0, & x \notin I.
+     \end{cases}
+    \]
+
+Тогда, если $f$ -- интегрируема на $I$, то $\widetilde{f}$ интегрируема на $\widetilde{I}$ и более того
+\[
+ \int_{\widetilde{I}}\widetilde{f} = \int_I f.
+\]
+\end{lemma}
+
+\begin{proof}
+Так как предполагается, что $f$ -- ограничена, то значит и функция $\widetilde{f}$ тоже ограничена, поэтому верхние и нижние интегралы существуют (см. Замечание \ref{good_remark_for_Rieman}).
+
+Воспользовавшись определением интеграла (см. Определение \ref{Rieman_sums_and_int}) и определениями $\inf, \sup$. получаем, что для любого $\varepsilon>0$ можно найти такое разбиение $\mathsf{P}$, что
+    \[
+     \overline{\int_{\widetilde{I}}} \widetilde{f} \le \overline{\mathcal{R}}(\mathsf{P},\widetilde{f}) = \overline{\mathcal{R}}(\mathsf{P}\cap J, f) < \int_I f + \varepsilon.
+    \]
+и\footnote{Опять же, найдутся для конкретного $\varepsilon>0$, вообще говоря, два разных разбиения, но взяв их объедение, мы получим нужное разбиение (см. предыдущую сноску).}
+    \[
+     \underline{\int_{\widetilde{I}}} \widetilde{f} \ge \underline{\mathcal{R}}(\mathsf{P},\widetilde{f}) = \underline{\mathcal{R}}(\mathsf{P}\cap J, f) > \int_I f - \varepsilon,
+    \]
+откуда
+\[
+ \int_I f - \varepsilon < \underline{\int_{\widetilde{I}}}\widetilde{f} \le \overline{\int_{\widetilde{I}}}\widetilde{f} < \int_I f + \varepsilon,
+\]
+так как это верно для любого $\varepsilon>0$, то 
+\[
+ \underline{\int_{\widetilde{I}}}\widetilde{f} = \overline{\int_{\widetilde{I}}}\widetilde{f} = \int_I f,
+\]
+что и требовалось доказать.
+\end{proof}
+
+\begin{theorem}[Аддитивность интеграла]\label{additive_of_int}
+    Если $f \in\mathscr{R}(I)$ и если $I = A \cup B$, при этом $A\cap B$ состоит из одной точки, то
+    \[
+     \int_I f = \int_A f|_A + \int_B f|_B.
+    \]
+\end{theorem}
+
+\begin{proof}
+ Пусть $I$, для произвольного разбиения $\mathsf{P}$ отрезка $I$, множества $\mathsf{P}\cap A$, $\mathsf{P}\cap B$ -- разбиения отрезков $A$, $B$ соответственно. Тогда, для произвольной интегральной суммы имеем
+ \[
+  \mathcal{S}(\mathsf{P},f) = \mathcal{S}(\mathsf{P}\cap A, f|_A) + \mathcal{S}(\mathsf{P}\cap B, f|_B)
+ \]
+
+ Действительно, если $A \cap B = \{c\}$, то интегральная сумма $\mathcal{S}(\mathsf{P},f)$ имеет вид
+ \[
+  f(\xi_1)\cdot (x_1- a) + \cdots + f(\xi_k)\cdot (c-x_{k-1}) + f(\xi_{k+1})\cdot (x_{k+1}-c) + \cdots + f(\xi_n)\cdot(b-x_n),
+ \]
+ где мы положили $I = [a,b]$, $A = [a,c]$, $B=[c,b]$, $\mathsf{P} = \{a, x_1,\ldots, x_k=c, \ldots, x_{n-1},b\}$ и $\xi_1,\ldots, \xi_n$ выбраны допустимым образом (см. Определение \ref{def_of_Rieman_via_lim}). Но в таком случае, первые $k$ слагаемых и образуют интегральную сумму $\mathcal{S}(\mathsf{P}\cap A, f|_A)$, а оставшиеся интегральную сумму $\mathcal{S}(\mathsf{P}\cap B, f|_B)$.
+
+Согласно лемме \ref{restriction_of_int}, функции $f|_A, f|_B$ интегрируемы на $A,B$ соответственно. Теперь воспользуемся определением интеграла, леммой \ref{inf(A+B)} и тем фактом, что любое разбиение отрезков $A,B$ можно получить так $\mathsf{P}\cap A$, $\mathsf{P}\cap B$, где $\mathsf{P}$ -- разбиение отрезка $I.$
+
+ Имеем
+ \[
+  \int_I f = \inf_\mathsf{P}\{ \overline{\mathcal{R}}(\mathsf{P},f) \} = \inf_\mathsf{P}\{ \overline{\mathcal{R}}(\mathsf{P}\cap A,f|_A) \} + \inf_\mathsf{P}\{ \overline{\mathcal{R}}(\mathsf{P}\cap B,f|_B) \} = \int_A f|_A + \int_B f|_B. 
+ \]
+\end{proof}
+
+
+\subsection{Фундаментальная теорема анализа}
+
+
+
+
+\begin{lemma}\label{|int|<M}
+    Если $f\in \mathscr{R}(I)$ и если $|f(x)| \le M$, то
+    \[
+     \bigl| \int_I f  \bigr| \le M\cdot |I|.
+    \]
+\end{lemma}
+\begin{proof}
+Так как $f \in \mathscr{R}(I)$, то $\int_I f = \underline{\int_I f} = \overline{\int_I}f$, то для любого разбиения $\mathsf{P} = \{a,x_1,\ldots, x_{n-1},b\}$, имеем
+ \begin{eqnarray*}
+ \left|\int_If \right|&=&\left|\overline{\int_I}f \right| \le \left|\overline{\mathcal{R}}(\mathsf{P},f) \right|  = \left| \sum_{i=0}^{n-1} \sup_{x\in [x_i,x_{i+1}]}f(x) \cdot(x_{i+1} - x_i)  \right|        \\
+ &\le & \sum_{i=0}^{n-1} \left|\sup_{x\in [x_i,x_{i+1}]}f(x) \right| \cdot \left|(x_{i+1} - x_i)\right| \le \sum_{i=0}^{n-1} M \cdot(x_{i+1} - x_i) = M\cdot |I|,  
+ \end{eqnarray*}
+ что и требовалось доказать.    
+\end{proof}
+
+
+\begin{lemma}\label{int(a)}
+    Если $f(x) = \alpha $ для любого $x \in I$ то $f\in \mathscr{R}(I)$, и
+    \[
+     \int_I f = \alpha \cdot |I|.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Действительно, для любого разбиения, $\mathsf{P}$ отрезка $I$, имеем
+    \[
+     \overline{\mathcal{R}}(\mathsf{P},f) = \underline{\mathcal{R}}(\mathsf{P},f) = \alpha \cdot |I|,
+    \]
+    откуда и следует утверждение леммы.
+\end{proof}
+
+
+
+\begin{theorem}[Первая фундаментальная теорема анализа]\label{the_first_fundamental_theorem}
+ Пусть $f\in \mathscr{R}(I)$, и пусть $I = [a,b]$, положим
+    \[
+     F(x): = \int_{[a,x]}f, \qquad  a < x \le b, 
+    \]
+    $F(a):=0$. Тогда $F$ непрерывна на отрезке $I=[a,b]$; более того, если функция $f$ -- непрерывна в точке $x_0 \in I$, то функция $F$ дифференцируема в точке $x_0$ и 
+    \[
+     F'(x_0) = f(x_0).
+    \]
+\end{theorem}
+
+\begin{proof}
+ Так как функция $f$ ограничена, то положим $|f(x)|\le M$ где $x \in [a,b]$. Тогда согласно лемме \ref{|int|<M} и аддитивности интеграла (теорема \ref{additive_of_int}), для любых $a \le x < y \le b$, имеем
+\begin{eqnarray*}
+    \left| F(y) - F(x) \right| &=& \left| \int_{[a,y]} f - \int_{[a,x]} f  \right| = \left| \int_{[a,x]}I + \int_{[x,y]}f - \int_{[a,x]}f \right| \\
+    &=& \left| \int_{[x,y]} f\right| \le M \cdot |y-x|.
+\end{eqnarray*}
+
+ Таким образом, мы получили, что для любого $\varepsilon>0$ из неравенства $|y-x|<\frac{\varepsilon}{M}$ будет следовать неравенство $|F(y) - F(x)| < \varepsilon$, \textit{т.е.,} функция $F(x)$ -- непрерывна на отрезке $I$ (см. Следствие \ref{reform_of_cont}).
+
+ Допустим теперь, что функция $f$ непрерывна в точке $x_0$, тогда для любого $\varepsilon>0$ можно найти такое $\delta >0$, что если $|x-x_0|< \delta$, то $|f(x) - f(x_0)|<\varepsilon$, где $a\le x \le b$.
+
+ Допустим теперь, что $x_0 +h \in I$. Используя аддитивность интеграла, леммы \ref{|int|<M}, \ref{int(a)}, а также линейность интеграла, получаем
+ \begin{eqnarray*}
+     \left| \frac{F(x_0 + h) - F(x_0)}{h} - f(x_0)  \right| &=& \left| \frac{1}{h} \left( \int_{[a,x_0+h]} f(x) - \int_{[a,x_0]}f(x) \right)  - f(x_0) \right| \\
+     &=& \left| \frac{1}{h} \left( \int_{[a,x_0]}f(x) + \int_{[x_0, x_0+h]}f(x) - \int_{[a,x_0]}f(x)  \right) - f(x_0) \right|\\
+     &=& \left| \frac{1}{h} \left( \int_{[x_0,x_0+h]} f(x)- h\cdot f(x_0) \right) \right| \\
+     &=& \left| \frac{1}{h} \left( \int_{[x_0,x_0+h]} f(x)- \int_{[x_0,x_0+h]} f(x_0) \right) \right| \\
+     &=& \left| \frac{1}{h} \int_{[x_0,x_0+h]} \Bigl(f(x)- f(x_0) \Bigr)  \right| \\
+     &\le & \frac{1}{h}\cdot \varepsilon\cdot h = \varepsilon. 
+ \end{eqnarray*}
+
+ Но это значит, что (см. Определение \ref{def_for_cont_via_d-e_on_R} предела функции), что
+ \[
+  \lim_{h\to 0} \frac{F(x_0+h)-F(x_0)}{h} = f(x_0),
+ \]
+ а тогда, учитывая определение производной в точке (см. Определение \ref{derivative_of_function}), $F'(x_0) = f(x_0)$, что и требовалось доказать.
+\end{proof}
+
+\subsection{Интегрирование по частям и замена в интеграле Римана}
+
+\begin{theorem}[Замена переменных]
+Пусть функция $\varphi:[\alpha, \beta] \to \mathbb{R}$ имеет непрерывную производную на этом отрезке, пусть $\varphi(\alpha) = a$, $\varphi(\beta) = b$. Далее, пусть $f: \varphi([\alpha, \beta]) \to \mathbb{R}$ -- непрерывна на множестве $\varphi([\alpha,\beta])$. Тогда имеет место формула замены переменной в интеграле Римана
+\[
+ \int_{[a,b]} f = \int_{[\alpha, \beta]} (f\circ \varphi) \cdot \varphi'.
+\]
+\end{theorem}
+\begin{mydanger}{\bf !}
+ Эту формулу обычно пишут более громоздко
+\[
+ \int_{[a,b]} f(x) = \int_{[\alpha, \beta]} \bigl( f(\varphi(t))\bigr)\cdot \varphi'(t), \qquad x = \varphi(t),
+\]
+но это лишь загромождает рассуждения.
+\end{mydanger}
+\begin{proof}
+Согласно условиям, $\varphi$ -- всюду дифференцируема на отрезке $[\alpha, \beta]$ и более того её производная $\varphi'$ всюду непрерывна на этом же отрезке. Далее, по условию $f$ непрерывна на множестве $\varphi([\alpha, \beta])$, мы имеем диаграмму
+\[
+ \xymatrix{
+ [\alpha, \beta] \ar@{->}[r]^\varphi \ar@{->}[rd]_{f\circ \varphi} & {\varphi([\alpha, \beta])}\ar@{->}[d]^f \\
+ & \mathbb{R}
+ }
+\]
+
+Так как горизонтальная и вертикальная стрелки непрерывны, то и их композиция (=наклонная стрелка) тоже непрерывна согласно теореме \ref{comp_of_continous_on_R}. По условию, функция $\varphi'$ тоже непрерывна на $[\alpha, \beta]$, тогда и функция $(f \circ \varphi)\cdot \varphi'$ -- непрерывна на этот же отрезке, так как произведение непрерывных функций есть функция непрерывная (см. Определение \ref{the_main_def_of_limit_on_R} и теорему \ref{lim(f+g)}). Тогда, согласно теореме об интегрируемости непрерывной функции (см. Теорема \ref{continous=integrable}), обе функции $f$ и $(f \circ \varphi)\cdot \varphi'$ -- интегрируемы.
+
+Тогда, если мы рассмотрим функции
+\[
+ F(x): = \int_{[a,x]}f, \qquad \Phi(\tau):=\int_{[\alpha, \tau]} (f\circ \varphi)\cdot \varphi',
+\]
+где $a<x \le b$, $\alpha < \tau \le \beta$, то согласно первой фундаментальной теореме анализа (см. Теорема \ref{the_first_fundamental_theorem}), эти функции дифференцируемы на отрезках $[a,b]$ и $[\alpha,\beta]$, соответственно.
+
+Пусть $x = \varphi(\tau)$ и вычислим производную сложной функции $F(\varphi(\tau))$ (см. Теорема \ref{d(fg)}),
+\[
+ \Bigl(F(\varphi(\tau))\Bigr)'_\tau = (F(x))'_x\cdot (\varphi(\tau))'_\tau = f(x)\cdot \varphi'(\tau) = \Bigl(f(\varphi(\tau)) \Bigr)\cdot \varphi'(\tau) = \left(\Bigl( f\circ \varphi \Bigr)\cdot \varphi'\right)(\tau),
+\]
+и $\Phi'(\tau) = \left(\bigl( f\circ \varphi \bigr)\cdot \varphi'\right)(\tau)$. Итак, обе функции $F(\varphi(\tau))$, $\Phi(\tau)$ имеют на отрезке $[\alpha, \beta]$ одинаковые производные, а это значит (см. Определение \ref{int1}), что они являются интегралами для одной и той же функции. Тогда они отличаются друг от друга (см. Теорема \ref{int1=int2+C}) на константу, \textit{т.е.,} $F(\varphi(\tau)) = \Phi(\tau) + C$. 
+
+Чтобы найти эту константу, положим $\tau: = \alpha$, тогда $\varphi(\alpha) = a$ и (см. Теорему \ref{the_first_fundamental_theorem}), $F(a):=0$, $\Phi(\alpha):=0$, поэтому $C=0$, поэтому $F(\varphi(\tau)) = \Phi(\tau)$ для всех $\tau \in [\alpha,\beta]$, что и доказывает теорему.
+\end{proof}
+
+
+\begin{theorem}[Интегрирование по частям]
+Пусть $f,g:[a,b] \to \mathbb{R}$ -- дифференцируемые функции на этом отрезке и пусть $f',g'$ -- интегрируемы на этом же отрезке, тогда имеет место формула
+\[
+ \int_{[a,b]} f\cdot g' = f(b)\cdot g(b) - f(a)\cdot g(a) - \int_{[a,b]}f'\cdot g.
+\]
+\end{theorem}
+
+\begin{proof}
+ Так как функции $f,g$ -- дифференцируемы на отрезке $[a,b]$, то они непрерывны на нём (см. Теорема \ref{diff=contionous_on_R}), а так как произведение непрерывных функций есть функция непрерывная (см. Определение \ref{the_main_def_of_limit_on_R} и теорему \ref{lim(f+g)}), то функции $(f\cdot g)',f'g, fg'$ интегрируемы на этом отрезке (см. Теорема \ref{continous=integrable}).
+
+ Далее, согласно формулам производной для произведения (см. Теорема \ref{ariph_for_der}), 
+ \[
+  (f\cdot g)' = f'\cdot g + f\cdot g',
+ \]
+ это значит, что функция $(f\cdot g)'$ тоже дифференцируема, а значит и непрерывна и тогда интегрируема (по тем же причинам, что и выше).
+
+ Используя теперь линейность интеграла (см. Теорема \ref{int(f+g)=int(f)+int(g)}), получаем
+ \[
+  \int_{[a,b]} (f\cdot g)' = \int_{[a,b]} \Bigl( f'\cdot g + f\cdot g' \Bigr) = \int_{[a,b]}  f'\cdot g + \int_{[a,b]} f\cdot g'.
+ \]
+
+ С другой стороны, согласно первой фундаментальной теореме (см. Теореме \ref{the_first_fundamental_theorem}),
+ \begin{eqnarray*}
+ \int_{[a,b]} (f \cdot g)' &=& (f\cdot g)(b) - (f \cdot g)(a)\\
+ &=& f(b)\cdot g(b) - f(a) \cdot g(a),    
+ \end{eqnarray*}
+откуда и следует утверждение теоремы.
+\end{proof}
+
+
+\section{Дальнейшие свойства интеграла Римана}
+
+\begin{theorem}[Первая теорема о среднем]\label{avareg_theorem}
+    Пусть $f:[a,b] \to \mathbb{R}$ -- ограниченная и непрерывная функция, тогда существует такое число $\xi \in [a,b]$, что
+    \[
+     \int_{I} f = f(\xi) \cdot |I|.
+    \]
+\end{theorem}
+
+\begin{proof}
+Согласно замечанию \ref{good_remark_for_Rieman}, имеем
+\[
+ m \cdot |I| \le \underline{\mathcal{R}}(f,\mathsf{P}) \le \overline{\mathcal{R}}(\mathsf{P},f) \le M \cdot |I|,
+ \]
+где $m:= \inf_{x\in I}f(x)$, $M: = \sup_{x\in I}f(x)$. Так как $f$ -- непрерывна, то по теореме Вейерштрасса (см. Теорема \ref{W2_on_R}), существуют такие точки $x_1, x_2 \in I$, что $f(x_1) = m$, $f(x_2) = M$. 
+
+Далее, согласно определению интеграла, 
+\[
+ m \cdot |I| \le \int_I f \le M \cdot |I|
+\]
+или что то же самое, что и
+\[
+ f(x_1) =m \le \frac{1}{|I|}\cdot \int_I f \le M = f(x_2).
+\]
+
+Итак, получаем, что 
+\[
+ \frac{1}{|I|}\cdot \int_I f = A \in [m,M].
+\]
+
+Без ограничения общности, будем считать, что $x_1<x_2$ и рассмотрим функцию $\varphi:[x_1,x_2] \to \mathbb{R}$, $\varphi(x): = f(x) - A$. Так как $f$ -- непрерывна на $I$, $[x_1,x_2] \subseteq I$, то (см. Следствие \ref{restriction_on_R}) $\varphi$ -- непрерывна на $[x_1,x_2]$.
+
+Так как $\varphi(x_1) = m-A <0$ и $\varphi(x_2) = M-A>0$, то согласно теореме о промежуточном значении (см. Теорема \ref{intermediat_theorem}), существует такая точка $\xi\in [x_1,x_2]$, что $\varphi(\xi)=0$, \textit{т.е.,} 
+\[
+ f(\xi) = A :=  \frac{1}{|I|}\cdot \int_I f,
+\]
+что и требовалось доказать.
+\end{proof}
+
+
+
+Нам понадобится следующая лемма\footnote{Изящное доказтельство этой леммы и последщего следствия было позаимтвовано \href{https://math.stackexchange.com/questions/451146/if-f-is-integrable-then-f-is-also-integrable?noredirect=1&lq=1}{отюда}, где основные и ключевые рассуждения были предоставлены пользователем с ником \href{https://math.stackexchange.com/users/72031/paramanand-singh}{Paramanand Singh}.}
+
+\begin{lemma}
+    Пусть $f:I \to \mathbb{R}$ -- ограниченная функция на отрезке $I$, тогда 
+    \[
+     \sup_{x\in I} |f(x)| - \inf_{x \in I} |f(x)| \le \sup_{x \in I} f(x) - \inf_{x \in I} f(x).
+    \]
+\end{lemma}
+
+\begin{proof}~
+
+(1) Прежде всего, покажем что
+\[
+ \Bigl| |a| - |b| \Bigr| \le |a-b|
+\]
+для любых $a,b\in \mathbb{R}$.
+
+Действительно, имеем
+\begin{eqnarray*}
+    |a| &=& |(a-b) + b|\\
+    &\le & |a-b| + |b|,
+\end{eqnarray*}
+откуда $|a-b| \ge |a| - |b|.$
+
+Далее,
+\begin{eqnarray*}
+    |b| &=& |(b-a) + a| \\
+    &\le& |b-a| + |a|
+\end{eqnarray*}
+откуда $|b-a| \ge |b| - |a|$ и так как $|a-b| = |b-a|$, то мы получаем требуемое неравенство.
+
+(2) Для краткости примем следующие обозначения
+\[
+ M(f):=\sup_{x \in I} f(x), \qquad m(f): = \sup_{x\in I}f(x)
+\]
+тогда
+\[
+M(|f|):=\sup_{x \in I} |f(x)|, \qquad m(|f|): = \sup_{x\in I}|f(x)|. 
+\]
+
+Пусть $x,y \in I$, тогда $f(x), f(y) \in [m(f), M(f)]$, поэтому $|f(x) - f(y)| \le M(f) - m(f)$, \textit{т.е.,} число $M(f) - m(f)$ -- верхняя грань множества $\{ |f(x) - f(y)|,\, x,y \in I  \}$.
+
+Покажем, что имеет место слудующее равенство
+\[
+  M(f) - m(f) = \sup \{ | f(x) - f(y)|,\, x,y \in I \}.
+\]
+
+Пусть $\varepsilon>0$, тогда, согласно определению $\sup, \inf$, можно найти такие точки $x,y \in I$, что
+\begin{align*}
+    & M(f) - \frac{\varepsilon}{2} < f(x) \le M(f) \\
+    & m(f) \le f(y) < m(f) + \frac{\varepsilon}{2},
+\end{align*}
+тогда $-m(f) - \frac{\varepsilon}{2} < -f(y) \le - m(f)$ и мы получаем
+\[
+ M(f) - m(f) - \varepsilon < f(x) - f(y) \le M(f) - m(f).
+\]
+
+Итак, мы для любого $\varepsilon>0$ нашли такие точки $x,y\in I$, что верно неравенство выше, но это означает, что 
+\[
+ M(f) - m(f) = \sup \{  f(x) - f(y),\, x,y \in I \}.
+\]
+
+Теперь, если мы поменяем местами точки $x,y$ в рассуждениях выше, то мы получим, что
+\[
+ M(f) - m(f) = \sup \{  f(y) - f(x),\, x,y \in I \}.
+\]
+это и означает, что
+\[
+  M(f) - m(f) = \sup \{ | f(x) - f(y)|,\, x,y \in I \}.
+\]
+
+(3) Согласно неравенству полученному в пунтке (1), для любых $x,y \in I$ имеем
+\[
+ \Bigl| |f(x)| - f(y)  \Bigr| \le |f(x) - f(y)|
+\]
+но тогда
+\[
+ \sup \left\{ \Bigl| |f(x)| - f(y)  \Bigr|\, x,y\in I  \right\} \le \sup \left\{ |f(x) - f(y)|\, x,y\in I \right\}.
+\]
+
+С другой стороны, согласно пункту (2),
+\[
+ M(|f|) - m(|f|) = \sup \left\{ \Bigl| |f(x)| - f(y)  \Bigr|\, x,y\in I  \right\}, \qquad M(f) - m(f) = \sup \left\{ |f(x) - f(y)|\, x,y\in I \right\},
+\]
+что и доказывает утверждение леммы.
+\end{proof}
+
+\begin{corollary}\label{int|f|}
+    Если функция $f:I \to \mathbb{R}$ -- интегрируема по Риману, то и функция $|f|$ тоже интегрируема по Риману на $I$ и при это
+    \[
+     \left| \int_I f \right| \le \int_I |f|.
+    \]
+\end{corollary}
+
+\begin{proof}~
+
+(1) Покажем, что функция $|f|$ -- интегрируема по Риману на $I$. По условию, функция $f$ -- интергрируема на отрезке $I$, тогда, согласно критерию интегрируемости (см. Теорема \ref{criteria_for_Rieman}), для любого $\varepsilon>0$ существует разбиние $\mathsf{P} = \{a=x_0 < x_1 < \ldots < x_n = b\}$ отрезка $I = [a,b]$, такое что
+\[
+ \overline{\mathcal{R}}(\mathsf{P},f) - \underline{\mathcal{R}}(\mathsf{P}, f) < \varepsilon.
+\]
+
+Для краткости, положим 
+\[
+ M_i(f): = \sup_{x\in [x_i,x_{i+1}]} f(x), \qquad m(f): = \inf_{x\in [x_i, x_{i+1}]}f(x), \qquad 0 \le i \le n-1.
+\]
+
+Тогда имеем
+\begin{eqnarray*}
+    \overline{\mathcal{R}}(\mathsf{P},|f|) - \underline{\mathcal{R}}(\mathsf{P}, |f|) &=& \sum_{i=0}^{n-1} M_i(|f|)\cdot \Delta x_i - \sum_{i=0}^{n-1} m_i(|f|) \cdot \Delta x_i \\
+    &=& \sum_{i=0}^{n-1} \Bigl(M_i(|f|) - m_i(|f|)\Bigr)\cdot \Delta x_i.
+\end{eqnarray*}
+
+ Согласно предыдущей лемме, $M_i(|f|) - m_i(|f|) \le M_i(f) - m_i(f)$ для любого $0 \le i \le n-1$, поэтому  
+\begin{eqnarray*}
+   \overline{\mathcal{R}}(\mathsf{P},|f|) - \underline{\mathcal{R}}(\mathsf{P}, |f|) &=& \sum_{i=0}^{n-1} \Bigl(M_i(|f|) - m_i(|f|)\Bigr)\cdot \Delta x_i \\
+   &\le & \sum_{i=0}^{n-1} \Bigl(M_i(f) - m_i(f)\Bigr)\cdot \Delta x_i\\
+   &=&\sum_{i=0}^{n-1} \Bigl(M_i(f) - m_i(f)\Bigr)\cdot \Delta x_i \\
+   &=& \overline{\mathcal{R}}(\mathsf{P},f) - \underline{\mathcal{R}}(\mathsf{P}, f)\\
+   &<& \varepsilon.
+\end{eqnarray*}
+
+Итак, мы для любого $\varepsilon>0$ нашли разбиение $\mathsf{P}$ отрезка $I$, такое, что
+\[
+ \overline{\mathcal{R}}(\mathsf{P},|f|) - \underline{\mathcal{R}}(\mathsf{P}, |f|) < \varepsilon,
+\]
+и тогда, согласно критерию интегрируемости (см. Теорема \ref{criteria_for_Rieman}), функция $|f|$ -- интегрируема на отрезке $I.$
+
+(2) Покажем теперь, что 
+\[
+     \left| \int_I f \right| \le \int_I |f|.
+    \]
+
+Действительно, имеем
+\[
+ -|f(x)| \le f(x) \le |f(x)|, \qquad x \in I,
+\]
+тогда, в силу предыдущего результата об интегрируемости функции $|f|$, а также благодоря линейности и монотонности интеграла (= Теорема \ref{int(af)=a*int(f)}, Следствие \ref{int>0}), получаем
+\[
+ -\int_I |f|  = \int_I (-|f|) \le \int_I f \le \int_I |f|,
+\]
+\textit{т.е.,} 
+\[
+ -\int_I |f|  \le \int_I f \le \int_I |f|,
+\]
+откуда и следует 
+\[
+     \left| \int_I f \right| \le \int_I |f|.
+\]
+\end{proof}
+
+\begin{remark}
+    Неравенство которое мы получили есть, своего рода, обобщением неравенства треугольника в следующем смысле. Пусть функция $f:I \to \mathbb{R}$ -- ступенчатая, то есть если $I = I_1 \sqcup \ldots \sqcup I_n$ и $f(x) = \alpha_i$ если и только если $x \in I_i$, то полученное неравенство превращается в следующее
+    \[
+     \left| a_1 + \cdots + a_n \right| \le |a_1| + \cdots |a_n|,
+    \]
+    где $a_i = \alpha_i \cdot |I_i|$, $1\le i \le n.$
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

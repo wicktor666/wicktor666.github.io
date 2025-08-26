@@ -1,0 +1,278 @@
+\documentclass[12pt,a5paper, twoside,reqno, openany]{book}
+\usepackage[a4paper]{geometry}
+\geometry{hmargin=1.8cm,top=2cm,bottom=2.5cm}
+%% Language and font encodings
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+
+\usepackage[upint]{stix2}
+% [10pt,a5paper,twoside,reqno]{amsbook}
+
+\usepackage{bigints}
+\usepackage{icomma}
+
+
+
+%\usepackage[sc]{mathpazo}
+\linespread{1.05}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri,through,positioning}
+\usetikzlibrary{intersections}
+\usetikzlibrary{arrows.meta, decorations.markings}
+\newcommand{\bigzero}{\mbox{\normalfont\Large\bfseries 0}}
+
+\usepackage{tikz-cd}
+
+\usepackage[matrix,arrow]{xy}
+\usepackage{amssymb,amscd,amsthm,amsmath}
+
+\usetikzlibrary{arrows,calc}
+
+\usepackage{pgfplots}
+\usetikzlibrary{fillbetween}
+
+\usepackage{blindtext}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\usepackage{polynom}
+
+\usepackage[T2A]{fontenc}    
+\usepackage[utf8]{inputenc}  % зависит от кодировки Вашего документа
+\usepackage[english,russian]{babel}  % если использовать вставки на английском не нужно, то можно в параметрах оставить только 'russian'
+
+\usepackage{bbold} % Основной пакет
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{amsthm}
+%%\usepackage{aprod}
+%%\usepackage{bbm}
+\usepackage{array}
+%\thispagestyle{empty}
+%\pagestyle{empty}
+%\usepackage[utf8]{inputenc}
+%\usepackage[english,russian]{babel}
+
+\usepackage{paratype}% 'это чтобы русский текст тоже был красивым
+
+\usepackage[normalem]{ulem}  % для зачекивания текста
+
+\usepackage{cmap} 
+
+
+
+\newcommand{\hess}{\mathbf{H}} % Матрица Гессе
+\newcommand{\R}{\mathbb{R}} % Множество действительных чисел
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\lagr}{\mathcal{L}} % Функция Лагранжа
+
+% FOR COMMENTS
+    \usepackage{xcolor}
+    \newcommand{\w}{\textcolor{blue}}
+    \usepackage{soul}
+%%%%%%%%%%%%%%%%%%%%%% 
+
+
+\newcommand{\mydangersymbol}[1]{%
+      \begin{tikzpicture}[baseline=(x.base),cyan]
+         \draw[rounded corners=.01em] (-.05em,-1.3em)rectangle(.05em,.9em);
+         \draw[fill=white,rounded corners=1] (0,.8em)--(.8em,0)--(0,-.8em)--(-.8em,0)--cycle;
+         \draw[very thick,line cap=round](-.3em,-1.3em)--(.3em,-1.3em);
+         \node(x) at (0,0em) {\normalfont\sffamily\small#1};
+      \end{tikzpicture}%
+}
+
+\newcommand{\mydangerrsymbol}[1]{%
+      \begin{tikzpicture}[baseline=(x.base),red]
+         \draw[rounded corners=.01em] (-.05em,-1.3em)rectangle(.05em,.9em);
+         \draw[fill=white,rounded corners=1] (0,.8em)--(.8em,0)--(0,-.8em)--(-.8em,0)--cycle;
+         \draw[very thick,line cap=round](-.3em,-1.3em)--(.3em,-1.3em);
+         \node(x) at (0,0em) {\normalfont\sffamily\small#1};
+      \end{tikzpicture}%
+}
+\newcommand{\scalar}[2]{(#1, #2)}
+
+\newcommand{\grad}{\mathbf{grad}} % Команда для градиента
+\newcommand{\dotprod}[2]{\left( #1, #2 \right)} % Команда для скалярного произведения
+
+\newcommand{\ie}{\textit{т.е. }}
+
+\newenvironment{mydanger}[1]{%
+  \par\medskip\noindent
+  \sbox0{\mydangersymbol{#1}\space}%
+  \hangindent\wd0
+  \parindent\hangindent
+  \hangafter=-2
+  \smash{\llap{\box0}}%
+  \small
+  \ignorespaces
+ }{\par\smallskip}
+
+
+\newenvironment{mydangerr}[1]{%
+  \par\medskip\noindent
+  \sbox0{\mydangerrsymbol{#1}\space}%
+  \hangindent\wd0
+  \parindent\hangindent
+  \hangafter=-2
+  \smash{\llap{\box0}}%
+  \small
+  \ignorespaces
+ }{\par\smallskip}
+
+
+
+%\usepackage{titlesec}
+
+\usepackage[symbol*]{footmisc}
+
+% to number equations like (1.2)
+\numberwithin{equation}{section}
+
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+    
+
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{claim}[theorem]{Утверждение}
+\newtheorem{problem}[theorem]{Задача}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem{note}[theorem]{Замечание}
+\newtheorem{comments}[theorem]{Комментарий}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Определение}
+\newtheorem{example}[theorem]{Пример}
+\newtheorem{remark}[theorem]{Замечание}
+\newtheorem{hremark}[theorem]{Историческое замечание}
+\newtheorem{construction}[theorem]{Конструкция}
+
+
+
+\newcommand{\m}{\mathbf}
+
+\pagestyle{plain}
+
+
+
+\title{\Huge{\texttt{The Hitchhiker's Guide to the Calculus Galaxy}}}
+\author{Виктор Лопаткин}
+
+
+
+\begin{document}
+
+\maketitle
+
+
+\begin{flushright}
+ {\Large ``$\mathfrak{...auf}$ $\mathfrak{der}$ $\mathfrak{Suche}$ $\mathfrak{die}$ $\mathfrak{Wahrheit}$ $\mathfrak{sich}$ $\mathfrak{t\ddot{a}nzen}$ $\mathfrak{l\ddot{a}sst}.$''}\\ {\small $\mathfrak{F.}$ $\mathfrak{Nietzsche}$}\footnote{``В поисках правды можно танцевать''. Ф. Ницше.}
+\end{flushright}
+
+
+\begin{flushright}
+{\Large{$\mathfrak{Man}$ $\mathfrak{wird}$ $\mathfrak{nur}$ $\mathfrak{schlauer,}$\\$\mathfrak{wenn}$ $\mathfrak{Man}$ $\mathfrak{gegen}$ $\mathfrak{schlauere}$ $\mathfrak{Gegner}$ $\mathfrak{spielt.}$}} \\
+~\\
+{$\mathfrak{Die}$ $\mathfrak{Grundlagen}$ $\mathfrak{des}$ $\mathfrak{Schachs,}$ {1883}}\footnote{{\textit{``Единственный способ стать умнее это играть с более умным противником.''}} \small{Основы шахмат, 1883.}}
+\end{flushright}
+
+~\\
+
+\begin{flushright}
+{\Large{$\mathfrak{Alles}$ $\mathfrak{hervorragende}$ $\mathfrak{ist}$ $\mathfrak{ebenso}$\\$\mathfrak{schwierig}$ $\mathfrak{als}$ $\mathfrak{selten.}$}} \\
+~\\
+{$\mathfrak{B. Spinoza}$}\footnote{{\textit{``Всё превосходное столь же сложно, как и редко.''}} \small{Бенедикт Спиноза.}}
+\end{flushright}
+
+~\\
+
+\begin{flushright}
+{\Large{$\mathfrak{Was}$ $\mathfrak{man}$ $\mathfrak{nachschlagen}$ $\mathfrak{kann,}$\\$\mathfrak{braucht}$ $\mathfrak{Man}$ $\mathfrak{sich}$ $\mathfrak{nicht}$ $\mathfrak{zu}$ $\mathfrak{merken.}$}} \\
+~\\
+{$\mathfrak{A. Einstein}$}\footnote{{\textit{``Не нужно запоминать ту информацию, которую можно найти.''}} \small{Альберт Эйнштейн.}}
+\end{flushright}
+
+~\\
+
+\begin{flushright}
+{\Large{$\mathfrak{Wo}$ $\mathfrak{viel}$ $\mathfrak{Gef\ddot{u}hl}$ $\mathfrak{ist,}$ $\mathfrak{ist}$ $\mathfrak{auch}$ $\mathfrak{viel}$ $\mathfrak{Leid.}$}} \\
+~\\
+{$\mathfrak{Leonardo}$ $\mathfrak{da}$ $\mathfrak{ Vinci.}$\footnote{{\textit{``Там, где много чувств, много и страданий.''}} \small{Леонардо да Винчи.}}}
+\end{flushright}
+
+
+~\\
+
+\begin{flushright}
+{\Large{$\mathfrak{Jeder,}$ $\mathfrak{der}$ $\mathfrak{aufh\ddot{o}rt}$ $\mathfrak{zu}$ $\mathfrak{lernen,}$ $\mathfrak{ist}$ $\mathfrak{alt,}$ \\ $\mathfrak{ob}$ $\mathfrak{mit}$ $\mathfrak{zwanzig}$ $\mathfrak{oder}$ $\mathfrak{achtzig.}$\\
+$\mathfrak{Jeder,}$ $\mathfrak{der}$ $\mathfrak{weiter}$ $\mathfrak{lernt,}$ $\mathfrak{bleibt}$ $\mathfrak{jung.}$}} \\
+~\\
+{$\mathfrak{H.}$ $\mathfrak{Ford.}$}\footnote{{\textit{``Каждый, кто перестаёт учиться, — стареет, неважно, в 20 или 80 лет. А любой, кто продолжает \phantom{``Каждый, кто перестает учиться, — стареет, неважно aaaaa}  учиться, остаётся молодым.''}} \small{Генри Форд.}}
+\end{flushright}
+
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\clearpage
+
+
+\part{Лекции}
+%\input{CONTENT/1.sequences}
+
+%\input{CONTENT/2.series}
+
+%\input{CONTENT/3.Topology_of_R1}
+
+%\input{CONTENT/4.Maps_in_R1}
+
+%\input{CONTENT/5.Differentiation_in_R1}
+
+%\input{CONTENT/6.Integration}
+
+%\input{CONTENT/7.RimanIntergal}
+
+%\input{CONTENT/8.Intergration_on_noncompact}
+
+%\input{CONTENT/9.Lebesgue_integral}
+
+%\input{CONTENT/10.Topology_in_Rn}
+
+%\input{CONTENT/11.Continous_on_Rn}
+
+%\input{CONTENT/12.Diff_in_Rn}
+
+%\input{CONTENT/13.Higher_Diff_in_Rn}
+
+%\input{CONTENT/14Max and Min}
+
+%\input{old/integral2}
+
+%\input{metric_spaces}
+
+%\input{old/Rn}
+
+\part{Семинарские занятия}
+\chapter{Принцип полноты и последовательности}
+%\input{CONTENT/seminars/1.Induction}
+
+\input{CONTENT/seminars/2.Sequences}
+
+
+\end{document}

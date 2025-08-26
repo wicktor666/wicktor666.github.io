@@ -1,0 +1,459 @@
+ We have 
+\begin{eqnarray*}
+ \D(x) &=& a\partial(x), \\
+ \D^2(x) &=& \D(a) \partial(x) + a^2\partial^2(x),\\
+ \D^3(x) &=& \D^2(a) \partial(x) + a\D(a)\partial^2(x) + \D(a^2)\partial^2(x) + a^3 \partial^3(x) \\
+ &=& \D^2(a)\partial(x) + (a\D(a) + \D(a^2))\partial^2(x) + a^3\partial^3(x),\\
+ \D^4(x) &=& \D^3(a)\partial(x) + a\D^2(a)\partial^2(x) + \D(a\D(a) + \D(a^2))\partial^2(x) + a(a\D(a) + \D(a^2))\partial^3(x)\\
+ &&+ \D(a^3)\partial^3(x) + a^4 \partial^4(x) \\
+ &=& \D^3(a)\partial(x) + ( a\D^2(a) + \D(a\D(a) + \D(a^2)) ) \partial^2(x) \\
+ &&+ (a^2\D(a) + a\D(a^2) + \D(a^3))\partial^3(x) + a^4\partial^4(x).
+\end{eqnarray*}
+
+
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+
+\usepackage[sc]{mathpazo}
+\linespread{1.05}
+
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\usepackage{BOONDOX-frak} % to make mathfrak font more evilly
+%Theorem Environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{construction}[theorem]{Construction}
+
+\newcommand{\D}{\mathscr{D}}
+\newcommand{\n}{\mathbf{n}}
+
+
+%% Table packages
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{multirow}
+
+
+\title{LND}
+\author{Viktor Lopatkin}
+
+\begin{document}
+
+
+
+\maketitle
+
+\textbf{Claim:} \textit{Let $A$ be a ring and $\partial$ its LND. For any $a\in A$ a linear map $\mathscr{D}:=a\partial$ is a LND if and only if $A$ is a domain and $a \in \mathrm{Ker}(\partial)$}.
+
+\textbf{Proof.}
+By the Leibniz product rule it immediately follows that if $\D$ is LND then $\partial$ is so.
+
+Let $\D$ be LND. Take $x \in A$ such that $x \ne 0$ and $\partial(x) \ne 0$. Assume that $\D^n(x) = 0$ for some $n \in \mathbb{N}$.
+
+(1) Let $n=1$ then $\D(x) = a\partial(x) =0$ then if $A$ is a domain then $\partial(x) = 0$ therefore $n$ must be assumed to be greater than $1$.
+
+(2) Let $n=2$ then $\D^2(x) = \D(a\partial(x))= \D(a)\partial(x)+ a\D(\partial(x)) = a\partial(a)\partial(x) + a^2\partial^2(x)$. Thus $\D^2(x)=0$ implies that $a\partial(a)=0$ and either $a^2=0$ or $\partial^2(x)=0$. Since $A$ is assumed to be a domain we then get $\partial^2(x)=0$, and $a\partial(a)=0$. Hence $\partial(a) = 0$ and the statement follows.
+
+(3) Let $n\ge 3.$ It is cleat that any power of a derivation is a linear map.
+
+Next,
+\begin{eqnarray*}
+ \D^n(x) &=& \D^{n-1}(\D(x)) = \D^{n-1}(a\partial(x))\\
+  &=& \D^{n-2}(\D(a\partial(x))) = \D^{n-2}(\D(a)\partial(x) + a^2\partial^2(x)) \\
+  &=& \D^{n-2}(\D(a)\partial(x)) + \D^{n-2}(a^2\partial^2(x)).
+\end{eqnarray*}
+
+It is obviously that $\D^{n-2}(a^2\partial^2(x))$ does not contain a term of a form $u\partial(x)$, where $u$ is a word in $a,\partial(a),\partial^2(a),\ldots, \partial^{n-1}(a)$.
+
+Further, we obtain
+\begin{eqnarray*}
+ \D^{n-2}(\D(a)\partial(x)) &=& \D^{n-3}(\D^2(a)\partial(x) + a\D(a)\partial^2(x)) \\
+ &=& \D^{n-3}(\D^2(a)\partial(x)) + \D^{n-3}(a\D(a)\partial^2(x))
+\end{eqnarray*}
+
+Similarly, we see that $\D^{n-3}(a\D(a)\partial^2(x))$ does not contain a term of a form $u\partial(x)$, where $u$ is a word as above. Continuing this line of reasoning we obtain that, by $\D^n(x)=0$, $\D^{n-1}(a)\partial(x) =0$. So, if $A$ is a domain and $\partial(x) \ne 0$ then $\D^n(x) =0$ implies that $\D^{n-1}(a)=0.$ Similarly, arguing as above we see that from $\D^{n-1}(a)=0$ it follows that $\D^{n-2}(a)\partial(a)=0.$ Continuing this line of reasoning we see that $\D^n(x) = 0$ implies that $a \underbrace{\partial(a) \cdots \partial(a)}_{n-1}=0$, and the statement follows.
+
+\end{document}
+
+
+
+ 
+Имеем отображение $(\Phi_n): \mathscr{W} \to \mathbb{R}^m$,
+\[
+ \Phi_n(x_1,\ldots, x_n, x_{n+1}, \ldots, x_{n+m}): = \Phi(a_1,\ldots, a_n, x_{n+1}, \ldots, x_{n+m})
+\]
+
+Итак, мы имеем непрерывно дифференцируемое отображение $\Phi:\mathscr{W} \to \mathbb{R}^m$, $\Phi(\m{a}) = \m{0}_m$ и якобиан отображения $\Phi_n:\mathscr{W} \to \mathbb{R}^m$ отличен от нуля, тогда по теореме о нявном отображении \ref{implicit_theorem}, найдутся окрестности $\mathscr{U}$, $\mathscr{V}$ точкек $(a_1,\ldots, a_n)$, $(a_{n+1}, \ldots, a_{n+m})$ соотвественно, и нерперывно дифференцируемое отображение $F:\mathscr{U} \to \mathscr{V}$ такое, что $(x_{n+1}, \ldots, x_{n+m}) = F(x_1,\ldots, x_n)$, \textit{т.е.,} мы получаем 
+\begin{equation}\label{extr_connection_2}
+  \begin{matrix}
+     x_{n+1} &=& \varphi_1(x_1, \ldots, x_n),\\
+     \vdots & & \vdots \\
+     x_{n+m} &=& \varphi_m(x_1,\ldots, x_n),
+ \end{matrix}    
+\end{equation}
+где $\varphi_1,\ldots, \varphi_m: \mathscr{U} \to \mathbb{R}$ -- непрерывно дифференцируемые функции которые задают $F$;
+\[
+ F: \begin{pmatrix}
+     x_1 \\
+     \vdots \\
+     x_n
+ \end{pmatrix} \mapsto \begin{pmatrix}
+     \varphi_1(x_1,\ldots, x_n) \\
+     \vdots \\
+     \varphi_m(x_1,\ldots, x_n)
+ \end{pmatrix}.
+\]
+
+\begin{mydanger}{\bf{!}}
+ Иными словами, требование, чтобы значения переменных $x_1,\ldots, x_{n+m}$ удовлетворяли уравнениям связи (\ref{extr_connections}), можно заменить предположением, что переменные $x_{n+1}, \ldots, x_{n+m}$ представляют собой функции (\ref{extr_connection_2}) от $x_1,\ldots, x_n$.    
+\end{mydanger}
+
+Таким образом, вопрос об условном экстремуме для фукнции $f$ от $n+m$ переменных в точке $\m{a} = (a_1,\ldots, a_n, \ldots, a_{n+m})$ сводится к вопросу об обыкновенном экстремуме для функции $\widetilde{f}:\mathscr{U} \to \mathbb{R}$ уже от $n$ переменных
+\[
+\widetilde{f}(x_1,\ldots, x_n):= f(x_1,\ldots, x_n, \varphi_1(x_1,\ldots, x_n), \ldots, \varphi_m(x_1,\ldots, x_n))
+\]
+в точке $\m{a}_0 = (a_1, \ldots, a_n)$.
+
+Другими словами функция $\widetilde{f}$ есть наклонная стрелка в коммутативной диаграмме
+\[
+ \xymatrix{
+ \mathbb{R}^n \supseteq \mathscr{U} \ar@{->}[r]^{\overline{F}} \ar@{->}[rd]_{\widetilde{f}} & \mathscr{U} \times \mathscr{V} \ar@{->}[d]^f \ar@{^{(}->}[r] & \mathbb{R}^n \times \mathbb{R}^m  \\
+ & \mathbb{R} &
+ }
+\]
+где
+\[
+ \overline{F}: = (\mathrm{id}_\mathscr{U},F): \begin{pmatrix}
+     x_1 \\
+     \vdots \\
+     x_n
+ \end{pmatrix} \mapsto \begin{pmatrix}
+     x_1 \\
+     \vdots \\
+     x_n \\
+     \varphi_1(x_1,\ldots, x_n) \\
+     \vdots \\
+     \varphi_m(x_1,\ldots, x_n)
+ \end{pmatrix},
+\]
+а $\mathscr{U} \times \mathscr{V} \hookrightarrow \mathbb{R}^n \times \mathbb{R}^m$ обозначает вложение.
+
+
+
+Предположим теперь, что $f$ дифференцируема на некотором промежутке\footnote{промежуток это либо отрезок, либо интервал, либо полуинтервал.} который мы обозначим через $I.$ 
+
+Таким образом, мы получаем функцию
+\[
+ \mathrm{d}f: I \to \mathbb{R}, \qquad I \ni x \mapsto (\mathrm{d}f)_{x},
+\]
+для которой
+\[
+ (\mathrm{d}f)_{x_0}(h) = f'(x_0) \cdot h = f'(x_0) \cdot  (\mathrm{d}x)_{x_0}(h), \qquad x_0 \in I.
+\]
+
+
+
+раз
+\[
+ \int \frac{[x]}{x^{\lambda +1}}\mathrm{d}x, \qquad \lambda \in \mathbb{R}, x \ge 1
+\]
+два
+\[
+ \int \left[ \frac{1}{\sqrt{x}} \right] \mathrm{d}x, \qquad  x \in (0,1].
+\]
+
+Здесь $[x]$ -- нижняя целая часть числа. 
+
+
+
+
+
+Для каждого $A \in \lambda_f(I)$ найдём (если сможем) все такие $B_{i_1}, \ldots, B_{i_p}$, что $B_{i_1}, \ldots, B_{i_p} \subseteq A$. Тогда если $f(A)  = \alpha,$ $g(B_{i_t}) = \beta_t$, $1 \le t \le p$, то
+\begin{eqnarray*}
+    (f \pm g)(x_t) &=& \alpha + \beta_t, \\
+    \max \{f,g\}(x_t) &=& \max \{ \alpha, \beta_t \}, \\
+    (f\cdot g) (x_t) &=& \alpha \cdot \beta_t,\\
+    \left( \frac{f}{g} \right)(x_t) &=& \frac{\alpha}{\beta_t}, \qquad \beta_t \ne 0.
+\end{eqnarray*}
+
+Если для $A$ таких $B_{i_t}$ не существует, то значит существует хотя бы одно $B \in \lambda_g(I)$, что $A \subseteq B$ и тогда мы найдём все такие $A_{j_1}, \ldots, A_{j_q}$ чтобы $\{A_{j_1}, \ldots, A_{j_q} \subseteq B\}$ и рассуждая аналогично, мы завершаем доказательство. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{lemma}
+    Пусть $I_1, I_2$ -- два интервала, тогда если $I_1 \cap I_2 \ne \varnothing$, то $I_1 \cup I_2$ -- тоже интервал.
+\end{lemma}
+
+\begin{proof}
+    Пусть $I_1 =(a_1, b_1)$, $I_2 = (a_2, b_2)$
+\end{proof}
+
+\begin{theorem}
+    Любое открытое множество $\mathscr{U} \subseteq \mathbb{R}$ есть объединение дизъюнктных интервалов\footnote{\textit{т.е.,} попарно непересекающихся интервалов}.  
+\end{theorem}
+
+
+
+
+
+\begin{theorem}
+ Пусть $\mathscr{U},F \subseteq \mathbb{R}$ -- два непустых множества, при этом $\mathscr{U}$ -- открыто в $\mathbb{R}$, а $F$ -- замкнуто в $\mathbb{R}$. Тогда если $\mathscr{V} \subseteq \mathscr{U}$ -- открыто в $\mathscr{U}$, то оно открыто и в $\mathbb{R}$. Если $S\subseteq F$ -- замкнуто в $F$, то оно замкнуто и в $\mathbb{R}$.
+\end{theorem}
+
+\begin{proof}~\\
+(1) Если $\mathscr{V}$
+    
+\end{proof}
+
+
+\begin{proof}
+    Так как $F$ -- дифференцируемо в $\mathscr{U}$, то для любых точек $\m{a}, \m{a}+\m{h} \in \mathscr{U}$ имеет место равенство
+\[
+F(\m{a} + \m{h}) - F(\m{a}) = (\mathrm{d}F_\m{a})\m{h} + \alpha(\m{h})\| \m{h}\|, \qquad \|\m{h}\| \to 0.
+ \]
+
+(1) Так как $\mathscr{U}$ -- открыто, то для любой точки $\m{c} \in \mathscr{U}$ найдётся открытый шар $B(\m{c},r) \subseteq \mathscr{U}$. Согласно Аксиоме Выбора мы можем выбрать любые две разные точки $\m{x},\m{y} \in B(\m{c},r)$. Рассмотрим отображение
+\[
+ \chi_{\m{x},\m{y}}: [0,1] \to \mathbb{R}^n, \qquad t \mapsto  \m{x}t + (1-t)\m{y},
+\]
+покажем, что $\chi_{\m{x},\m{y}}(t) \in B(\m{c},r)$ для любого $t \in [0,1]$. Действительно, имеем $\|\m{x} - \m{c}\|, \|\m{y} - \m{c}\| < r$, тогда для любого $t \in [0,1]$ получаем
+
+\begin{eqnarray*}
+  \| (t\m{x}+ (1-t)\m{y}) - \m{c}\| &=& \|  t\m{x}+ (1-t)\m{y}- t\m{c} - (1-t)\m{c}\|  \\
+  &= & \| t(\m{x} - \m{c}) + (1-t)(\m{y} - \m{c})  \| \\
+  &\le & t \| \m{x} - \m{c} \| + (1-t) \| \m{y}  -\m{c} \| \\
+  &<& tr + (1-t)r = r,
+\end{eqnarray*}
+\textit{т.е.,} $\m{x}t + (1-t)\m{y} \in B(\m{a},r)$ для любого $t \in [0,1].$
+
+
+(2) Пусть отображение $F$ определено следующим образом
+\[
+ F: \begin{pmatrix}
+     x_1 \\ \vdots \\ x_n
+ \end{pmatrix} \mapsto 
+ \begin{pmatrix}
+     f_1(x_1,\ldots, x_n) \\
+     \vdots \\
+     f_n(x_1,\ldots, x_n)
+ \end{pmatrix}.
+\]
+
+Определим для каждого $1 \le i \le n$ функцию $\varphi_i(t):[0,1] \to B(\m{a}, r)$ следующим образом
+\[
+ \varphi_i(t): = f_i(t\m{x} + (1-t)\m{y}), \qquad 1\le i \le n,
+\]
+другими словами, $\varphi_i: = f_i \circ \chi_{\m{x},\m{y}}$,
+\[
+ \xymatrix{
+  [0,1] \ar@{->}[rd]_{\varphi_i} \ar@{->}[r]^{\chi_{\m{x},\m{y}}} & B(\m{a},r) \ar@{->}[d]^{f_i} \\
+  & \mathbb{R}
+ }
+\]
+
+Пусть $\m{z}_t:=t\m{x} + (1-t)\m{y}$, тогда по теореме о дифференциале композиции \ref{d(FG)} получаем
+\begin{eqnarray*}
+ \varphi'_i(t) &=& (\mathrm{d}f_i)_{\m{z}_t} \cdot \chi'_{\m{x},\m{y}}(t) \\
+ &=& (\mathrm{d}f_i)_{\m{z}_t} \cdot (\m{x} - \m{y}) \\
+ &=& \begin{pmatrix}
+     \dfrac{\partial f_i}{\partial x_1}({\m{z}_t}) & \ldots & \dfrac{\partial f_i}{\partial x_n} ({\m{z}_t})
+ \end{pmatrix} \begin{pmatrix}
+     x_1 - y_1 \\
+     \vdots \\
+     x_n -y_n
+ \end{pmatrix} \\
+ &=& \sum_{k=1}^n \dfrac{\partial f_i}{\partial x_k}({\m{z}_t}) (x_k - y_k) .
+\end{eqnarray*}
+
+(3) По теореме Лагранжа \ref{Langrange} существует такой $\vartheta_i \in (0,1)$, что 
+\[
+ \varphi_i(1) - \varphi_i(0) = \varphi_i'(\vartheta_i),
+\]
+тогда, положим, $\m{z}_i: = \vartheta_i \m{x} + (1-\vartheta_i)\m{y}$, и, принимая во внимание, что $\varphi_i(1) - \varphi_i(0) = f_i(\m{x}) - f_i(\m{y})$, мы получаем
+\begin{eqnarray*}
+ F(\m{x}) - F(\m{y}) &=& \begin{pmatrix}
+   f_1(\m{x}) - f_1(\m{y})\\
+   \vdots \\
+    f_n(\m{x}) - f_n(\m{y})
+ \end{pmatrix} = \begin{pmatrix}
+     \dfrac{\partial f_1}{\partial x_1}(\m{z}_1) & \ldots & \dfrac{\partial f_1}{\partial x_n}(\m{z}_1) \\
+     \vdots & \ddots & \vdots \\
+     \dfrac{\partial f_n}{\partial x_1}(\m{z}_n) & \ldots & \dfrac{\partial f_n}{\partial x_n}(\m{z}_n)
+ \end{pmatrix}\begin{pmatrix}
+   x_1-y_1\\
+   \vdots \\
+    x_n - y_n
+ \end{pmatrix} = J(\m{z}_1,\ldots, \m{z}_n)(\m{x} - \m{y}).
+\end{eqnarray*}
+
+В связи с этим рассмотрим функцию 
+\[
+ \mathrm{det}(J): \underbrace{\mathbb{R}^n \times \cdots \times \mathbb{R}^n}_n \to \mathbb{R}, \qquad (\m{x}_1,\ldots, \m{x}_n) \mapsto \mathrm{det} \begin{pmatrix}
+     \dfrac{\partial f_1}{\partial x_1}(\m{x}_1) & \ldots & \dfrac{\partial f_1}{\partial x_n}(\m{x}_1) \\
+     \vdots & \ddots & \vdots \\
+     \dfrac{\partial f_n}{\partial x_1}(\m{x}_n) & \ldots & \dfrac{\partial f_n}{\partial x_n}(\m{x}_n)
+ \end{pmatrix}
+\]
+
+Так функция $\mathrm{det}$ -- непрерывная, то $\mathrm{det}(J)$ непрерывная, с другой стороны, $\mathrm{det}J(\m{a},\ldots, \m{a}) = \mathrm{det} (\mathrm{d}F)_a$. По условию, $(\mathrm{d}F)_\m{a}$ -- обратима, \textit{т.е.} $\mathrm{det} (\mathrm{d}F)_a \ne 0$, \textit{т.е.} $\mathrm{det}(J(\m{a},\ldots,\m{a})) \ne 0$. Но тогда в силу непрерывности $\mathrm{det}(J)$ можно найти такой открытый шар $B(\m{a}, \varepsilon)$, что для любых $\m{z}_1,\ldots, \m{z}_n \in B(\m{a},\varepsilon)$, $\mathrm{det}(J)(\m{z}_1,\ldots, \m{z}_n) \ne 0.$
+
+(4) Итак, пусть $\m{x},\m{y} \in B(\m{a},\varepsilon)$, $\m{x} \ne \m{y}$ тогда из предыдущих рассуждений мы получаем
+\begin{equation}\label{F(x)-F(y)}
+  F(\m{x}) - F(\m{y}) = J(\m{z}_1,\ldots, \m{z}_n)(\m{x}- \m{y})    
+\end{equation}
+
+и так как $\mathrm{det}(J)(\m{z}_1,\ldots, \m{z}_n) \ne 0$, то $J(\m{z}_1,\ldots, \m{z}_n) \ne 0$, и тогда $F(\m{x}) \ne F(\m{y}).$~\\
+
+\boxed{
+\boxed{
+\textbf{Вывод: мы нашли такой шар $B(\m{a}, \varepsilon)$, что отображение $F: B(\m{a}, \varepsilon) \to F(B(\m{a}, \varepsilon))$ -- биекция!}
+}}~\\
+
+(5) Покажем, что $F(B(\m{a}, \varepsilon))$ -- открыто \textit{т.е.} для любой точки $\m{x} \in F(B(\m{a}, \varepsilon))$ найдётся такой шар малого радиуса с центром в $F(\m{x})$, который будет содержаться в $ F(B(\m{a}, \varepsilon)).$
+
+Для таких целей мы рассмотрим функцию $\psi_\m{v}(\m{y}): = \| F(\m{y}) - \m{v}\|^2$ на замкнутом в $\mathscr{U}$ шаре $\bar B(\m{a}, \varepsilon)$, которую можно определить как наклонную стрелку в диаграмме
+\[
+ \xymatrix{
+  \bar B(\m{a}, \varepsilon) \ar@{->}[r]^F \ar@{->}[rd]_{\psi_\m{v}} & F(\bar B(\m{a}, \varepsilon)) \ar@{->}[d]^{g_\m{v}}\\
+  & \mathbb{R}
+ }
+\]
+где $g_\m{v}(\m{b}): = \| \m{b} - \m{v}\|^2 = \left( \sqrt{ (b_1-v_1) + \cdots + (b_n - v_n)^2 } \right)^2 = (b_1-v_1) + \cdots + (b_n - v_n)^2$, где $\m{b} = (b_1,\ldots, b_n)^\top$ и $\m{v} = (v_1,\ldots, v_n)^\top.$
+
+Тогда по теореме о дифференциале композиции \ref{d(FG)}
+\begin{eqnarray*}
+    (\mathrm{d} \psi_\m{v})_\m{y} &=&(\mathrm{d}g_\m{v})_{F(\m{y})} \cdot (\mathrm{d}F)_\m{y} \\
+    &=& \begin{pmatrix}
+        2(f_1(\m{y}) - v_1) & \ldots & 2(f_n(\m{y}) - v_n) 
+    \end{pmatrix} \begin{pmatrix}
+     \dfrac{\partial f_1}{\partial x_1}(\m{y}) & \ldots & \dfrac{\partial f_1}{\partial x_n}(\m{y}) \\
+     \vdots & \ddots & \vdots \\
+     \dfrac{\partial f_n}{\partial x_1}(\m{y}) & \ldots & \dfrac{\partial f_n}{\partial x_n}(\m{y})
+     \end{pmatrix} 
+\end{eqnarray*}
+тогда для каждого $1 \le i \le n$
+\begin{equation}\label{d(psi)}
+  \dfrac{\partial \psi}{\partial x_i}(\m{y}) = 2 \sum_{k=1}^n \dfrac{\partial f_i}{\partial x_k}(\m{y}) (f_i(\m{y}) - v_i).    
+\end{equation}
+~\\
+
+
+ \textbf{Мы хотим показать, что точка минимума этой функции находится в шаре $B(\m{a},\varepsilon)$.}
+
+~\\
+
+(6) Рассмотрим функцию $\rho_\m{x}: \bar B(\m{a},\varepsilon) \to \mathbb{R}$, $\rho_\m{x}(\m{y}): = \| F(\m{y}) - F(\m{x})\|$, которая, очевидно, непрерывна. Пусть $\m{s} \in S(\m{a},\varepsilon): = \{\m{y}\in \mathbb{R}^n\, :\, \| \m{y} - \m{a}\| = \varepsilon\}$, так как $S$ -- компакт (Следствие \ref{sphere_is_compact}), то согласно Теореме \ref{general_Weistrass} функция $\rho_\m{x}$, рассматриваемая только на $S$ достигает минимума, но так как $\rho_\m{x}(\m{s}) = \| F(\m{s}) - F(\m{x})\| = 0$, если и только если $\m{s} = \m{x}$ (потому что $F$ биективно на $B(\m{a},\varepsilon)$), то минимум этой функции -- положителен.
+
+Тогда, можно выбрать положительное число $\delta>0$ так, чтобы $\rho_\m{x}(\m{s}) = \| F(\m{s}) - F(\m{x})\| > 2 \delta$ для всех $\m{s} \in S(\m{a}, \varepsilon).$
+
+(7) Покажем теперь, что открытый шар $B(F(\m{x}), \delta) \subseteq F(B(\m{a}, \varepsilon))$. Пусть $\m{v} \in B(F(\m{x}), \delta)$, \textit{т.е.,} $\| F(\m{x}) - \m{v}\| < \delta$. Для любого $\m{s} \in S(\m{a}, \varepsilon)$ согласно Лемме \ref{x-y<|x-y|} получаем
+\begin{eqnarray*}
+    \| F(\m{s}) - \m{v}\| &=& \| ( F(\m{s}) - F(\m{x} )) - (\m{v} - F(\m{x}))\| \\
+    &\ge & \Bigl|  \| F(\m{s}) - F(\m{x})  \| - \| \m{v} - F(\m{x}) \| \Bigr| \\
+    &>& |2\delta - \delta| = \delta.
+\end{eqnarray*}
+
+Вернёмся к функции $\psi_\m{v}(\m{y}): = \| F(\m{y}) - \m{v}\|^2$, определённой на $\bar B(\m{a}, \varepsilon)$, тогда получаем 
+\begin{align*}
+    & \psi_\m{v}(\m{s}) = \| F(\m{s}) - \m{v}\|^2 > \delta^2, \qquad \m{s} \in S(\m{a},\varepsilon),\\
+    &\psi_\m{v}(\m{x}) = \| F(\m{x}) - \m{v}\|^2 <\delta^2.
+\end{align*}
+
+С другой стороны, $\bar B(\m{a}, \varepsilon)$ -- компакт (так как он, очевидно, ограничен и замкнут согласно Лемме \ref{closed_ball=closed}), тогда функция (Теорема \ref{general_Weistrass}) $\psi_\m{v}$ принимает на нём минимальное значение, но тогда из неравенств выше вытекает, что точка минимума $\m{w} \in B(\m{a},\varepsilon)$.
+
+(8) В таком случае, если $\m{w}$ -- точка минимума, то из необходимого признака \ref{nessary_condition_for_extr}, $\frac{\partial \psi}{\partial x_i}(\m{w})=0$, но так как $J \ne 0$ в шаре $B(\m{a},\varepsilon)$, то из (\ref{d(psi)}) вытекает, что $f_i(\m{w}) = v_i$ для каждого $1\le i \le n$, \textit{т.е.} $\m{v} = F(\m{w})$.
+
+Итак, мы взяли произвольную точку $\m{v} \in B(F(\m{x}, \delta)$ и только что показали, что $\m{v} = F(\m{w})$, где $\m{w} \in B(\m{a},\varepsilon)$, но это и означает, что $B(F(\m{x}, \delta) \subseteq F(B(\m{a}, \varepsilon))$, \textit{т.е.} мы показали, что $F(B(\m{a}, \varepsilon))$ -- открыто.
+
+
+(9) Нам осталось показать, что $F^{-1}$ -- дифференцируемо в $F(B(\m{a},\varepsilon))$, \textit{т.е.} для любой точки $\m{a}' \in F(B(\m{a},\varepsilon))$ существует такой линейный оператор $\Phi_{\m{a}'}$, что для любых двух точек $\m{a}', \m{a}' + \m{h}' \in F(B(\m{a},\varepsilon))$ имеет место равенство
+\[
+ F^{-1}(\m{a}' + \m{h}') - F^{-1}(\m{a}') = \Phi_{\m{a}'}(\m{h}') + \beta(\m{h}') \| \m{h}'\|, \qquad \m{h}' \to \m{0}_n.
+\]
+
+Пусть $\m{a}: = F^{-1}(\m{a}')$ и $\m{a} + \m{h} := F^{-1}(\m{a}' + \m{h}')$, \textit{т.е.} $F(\m{a}) = \m{a}'$ и $F(\m{a} + \m{h}) = \m{a}' + \m{h}'$. 
+
+Тогда
+\begin{eqnarray*}
+    \Phi_{\m{a}'}(\m{h}') &=& \Phi_{\m{a}'}\left( F(\m{a} + \m{h}) - \m{a}'  \right) \\
+    &=& \Phi_{\m{a}'}\left( F(\m{a} + \m{h}) - F(\m{a}) \right)
+\end{eqnarray*}
+так как $F$ -- дифференцируемо в $\mathscr{U}$, то согласно определению 
+\[
+ F(\m{a} + \m{h}) - F(\m{a}) = (\mathrm{d}F_\m{a})\m{h} + \alpha(\m{h})\| \m{h}\|, \qquad \|\m{h}\| \to 0
+\]
+тогда, требуя, чтобы $\Phi_{\m{a}'}$ была обратной к матрице $(\mathrm{d}F)_\m{a}$, получаем
+\begin{eqnarray*}
+    \Phi_{\m{a}'}(\m{h}')&=& \Phi_{\m{a}'}\left( (\mathrm{d}F_\m{a})\m{h} + \alpha(\m{h})\| \m{h}\| \right) \\
+    &=& \m{h} + \Phi_{\m{a}'}(\alpha(\m{h}))\cdot \| \m{h}\|
+\end{eqnarray*}
+
+Рассмотрим теперь 
+\[
+ \beta(\m{h}'): = \frac{\|\m{h}\|}{\| \m{h}'\|}\Phi_{\m{a}'}(\alpha(\m{h})) ,
+\]
+и покажем, что $\lim_{\m{h}' \to \m{0}_n} \beta(\m{h}') = 0$.
+
+Вернёмся к равенству (\ref{F(x)-F(y)}) и рассмотрим теперь функцию $J(\m{z}_1,\ldots, \m{z}_n)$ на замкнутом шаре $\bar B(\m{a},\varepsilon)$, тогда по теореме \ref{W=complete} эта функция принимает минимальное значение $\mu$, \textit{т.е.} мы получаем
+\[
+ \| F(\m{x}) - F(\m{y})\| = \| J(\m{x}-\m{y})\| \ge \mu \|\m{x} - \m{y}\|.
+\]
+
+Так как $\m{h}'= F(\m{a} + \m{h}) - F(\m{a})$, то из неравенства выше, получаем
+\[
+  \| \m{h}'\| =\| F(\m{a} + \m{h}) - F(\m{a}) \| \ge  \mu \| \m{h} \|.
+\]
+
+Тогда
+\[
+ \beta(\m{h}'): = \frac{\|\m{h}\|}{\| \m{h}'\|}\Phi_{\m{a}'}(\alpha(\m{h})) \le \mu \Phi_{\m{a}'}(\alpha(\m{h})),
+\]
+в силу непрерывности $\Phi_{\m{a}'}$ (так как это линейный оператор, Лемма \ref{linear_is_contious}), мы получаем, что 
+\[
+ \beta(\m{h}'): = \Phi_{\m{a}'}(\alpha(\m{h})) \to 0, \qquad \m{h}' \to \m{0}_n,
+\]
+что и показывает $\lim_{\m{h}' \to \m{0}_n} \beta(\m{h}') = 0$, а тогда имеет место равенство 
+\[
+ F^{-1}(\m{a}' + \m{h}') - F^{-1}(\m{a}') = \Phi_{\m{a}'}(\m{h}') + \beta(\m{h}') \| \m{h}'\|, \qquad \m{h}' \to \m{0}_n.
+\]
+
+Тем самым, теорема об обратной функции полностью доказана.
+\end{proof}

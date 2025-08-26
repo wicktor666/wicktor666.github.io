@@ -1,0 +1,1102 @@
+\chapter{Теория экстремумов}
+
+\section{Компактные пространства}
+
+Мы приступаем 
+
+\begin{definition}
+ Пусть $X$ -- произвольное непустое множество. Множество $(\mathscr{U}_\lambda)_{\lambda \in \Lambda}$ подмножеств множества $X$ называется его \textit{покрытием}, если $X = \bigcup_{\lambda \in \Lambda} \mathscr{U}_\lambda$.    
+\end{definition}
+
+Имеется и другое, более широкое понимание этих терминов: множество $(\mathscr{U}_\lambda)_{\lambda \in \Lambda}$ подмножеств множества $Y$ называется \textit{покрытием} множества $X\subseteq Y$, если $X \subseteq \bigcup_{\lambda \in \Lambda} U_\lambda$.
+
+
+\begin{definition}
+    Метрическое пространство $E$ называется \textit{компактным}, если оно удовлетворяет \boxed{\textbf{аксиоме Бореля -- Лебега)}}: для каждого покрытия $(\mathscr{U}_\lambda)_{\lambda \in \Lambda}$ пространства $E$ открытыми множествами (=открытое покрытие) существует конечное подсемейство $(\mathscr{U}_\lambda)_{\lambda \in L}$ (где $L \subseteq \Lambda$, и $L$ -- конечное множество), являющееся покрытием пространства $E.$
+\end{definition}
+
+\begin{definition}
+\textit{Компактом} (или компактным множеством) в метрическом пространстве $(E,d)$ называется такое множество $K$, для которого метрическое подпространство $(K,d|_K)$ пространства $(E,d)$ компактно.
+\end{definition}
+
+
+
+
+
+\begin{lemma}
+    Подпространство $K$ в метрическом пространстве $(E,d)$ -- компакт тогда и только тогда, когда из любого его покрытия множествами, открытыми в $E$, можно выделить конечное подпокрытие этими же множествами.
+\end{lemma}
+
+\begin{proof}~
+
+    (1) Пусть $(K,d|_K)$ -- компактное подпространство в $(E,d)$, и пусть $\{ \mathscr{U}_\alpha \}_{\alpha \in A}$ -- его покрытие, \ie $K = \cup_{\alpha \in A} \mathscr{U}_\alpha$, где все $\mathscr{U}_\alpha \subseteq K$ открыты в $K$, но тогда (Предложение \ref{open_in_subset}) для каждого $\alpha \in A$ существует открытое множество $\widetilde{\mathscr{U}}_\alpha$ в $E$ такое, что $\mathscr{U}_\alpha= \widetilde{\mathscr{U}}_\alpha \cap K$. Тогда $K \subseteq \cup_{\alpha \in A} \widetilde{\mathscr{U}}_\alpha.$ Так как $K$ -- компакт, то можно найти конечное число множеств, скажем, $\mathscr{U}_1, \ldots, \mathscr{U}_n$, таких, что $K = \cup_{i=1}^n\mathscr{U}_i$, но тогда $K \subseteq \cup_{i=1}^n \widetilde{\mathscr{U}}_i$.
+
+(2) Пусть для любого покрытия $\{\widetilde{\mathscr{U}}_\alpha\}_{\alpha \in A}$ множества $K$ открытыми множествами из $E$ можно всегда найти конечное подпокрытие, скажем, $K \subseteq \cup_{i=1}^n \widetilde{\mathscr{U}}_i$, но тогда 
+\[
+ K = K \cap \bigcup_{i=1}^n \widetilde{\mathscr{U}}_i= \bigcup_{i=1}^n \mathscr{U}_i
+\]
+при этом (см. Предложение \ref{open_in_subset}) каждое $\mathscr{U}_\alpha : = \widetilde{\mathscr{U}}_\alpha \cap K$ -- открыто в $K$.
+\end{proof}
+
+
+
+
+\begin{lemma}\label{metric=hausdorff}
+    Любое метрическое пространство удовлетворяет \textbf{аксиоме отделимости Хаусдорфа}; для любых двух различных точек найдутся их непересекающиеся окрестности.
+\end{lemma}
+\begin{proof}
+    Пусть $(E,d)$ -- метрическое пространство, и пусть $x_1,x_2 \in E$ -- две его различные точки. Нужно показать, что найдутся два открытых множества $\mathscr{U}_1, \mathscr{U}_2 \subset E$ такие, что $x_1\in \mathscr{U}_1$, $x_2\in \mathscr{U}_2$ и $\mathscr{U}_1\cap \mathscr{U}_2 = \varnothing.$
+
+   Пусть $y \in B(x_1,r_1) \cap B(x_2,r_2)$, тогда $d(x_1,y)<r_1$ и $d(x_2,y)<r_2$. По неравенству треугольника, получаем
+    \[
+     d(x_1,x_2) \le d(x_1,y) + d(x_2,y)< r_1 +r_2.
+    \]
+
+    Это означает, что $B(x_1,r_1) \cap B(x_2,r_2) \ne \varnothing$, если и только если $r_1+r_2 > d(x_1,x_2)$, а если $r_1+r_2 \le d(x_1,x_2)$, то $B(x_1,r_1) \cap B(x_2,r_2) = \varnothing$. Таким образом, для данных двух различных точек $x_1,x_2$ полагаем $\mathscr{U}_1: = B(x_1,r_1)$, $\mathscr{U}_2:=B(x_2,r_2)$ и требуем, чтобы $r_1+r_2 \le d(x_1,x_2)$. Это доказывает хаусдорфовость метрических пространств. 
+\end{proof}
+
+\begin{corollary}\label{point_is_closed}
+    В любом метрическом пространстве $(E,d)$ точка -- замкнутое множество.
+\end{corollary}
+
+\begin{proof}
+    Пусть $y \in \overline{\{x\}}$ тогда для любого $r>0$, $B(y,r) \cap \{x\} \ne \varnothing$, \ie для любого $r >0$ $x \in B(y,r)$, учитывая выполнения аксиомы отделимости в метрических пространствах получаем, что такое возможно, только если $x =y$, что и доказывает требуемое.
+\end{proof}
+
+
+\begin{theorem}[\textbf{Свойства компакта}]\label{properties_of_compact}
+ В метрическом пространстве $(E,d)$ любой компакт обладает следующими свойствами:
+  \begin{enumerate}
+      \item Компакт -- ограниченное множество, \ie найдётся такой шар $B(a,r) \subseteq E$, что $K \subseteq B(a,r)$.
+      \item Компакт -- замкнутое множество, \ie он содержит все свои точки прикосновения ($\overline{K} = K$).
+      \item Замкнутое подмножество компакта самое является компактом.
+  \end{enumerate} 
+\end{theorem}
+
+\begin{proof}
+Пусть $(E,d)$ -- метрическое пространство, $K$ -- компакт в $E$.
+
+(1)  Согласно Аксиоме Выбора, мы можем взять точку $x\in K$. Рассмотрим бесконечную последовательность шаров $(B(x,n))_{n=1}^\infty$ в $K$, очевидно, что это -- покрытие для $K$, и более того $E = \cup_{n \ge 1} B(x,n)$. Так как $K$ -- компакт, то из этого покрытия можно выбрать конечное подпокрытие, скажем, $\{B(x,r)\}_{r=t}^N$, такое, что $K \subseteq \cup_{t=1}^N B(x,r)$. Так как $B(x,p) \subseteq B(x,q)$ при $p<q$, то $\cup_{t=1}^N B(x,r) = B(x,N)$, что и показывает ограниченность $K.$
+
+(2) Пусть $y \in \overline{K}$, но $y \notin K$. Тогда по Лемме \ref{metric=hausdorff}, для каждого $x\in K$ можно найти два таких шара $B(x, r_x)$, $B(y, \varepsilon_x)$, что $B(x, r_x) \cap B(y, \varepsilon_x) = \varnothing.$ Ясно, что $K \subseteq \cup_{x \in K} B(x,r_x)$. Так как $K$ -- компакт, то можно найти конечное множество точек $\{x_1,\ldots, x_n\}$ такое, что $K \subseteq \cup_{i=1}^n B(x_i, r_i)$, где $r_i = r_{x_i}$, $1\le i \le n.$ Для всех таких $x_i$, мы уже имеем шары $B(y, \varepsilon_i)$, $B(y,\varepsilon_i) \cap B(x_i, r_i) = \varnothing$, где $\varepsilon_i := \varepsilon_{x_i}$. Но, тогда полагая $\varepsilon: = \min \{\varepsilon_1, \ldots, \varepsilon_n\}$, получаем, что
+\[
+  B(y, \varepsilon) \cap K \subseteq B(y, \varepsilon) \cap \bigcup_{i=1}^n B(x_i,r_i) = \varnothing,
+\]
+\textit{т.е.,} мы нашли окрестность $B(y, \varepsilon)$ точки $y$, которая не пересекается с $K$. Но это означает см. Определение \ref{limit_point}, Лемма \ref{closure}), что $y \notin \overline{K}$.  Поэтому если $y\in \overline{K}$, то $y \in K$, \ie $\overline{K} = K.$
+
+
+
+(3) Пусть $F \subseteq K$ -- замкнутое подмножество в $K$, и пусть $\{\mathscr{U}_\alpha\}_{\alpha \in A}$ -- покрытие $F$ открытыми множествами из $E$, \ie $F \subseteq \cup_{\alpha \in A} \mathscr{U}_\alpha$.
+
+Тогда имеем
+\[
+  K \subseteq F \cup (E \setminus F) \subseteq \bigcup_{\alpha \in A} \mathscr{U}_\alpha \cup (E \setminus F),
+\]
+\ie мы получили покрытие для $K$, но так как $K$ -- компакт, то можно найти такие, скажем, $\mathscr{U}_1, \ldots, \mathscr{U}_n$, что 
+\[
+ K \subseteq \mathscr{U}_1 \cup \cdots \cup \mathscr{U}_n \cup (E \setminus F),
+\]
+но тогда 
+\[
+ F \subseteq \mathscr{U}_1 \cup \cdots \cup \mathscr{U}_n,
+\]
+что означает компактность $F.$
+\end{proof}
+
+
+\begin{theorem}\label{image_of_compact}
+    Пусть $f:E\to E'$ -- непрерывное отображение между метрическими пространствами, тогда если $X$ -- компактно, то $f(X)$ -- компактно.
+\end{theorem}
+
+\begin{proof}
+    Пусть $\{\mathscr{U}'_\alpha\}_{\alpha \in A}$ -- покрытие $f(E)$ открытыми в $E'$ множествами, тогда $\{f^{-1}(\mathscr{U}'_\alpha)\}_{\alpha \in A}$ -- покрытие $E$, и так как $f$ -- непрерывно, то по Теореме \ref{preimage_of_open}, это покрытие открытыми множествами в $E.$ Так как $X$ -- компактно, то можно найти конечное подпокрытие, скажем, $\{f^{-1}(\mathscr{U}'_i)\}_{i=1}^n$, но тогда $\{\mathscr{U}_i\}_{i=1}^n$ -- покрытие для $f(X)$, что и показывает компактность $f(X).$
+\end{proof}
+
+
+\subsection{Компактность в $\mathbb{R}^n$}
+
+\textit{(Прямоугольным) параллелепипедом в $\mathbb{R}^n$} будем называть множество 
+\[
+  \mathcal{P}: = [a_1, b_1] \times \cdots \times [a_n, b_n].
+\]
+
+
+\begin{proposition}\label{cub_is_compact}
+    Параллелепипед $\mathcal{P}$ -- компакт в $\mathbb{R}^n$, где рассматривается евклидова метрика.
+\end{proposition}
+\begin{proof}
+Доказывать будем от противного. Допустим, что существует такое покрытие $\{\mathscr{U}_\alpha\}_{\alpha \in A}$ открытыми множествами из $\mathbb{R}^n$ для параллелепипеда $\mathcal{P}$, что из него нельзя выбрать конечное подпокрытие. 
+
+Итак, пусть $\mathcal{P} \subseteq \bigcup_{\alpha \in A} \mathscr{U}_\alpha$ и из этого покрытия нельзя выбрать конечное подпокрытие которое бы покрыло $\mathcal{P}$. Разобьём каждый отрезок $[a_k, b_k]$ пополам \ie представим его так:
+    \[
+     [a_k, b_k] = \left[ a_k, \frac{a_k+b_k}{2} \right] \cup \left[\frac{a_k +b_k}{2}, b_k \right] \qquad 1 \le k \le n,
+    \]
+тогда $\mathcal{P}$ разобьётся на $2^n$ параллелепипедов. По условию, $\mathcal{P}$ нельзя покрыть конечным числом множеств из $\{ \mathscr{U}_\alpha\}_{\alpha \in A}$, тогда найдётся хотя бы один из полученных параллелепипедов, обозначим его через $\mathcal{P}_1$, который тоже нельзя покрыть конечным числом множеств из покрытия $\{ \mathscr{U}_\alpha\}_{\alpha \in A}$.
+
+Разобьём теперь параллелепипед $\mathcal{P}_1$ аналогичным образом на $2^n$ параллелепипедов. Так как $\mathcal{P}_1$ нельзя покрыть конечным числом множеств из покрытия $\{ \mathscr{U}_\alpha\}_{\alpha \in A}$, то найдётся хотя бы один, скажем, $\mathcal{P}_2$, из только что полученных, который тоже нельзя покрыть конечным числом множеств. Будем повторять эту процедуру каждый раз. В результате мы получаем бесконечную цепь вложенных друг в друга параллелепипедов 
+\[
+ \mathcal{P} \supsetneq \mathcal{P}_1 \supsetneq \mathcal{P}_2 \supsetneq \ldots
+\]
+каждый из которых нельзя покрыть конечным числом элементов множества $\{\mathscr{U}_\alpha\}_{\alpha \in A}$, и где каждый из них описывается следующим образом
+\[
+ \mathcal{P}_i = \left[a_i^{(1)}, b_i^{(1)} \right] \times \cdots \times \left[a_i^{(n)}, b_i^{(n)} \right], \qquad i \ge 1,
+\]
+при этом, по построению, получаем $n$ систем вложенных друг в друга отрезков
+\begin{align*}
+    & \left[ a_1^{(1)}, b_1^{(1)} \right] \supseteq \left[ a_2^{(1)}, b_2^{(1)} \right] \supseteq \left[ a_3^{(1)}, b_3^{(1)} \right] \supseteq \ldots \\
+   & \left[ a_1^{(2)}, b_1^{(2)} \right] \supseteq \left[ a_2^{(2)}, b_2^{(2)} \right] \supseteq \left[ a_3^{(2)}, b_3^{(2)} \right] \supseteq \ldots 
+\end{align*}
+у которых длины строго уменьшаются (каждый из отрезков по длине в два раза меньше, чем его соседний слева отрезок). Тогда по Лемме о вложенных отрезках (Лемма \ref{cap_of_intervals}), для каждой из этих $n$ систем есть своя общая точка, $c_i \in \bigcap_{k \ge 1} [ a_k^{(i)}, b_k^{(i)} ] $, которая есть предельная для последовательности их концов; 
+\[
+ \begin{matrix}
+    a_1^{(1)} & a_2^{(1)} & a_3^{(1)}& \ldots  & \to & c_1 & \leftarrow & \ldots & b_3^{(1)} & b_2^{(1)}  \\
+    a_1^{(2)} & a_2^{(2)} & a_3^{(2)}& \ldots  & \to & c_2 & \leftarrow & \ldots & b_3^{(1)} & b_2^{(1)}  \\
+    \vdots & \vdots &\vdots & \ddots && \vdots && && \\
+    a_1^{(n)} & a_2^{(n)} & a_3^{(n)}& \ldots  & \to & c_n & \leftarrow & \ldots & b_3^{(1)} & b_2^{(1)}  
+\end{matrix}
+\]
+тогда для любого $\varepsilon >0$ и для каждого $1\le p \le n$, найдётся такой номер $M_p$, что при $m \ge M_p$ все $a_m^{(p)}, b_m^{(p)} \in (c_p - \varepsilon, c_p + \varepsilon)$. Пусть $M: = \max_{1 \le p \le n}\{M_p\}$, тогда при $m > M$ все $a_m^{(p)}, b_m^{(p)} \in (c_p - \varepsilon, c_p + \varepsilon)$ при любом $1\le p \le n.$
+
+Рассмотрим теперь параллелепипед
+\[
+ \mathcal{P}_\varepsilon(\m{c}):= [c_1 - \varepsilon, c_1 + \varepsilon] \times \cdots \times [c_n - \varepsilon, c_n + \varepsilon]
+\]
+где $\m{c}: = (c_1,\ldots, c_n)$. Тогда для всех $m>M$ получаем, что все параллелепипеды $\mathcal{P}_m \subset \mathcal{P}_\varepsilon(\m{c})$.
+
+С другой стороны, 
+\[
+  \m{c} = (c_1,\ldots, c_n) \in \bigcap_{i \ge 1} \mathcal{P}_i \subset \mathcal{P} \subseteq \bigcup_{\alpha \in A} \mathscr{U}_\alpha
+\]
+тогда найдётся хотя бы одно $\mathscr{U}_\alpha$, содержащее эту точку $\m{c}$, так как $\mathscr{U}_\alpha$ открыто, то найдётся шар $B(c, r)$ такой, что $B(\m{c}, r) \subseteq \mathscr{U}_\alpha$.
+
+Пусть теперь $0 < \varepsilon < \dfrac{r}{\sqrt{n}}$, тогда получаем, что для каждого $m>M$
+\[
+ \mathcal{P}_m \subseteq \mathcal{P}_\varepsilon(\m{c}) \subseteq B(\m{c}, r) \subseteq \mathscr{U}_\alpha.
+\]
+
+Но это означает, что каждый из $\mathcal{P}_m$ при $m >M$ можно покрыть всего одним элементом $\mathscr{U}_\alpha$, что противоречит выбору таких параллелепипедов, \textit{т.е.,} первоначальный параллелепипед можно тогда покрыть конечным числом элементов множества $\{\mathscr{U}_\alpha\}$, что означает его компактность.    
+\end{proof}
+
+
+\begin{theorem}[{\bf Критерий компактности в $\mathbb{R}^n$}]\label{criterai_of_compacness}
+Множество $K \subseteq \mathbb{R}^n$ компактно тогда и только тогда, когда оно замкнуто и ограничено.    
+\end{theorem}
+\begin{proof}~
+
+(1) Согласно Теореме \ref{properties_of_compact} (1), мы получаем необходимость.
+
+(2) Если $K \subseteq \mathbb{R}^n$ ограничено и замкнуто, то это значит, что оно содержится в некотором шаре, скажем, $B(\m{x}, r)$ который содержится целиком внутри параллелепипеда
+    \[
+     \mathcal{P} = [x_1- r,x_1+r] \times \cdots \times [x_n-r, x_n+r]
+    \]
+    где $\m{x} = (x_1, \ldots, x_n)$. Так как $K$ -- замкнуто, то из предложения \ref{cub_is_compact} и Теоремы \ref{properties_of_compact} (3) вытекает утверждение. 
+\end{proof}
+
+\begin{corollary}\label{sphere_is_compact}
+    В пространстве $\mathbb{R}^n$ сфера $S^n: =\{(x_1,\ldots, x_n): x_1^2 + \cdots +x_n^2 =r^2\}$ -- компакт.
+\end{corollary}
+\begin{proof}
+ Очевидно, что сфера $S^n$ ограничена, так как $S^n \subseteq B(\m{0}_n, r')$, где $r'>r$. Покажем замкнутость. Отображение
+ \[
+  f: \mathbb{R}^n \to \mathbb{R}, \qquad (x_1,\ldots, x_n) \mapsto x_1^2 + \cdots + x_n^2 - r^2
+ \]
+ для фиксированного $r>0$ очевидно непрерывно, тогда $S^n= f^{-1}(\{0\})$, но точка, согласно Следствию \ref{point_is_closed}, $0$ -- замкнутое множество в $\mathbb{R}$ в евклидовой метрике. Таким образом $S^n$ -- ограничено и замкнуто, а значит -- компакт.
+\end{proof}
+
+
+
+\begin{theorem}\label{general_Weistrass}
+    На компактном множестве всякая непрерывная функция ограничена и достигает наибольшего и наименьшего значений.
+\end{theorem}
+Другими словами, если $f:K \to \mathbb{R}$ -- непрерывная функция, $K$ -- компактно, то найдутся такие $a,b \in K$, что $f(a) \le f(x) \le f(b)$ для любого $x \in K$.
+
+\begin{proof}
+    Согласно Теореме \ref{image_of_compact} $f(K)$ -- компактно в $\mathbb{R}$, тогда согласно Теореме \ref{criterai_of_compacness} оно ограничено. Тогда согласно принципу полноты Вейерштрасса (Теорема \ref{W=complete}) существуют $m:=\inf f(X)$, $M:= \sup f(K).$ Но по теореме \ref{criterai_of_compacness} $f(K)$ также и замкнуто, тогда по Лемме \ref{closure} $m,M \in f(K)$, откуда и следует существование таких точек $a,b\in K$, что $f(a) \le f(x) \le f(b)$ при всех $x\in K.$
+\end{proof}
+
+
+
+
+\section{Экстремум функции}
+
+Теперь у нас всё готово, чтобы исследовать функции на экстремумы. Прежде всего, введём необходимые понятия.
+
+\begin{definition}
+    Точка $\m{a} \in \mathbb{R}^n$ называется \textit{точкой локального максимума (минимума)} функции $f:\mathbb{R}^n \to \mathbb{R}$, если она определена в некоторой её окрестности $\mathscr{U}(\m{a})$ и $f(\m{x}) \ge f(\m{a})$ (\textit{соотв.} $f(\m{x}) \le f(\m{a})$) для любой точки $\m{x} \in \mathscr{U}(\m{a}).$
+
+Точки локального максимума и минимума называются точками \textit{экстремума.}
+\end{definition}
+
+\begin{mydanger}{\bf{!}}
+    В случае $f:\mathbb{R} \to \mathbb{R}$ исследование функции на экстремум, как правило, ограничивается исследованием знака $f'(x)$ в окрестности точки экстремума. Однако в случае, когда $n\ge 2$, исследованием функции $f:\mathbb{R}^n \to \mathbb{R}$ на экстремум уже, как правило, не ограничивается исследованием $(\mathrm{d}f)_\m{a}.$ 
+\end{mydanger}
+
+\begin{example}
+    Рассмотрим функцию $f(x,y) = (y-x^2)(y-2x^2)$
+\end{example}
+
+\begin{theorem}[Необходимое условие экстремума]\label{nessary_condition_for_extr}
+    Если $\m{a} = (a_1,\ldots, a_n) \in \mathbb{R}^n$ -- точка экстремума функции $f:\mathbb{R}^n \to \mathbb{R}$, тогда, если все частные производные $f'_{x_i}$, $1\le i \le n$ существуют в какой-то окрестности $\mathscr{U}(\m{a})$ точки $\m{a}$, то $(\mathrm{d}f)_\m{a}(\m{h}) = 0$ для любого $\m{h} \in \mathscr{U}(\m{a}),$ или
+    \[
+     \left.\frac{\partial f}{\partial x_1}\right|_\m{a} = \ldots = \left.\frac{\partial f}{\partial x_n}\right|_\m{a} = 0.   
+    \]
+\end{theorem}
+\begin{proof}
+    Рассмотрим $k$ функций $\varphi_k(t): = f(a_1,\ldots, a_{k-1}, t, a_{k+1}, \ldots, a_n)$, $1 \le k \le n$, где от каждого $t$ мы требуем чтобы, соответствующая точка лежала в окрестности $\mathscr{U}(\m{a}).$ Пусть $\m{a}$ -- точка максимума, тогда, в частности $f(a_1, \ldots, t, \ldots) \le f(\m{a})$ для любого $t$, \textit{т.е.} $\varphi_k(t) \le f(\m{a})$ при каждом $1 \le k \le n$. Другими словами, $a_k$ -- точка максимума для $\varphi_k(t)$. Тогда по теореме Ферма \ref{Ferma} $\varphi'_k(a_k) = 0$, но $\varphi'_k(a_k) = f'_{x_k}(\m{a}) = 0$ для каждого $1 \le k \le n$, что и требовалось доказать.
+\end{proof}
+
+
+
+\begin{theorem}[Достаточное условие экстремума]
+    Пусть функция $f:\mathbb{R}^n \to \mathbb{R}$ является дважды дифференцируемой в окрестности $\mathscr{U}(\m{a})$ точки $\m{a} \in \mathbb{R}^n$, все $f''_{x_ix_j}$ непрерывны в $\m{a}$ и $(\mathrm{d}f_\m{a})(\m{h}) = 0$ для любого $\m{h} \in \mathscr{U}(\m{a}).$ 
+    \begin{enumerate}
+        \item Если $(\m{d}^2f_\m{a})(\m{h}) >0 $ для любого $\m{h} \in \mathscr{U}(\m{a})$, то $\m{a}$ -- локальный минимум.
+        \item Если $(\m{d}^2f_\m{a})(\m{h}) <0 $ для любого $\m{h} \in \mathscr{U}(\m{a})$, то $\m{a}$ -- локальный максимум.
+        \item Если существуют такие $\m{u}, \m{v} \in \mathscr{U}(\m{a})$, что $(\m{d}^2f)_\m{a}(\m{u}) >0$, $(\m{d}^2f)_\m{a}(\m{v}) <0$, то $\m{a}$ не является точкой экстремума. 
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    В окрестности $\mathscr{U}(a)$ точки $\m{a}$ имеем (Теорема \ref{Tayl_for_2}),
+     \[
+     f(\m{a} + \m{h}) =f(\m{a}) + \nabla_\m{a}(f)(\m{h}) + \frac{1}{2} \m{h}^\top \m{H}_\m{a}(f) \m{h} + o(\|\m{h}\|^2), \qquad \m{h} \to \m{0}_n.
+    \]
+    по условию $\nabla_\m{a}(f)(\m{h}) = 0$, запишем это в следующем виде
+\begin{eqnarray*}
+    f(\m{a} + \m{h}) &=& f(\m{a}) +  \frac{1}{2} \m{h}^\top \m{H}_\m{a}(f) \m{h} + \alpha(\m{h}) \| \m{h}\|^2 \\
+   &=& f(\m{a}) + \|\m{h}\|^2 \left( \frac{1}{2}\frac{\m{h}^\top}{\|\m{h} \|} \m{H}_\m{a}(f) \frac{\m{h}}{\|\m{h} \|} + \alpha(\m{h}) \right) \\
+   &=&f(\m{a}) + \|\m{h}\|^2\left( \frac{1}{2} (\mathrm{d}^2f)_\m{a}\left(\frac{\m{h}} {\|\m{h}\|}\right) + \alpha(\m{h}) \right).
+\end{eqnarray*}
+
+Так как $(\mathrm{d}^2)_\m{a}(\m{h}) = \frac{1}{2} \m{h}^\top \m{H}_\m{a}(f) \m{h}$ -- полином от переменных $h_1, \ldots, h_n$, то это непрерывная функция. С другой стороны, $\frac{\m{h}}{\| \m{h}\|}$ принадлежит единичной сфере $S^{n-1}: = \{\m{x} \in \mathbb{R}^n\, :\, \|\m{x}\| = 1\}$, тогда согласно теореме \ref{general_Weistrass} $(\mathrm{d}^2f)_\m{a}(\m{h})$ принимает максимальное и минимальное значение на сфере $S^{n-1}.$
+
+(1) Пусть $(\m{d}^2f)_\m{a}(\m{h}) >0 $ для любого $\m{h} \in \mathscr{U}(\m{a})$, тогда, если $\m{v} \in S^{n-1}$, то и $(\m{d}^2f)_\m{a}(\m{v}) >0 $, и тогда её минимальное значение на сфере тоже положительное, поэтому положим
+\[
+ m: = \min_{\m{v} \in S^{n-1}} (\m{d}^2f)_\m{a}(\m{v}) > 0.
+\]
+
+Тогда
+\[
+ f(\m{a} + \m{h}) = f(\m{a}) + \| \m{h}\|^2 \left( \frac{1}{2} (\mathrm{d}^2f)_\m{a}\left(\frac{\m{h}} {\|\m{h}\|}\right) + \alpha(\m{h}) \right) \\
+ \ge  f(\m{a}) + \| \m{h}\|^2 \left( \frac{m}{2} +\alpha(\m{h})\right),
+\]
+так как $\lim_{\m{h} \to \m{0}_n} \alpha(\m{h}) = 0 $, то существует такая окрестность $\mathscr{V}$ точки $\m{0}_n$, что $|\alpha(\m{h})|< \frac{m}{4}$, тогда для любого $\m{h} \in \mathscr{V}$ получаем
+\[
+  f(\m{a} + \m{h}) \ge f(\m{a}) + \frac{m}{4} \| \m{h}\|^2,
+\]
+что означает, что точка $\m{a}$ -- локальный минимум.
+
+(2) Доказательство аналогичное.
+
+(3) Пусть существуют такие $\m{u}, \m{v} \in \mathscr{U}(\m{a})$, что $(\m{d}^2f)_\m{a}(\m{u}) >0$, $(\m{d}^2f)_\m{a}(\m{v}) <0$. Тогда имеем
+ \begin{eqnarray*}
+     f(\m{a} + t \m{u}) &=& f(\m{a}) + \frac{1}{2} (\mathrm{d}^2_\m{a}f)(t\m{u}) + \alpha(t \m{u})\| t \m{u}\|^2 \\
+     &=& f(\m{a}) + t^2 \left( \frac{1}{2} (\mathrm{d}^2_\m{a}f)(\m{u}) + \alpha(t \m{u})\| \m{u}\|^2 \right),
+ \end{eqnarray*}
+ аналогично, получаем
+ \[
+     f(\m{a} + t \m{v}) = f(\m{a}) + t^2 \left( \frac{1}{2} (\mathrm{d}^2_\m{a}f)(\m{v}) + \alpha(t \m{v})\| \m{v}\|^2 \right).
+ \]
+
+Тогда при достаточно близких $t$ к нулю, с одной стороны, $f(\m{a} + t \m{u}) < f(\m{a})$, а с другой, $f(\m{a} + t \m{v}) > f(\m{a})$, это завершает доказательство. 
+\end{proof}
+
+\section{Принцип сжимающих отображений}
+
+
+\begin{definition}
+    Пусть $(\m{V}, \| \cdot \|)$ -- нормированное пространство. Отображение $T: \m{V} \to \m{V}$ называет \textit{сжимающим отображением} или \textit{сжатием}, если существует такое число $0 \le \varkappa <1$, что для всех $\m{v,u \in V}$ выполняется условие
+    \[
+     \| T(\m{v}) - T(\m{u}) \| \le \varkappa \| \m{v} - \m{u}\|,
+    \]
+    при этом число $\varkappa$ называется \textit{коэффициентом сжатия.}
+\end{definition}
+
+
+
+\begin{mydanger}{\bf !}
+   Условие $\varkappa \ge 0$, на самом деле излишне в силу не отрицательности нормы, поэтому часто просто требует чтобы $\varkappa <1.$
+\end{mydanger}
+
+
+\begin{lemma}
+    Любое сжимающее отображение является непрерывным.
+\end{lemma}
+
+\begin{proof}
+    Действительно, если $T$ -- сжимающее отображение с коэффициентом сжатия $\varkappa$, то для любого $\varepsilon>0$ положим $0 <\delta < \frac{\varepsilon}{\varkappa}$, тогда для всех $\m{u,v} \in \m{V}$, при условии $\|\m{u} - \m{v}\|< \delta < \frac{\varepsilon}{\varkappa}$, имеем
+    \[
+     \| T(\m{v}) - T(\m{u}) \| \le \varkappa \| \m{v} - \m{u}\| < \varepsilon \cdot \frac{\varepsilon}{\varkappa} = \varepsilon,
+    \]
+    что и доказывает непрерывность.
+\end{proof}
+
+\begin{theorem}[Бaнах]
+    Всякое сжимающее отображение $T:\mathbb{R}^n \to \mathbb{R}^n$ имеет одну и только одну неподвижную точку.
+\end{theorem}
+
+\begin{mydangerr}{\bf!}
+    Это и есть принцип сжимающих отображений, ещё это называют теоремой Банаха о неподвижной точке. Тут мы дали частный случай этой теоремы ограниваясь пространством $\mathbb{R}^n$.
+\end{mydangerr}
+
+
+
+\begin{remark}
+    Суть принципа можно описать привлекаю картографию. Представьте, что у вас есть карта местности. Вы берёте эту карту, сжимаете её (например, уменьшаете в 2 раза) и кладёте обратно на ту же местность так, что вся уменьшенная карта целиком лежит внутри области, которую она изображает. Принцип утверждает, что на карте существует ровно одна точка, которая лежит в точности над той же самой точкой местности, которую она изображает. Эта точка называется неподвижной точкой.
+\end{remark}
+
+\begin{proof}[Доказательство теоремы Банаха]
+Пусть $\m{v}_0 \in \mathbb{R}^n$ -- произвольный вектор. Положим
+\[
+ \m{v}_1: = T(\m{v}_0), \qquad \m{v}_2: = T(\m{v}_1), \qquad \m{v}_p: = T(\m{v}_{p-1}), \quad p \ge 1.
+\]
+
+Покажем что последовательность $(\m{v}_p)$ фундаментальна. Действительно, считая для определённости $q \ge p$, имеем
+\begin{eqnarray*}
+    \| \m{v}_p - \m{v}_q  \| &=& \| T^p(\m{v}_0) - T^q (\m{v}_0)  \| =\| T(T^{p-1}(\m{v}_0)) - T(T^{q-1}(\m{v}_0)) \| \\
+    &\le & \varkappa \| T^{p-1} (\m{v}_0) - T^{q-1} (\m{v}_0) \| \\
+    &\le & \varkappa^p \|  \m{v}_0 - T^{q-p}(\m{v}_0)  \| = \varkappa^p \| \m{v}_0 - \m{v}_{q-p} \| \\
+    &=& \varkappa^p \| (\m{v}_0 - \m{v}_1) + (\m{v}_1 - \m{v}_2) + \cdots +(\m{v}_{q-p-1} - \m{v}_{q-p})   \| \\
+    &\le & \varkappa^p \Bigl( \| \m{v}_0  - \m{v}_1 \| + \| \m{v}_1 - \m{v}_2\| + \cdots + \| \m{v}_{q-p-1} - \m{v}_{q-p} \| \Bigr).
+\end{eqnarray*}
+
+Далее, имеем $\| \m{v}_1 - \m{v}_2 \| = \| T(\m{v}_0) - T(\m{v}_1)  \| \le \varkappa \| \m{v}_0- \m{v}_1\|$ и вообще для любого $k \ge 1$,
+\[
+ \| \m{v}_{k} - \m{v}_{k+1} \| = \| T^k(\m{v}_0) - T^k(\m{v}_1) \| \le \varkappa^k \| \m{v}_0 - \m{v}_1\|.
+\]
+
+Поэтому, получаем
+\begin{eqnarray*}
+    \| \m{v}_p - \m{v}_q  \|
+    &\le & \varkappa^p \Bigl( \| \m{v}_0  - \m{v}_1 \| + \| \m{v}_1 - \m{v}_2\| + \cdots + \| \m{v}_{q-p-1} - \m{v}_{m-p} \| \Bigr)\\
+    &\le & \varkappa^p \| \m{v}_0 - \m{v}_1 \| \Bigl( 1+ \varkappa + \varkappa^2 + \cdots + \varkappa^{q-p-1} \Bigr) \le \varkappa^p \| \m{v}_0 - \m{v}_1 \| \frac{1}{1- \varkappa}.
+\end{eqnarray*}
+
+Так как $\varkappa<1$, то при $n\to \infty$ величина $\| \m{v}_p - \m{v}_q\|$ сколь угодна мала, \textit{т.е.,} последовательность $(\m{v}_p)$ является фундаментальной. Тогда в силу полноты $\mathbb{R}^n$, эта последовательность имеет предел
+\[
+ \m{v}^*: = \lim_{p\to \infty} \m{v}_p.
+\]
+
+Тогда, в силу непрерывности $T$ имеем
+\[
+ T(\m{v}^* = T(\lim_{p\to \infty} \m{v}_p) = \lim_{p\to \infty} T(\m{v}_p) = \lim_{p\to \infty} \m{v}_{p_+1} = \m{v}^*,
+\]
+\textit{т.е.,} $\m{v}^*$ является неподвижной точки для отображения $T.$
+
+Покажем теперь её единственность. Если $T(\m{v}^*) = \m{v}^*$ и $T(\m{u}^*) = \m{u}^*$, то с одной стороны,
+\[
+ \| T(\m{v}^*) - T(\m{u}^*) \| \le  \varkappa \| \m{v}^* - \m{u}^* \|
+\]
+а, так как $T(\m{v}^*) = \m{v}^*$ и $T(\m{u}^*) = \m{u}^*$, то 
+\[
+ \| \m{v}^* - \m{u}^* \| \le \varkappa \| \m{v}^* - \m{u}^*\|.
+\]
+
+Но $\varkappa<1$, поэтому это неравенство возможно если и только если $ \| \m{v}^* - \m{u}^*\| = 0$, что и означает $ \m{v}^*= \m{u}^*.$
+\end{proof}
+
+
+\section{Теорема о среднем в $\mathbb{R}^n$}
+
+
+\begin{theorem}
+Пусть:
+\begin{enumerate}
+    \item $\mathscr{U} \subseteq \mathbb{R}^n$ "--- открытое множество,
+    \item $F: \mathscr{U} \to \mathbb{R}^m$ "--- дифференцируемое отображение,
+    \item Отрезок $[\mathbf{a}, \mathbf{b}] \subseteq U$, где
+    \[
+    [\mathbf{a}, \mathbf{b}] = \{ \mathbf{a} + t(\mathbf{b} - \mathbf{a}) \mid t \in [0, 1] \}.
+    \]
+\end{enumerate}
+Тогда существует $M = \max\limits_{\mathbf{x} \in [\mathbf{a}, \mathbf{b}]} \| \mathrm{d}F_{\mathbf{x}} \|$ такое, что
+\[
+\| F(\mathbf{b}) - F(\mathbf{a}) \| \leqslant M \cdot \| \mathbf{b} - \mathbf{a} \|,
+\]
+где $\| \cdot \|$ "--- евклидова норма в $\mathbb{R}^m$ и $\mathbb{R}^n$, а $\| \mathrm{d}F_{\mathbf{x}} \|$ "--- операторная норма дифференциала.
+\end{theorem}
+
+
+
+\begin{proof}
+1. \textbf{Вспомогательная функция:} \\
+Определим $g: [0, 1] \to \mathbb{R}^m$:
+\[
+g(t) = F(\mathbf{a} + t(\mathbf{b} - \mathbf{a})).
+\]
+Тогда $g(0) = F(\mathbf{a})$, $g(1) = F(\mathbf{b})$, и
+\[
+\| F(\mathbf{b}) - F(\mathbf{a}) \| = \| g(1) - g(0) \|.
+\]
+Производная $g$:
+\[
+g'(t) = \mathrm{d}F_{\mathbf{a} + t(\mathbf{b} - \mathbf{a})}(\mathbf{b} - \mathbf{a}).
+\]
+
+2. \textbf{Случай равенства:} \\
+Если $g(1) = g(0)$, неравенство выполняется тривиально. Далее считаем $g(1) \neq g(0)$.
+
+3. \textbf{Единичный вектор:} \\
+Положим $\mathbf{v} = g(1) - g(0)$ и
+\[
+\mathbf{h} = \frac{\mathbf{v}}{\| \mathbf{v} \|}, \quad \| \mathbf{h} \| = 1.
+\]
+Тогда
+\[
+\| \mathbf{v} \| = \scalar{\mathbf{v}}{\mathbf{h}} = \scalar{g(1) - g(0)}{\mathbf{h}}.
+\]
+
+4. \textbf{Скалярная функция:} \\
+Рассмотрим $\phi(t) = \scalar{g(t)}{\mathbf{h}}$. Тогда
+\[
+\phi(1) - \phi(0) = \scalar{g(1) - g(0)}{\mathbf{h}} = \| \mathbf{v} \|.
+\]
+Производная:
+\[
+\phi'(t) = \scalar{g'(t)}{\mathbf{h}} = \scalar{\mathrm{d}F_{\mathbf{c}_t}(\mathbf{b} - \mathbf{a})}{\mathbf{h}},
+\]
+где $\mathbf{c}_t = \mathbf{a} + t(\mathbf{b} - \mathbf{a})$.
+
+5. \textbf{Теорема Лагранжа:} \\
+По теореме Лагранжа $\exists\, \tau \in (0,1)$:
+\[
+\phi(1) - \phi(0) = \phi'(\tau).
+\]
+Следовательно:
+\[
+\| \mathbf{v} \| = \scalar{\mathrm{d}F_{\mathbf{c}}(\mathbf{b} - \mathbf{a})}{\mathbf{h}}, \quad \mathbf{c} = \mathbf{a} + \tau(\mathbf{b} - \mathbf{a}) \in [\mathbf{a}, \mathbf{b}].
+\]
+
+6. \textbf{Оценка:} \\
+По неравенству Коши-Шварца:
+\[
+\left| \scalar{\mathrm{d}F_{\mathbf{c}}(\mathbf{b} - \mathbf{a})}{\mathbf{h}} \right| \leqslant \| \mathrm{d}F_{\mathbf{c}}(\mathbf{b} - \mathbf{a}) \| \cdot \| \mathbf{h} \| = \| \mathrm{d}F_{\mathbf{c}}(\mathbf{b} - \mathbf{a}) \|.
+\]
+По свойству операторной нормы:
+\[
+\| \mathrm{d}F_{\mathbf{c}}(\mathbf{b} - \mathbf{a}) \| \leqslant \| \mathrm{d}F_{\mathbf{c}} \| \cdot \| \mathbf{b} - \mathbf{a} \|.
+\]
+
+7. \textbf{Максимум нормы:} \\
+Функция $\mathbf{x} \mapsto \| \mathrm{d}F_{\mathbf{x}} \|$ непрерывна на компакте $[\mathbf{a}, \mathbf{b}]$, поэтому
+\[
+M = \max_{\mathbf{x} \in [\mathbf{a}, \mathbf{b}]} \| \mathrm{d}F_{\mathbf{x}} \| < \infty,
+\]
+и $\| \mathrm{d}F_{\mathbf{c}} \| \leqslant M$.
+
+8. \textbf{Итог:} \\
+\[
+\| F(\mathbf{b}) - F(\mathbf{a}) \| = \| \mathbf{v} \| \leqslant M \cdot \| \mathbf{b} - \mathbf{a} \|.\qedhere
+\]
+\end{proof}
+
+
+
+
+
+
+\section{Теорема о неявной и обратной функции}
+
+
+\begin{theorem}[Об обратной функции]
+Пусть $F: \mathscr{U} \subset \mathbb{R}^n \to \mathbb{R}^n$ --- отображение класса $C^1$ на открытом множестве $\mathscr{U}$, $\mathbf{a} \in \mathscr{U}$, и дифференциал $\mathrm{d}F_{\mathbf{a}}$ обратим. Тогда существуют окрестности $V \ni \mathbf{a}$ и $W \ni F(\mathbf{a})$ такие, что:
+\begin{enumerate}
+    \item $F: V \to W$ биективно,
+    \item Обратное отображение $g = F^{-1}: W \to V$ класса $C^1$,
+    \item $\mathrm{d}g_{\mathbf{y}} = [\mathrm{d}F_{g(\mathbf{y})}]^{-1}$ для всех $\mathbf{y} \in W$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{Шаг 1: Приведение к нормализованному виду}
+
+Без потери общности считаем:
+\begin{itemize}
+    \item $\mathbf{a} = 0$ (сдвигом координат),
+    \item $F(0) = 0$ (заменой $F \mapsto F - F(\mathbf{a})$),
+    \item $\mathrm{d}F_{0} = I$ (единичная матрица, заменой $F \mapsto [\mathrm{d}F_{\mathbf{a}}]^{-1} F$).
+\end{itemize}
+Таким образом, $\|F(\mathbf{x}) - \mathbf{x}\| = o(\|\mathbf{x}\|)$ при $\mathbf{x} \to 0$.
+
+\medskip
+\textbf{Шаг 2: Выбор параметров}
+
+Выберем $r > 0$ так, что:
+\begin{itemize}
+    \item Замкнутый шар $\overline{B}(0, 2r) \subset \mathscr{U}$,
+    \item На $\overline{B}(0, 2r)$ выполняется:
+    \[
+    \|\mathrm{d}F_{\mathbf{x}} - I\| \leq \frac{1}{2} \quad \forall \mathbf{x} \in \overline{B}(0, 2r).
+    \]
+\end{itemize}
+Возможно благодаря непрерывности $\mathbf{x} \mapsto \mathrm{d}F_{\mathbf{x}}$.
+
+\medskip
+\textbf{Шаг 3: Построение сжимающего отображения}
+
+Для $\mathbf{y} \in \mathbb{R}^n$ определим:
+\[
+T_{\mathbf{y}}(\mathbf{x}) = \mathbf{x} - F(\mathbf{x}) + \mathbf{y}.
+\]
+
+\medskip
+\textbf{Шаг 4: Проверка условий принципа сжимающих отображений}
+
+\textbf{Лемма:} При $\|\mathbf{y}\| < \frac{r}{2}$ отображение $T_{\mathbf{y}}$ является сжимающим на $\overline{B}(0, r)$.
+
+\begin{proof}[Доказательство леммы]
+1. \textit{Сжимаемость:} Для $\mathbf{x}_1, \mathbf{x}_2 \in \overline{B}(0, r)$:
+\[
+T_{\mathbf{y}}(\mathbf{x}_1) - T_{\mathbf{y}}(\mathbf{x}_2) = (\mathbf{x}_1 - \mathbf{x}_2) - (F(\mathbf{x}_1) - F(\mathbf{x}_2)).
+\]
+По \textbf{теореме о среднем значении}:
+\[
+\|F(\mathbf{x}_1) - F(\mathbf{x}_2)\| \leq \sup_{\xi \in [\mathbf{x}_1,\mathbf{x}_2]} \|\mathrm{d}F_{\xi}\| \cdot \|\mathbf{x}_1 - \mathbf{x}_2\|.
+\]
+Так как $\|\mathrm{d}F_{\xi} - I\| \leq \frac{1}{2}$, то:
+\[
+\|T_{\mathbf{y}}(\mathbf{x}_1) - T_{\mathbf{y}}(\mathbf{x}_2)\| \leq \sup_{\xi} \|I - \mathrm{d}F_{\xi}\| \cdot \|\mathbf{x}_1 - \mathbf{x}_2\| \leq \frac{1}{2} \|\mathbf{x}_1 - \mathbf{x}_2\|.
+\]
+
+2. \textit{Инвариантность:} Для $\mathbf{x} \in \overline{B}(0, r)$:
+\[
+\|T_{\mathbf{y}}(\mathbf{x})\| \leq \|T_{\mathbf{y}}(\mathbf{x}) - T_{\mathbf{y}}(0)\| + \|T_{\mathbf{y}}(0)\| \leq \frac{1}{2}\|\mathbf{x}\| + \|\mathbf{y}\| < \frac{r}{2} + \frac{r}{2} = r.
+\]
+Следовательно, $T_{\mathbf{y}}(\overline{B}(0, r)) \subset \overline{B}(0, r)$.
+\end{proof}
+
+\medskip
+\textbf{Шаг 5: Существование обратного отображения}
+
+Для каждого $\mathbf{y} \in B(0, r/2)$ существует единственная неподвижная точка $\mathbf{x}_{\mathbf{y}} \in \overline{B}(0, r)$:
+\[
+T_{\mathbf{y}}(\mathbf{x}_{\mathbf{y}}) = \mathbf{x}_{\mathbf{y}} \implies F(\mathbf{x}_{\mathbf{y}}) = \mathbf{y}.
+\]
+Положим $g(\mathbf{y}) = \mathbf{x}_{\mathbf{y}}$. Тогда $F(g(\mathbf{y})) = \mathbf{y}$.
+
+\medskip
+\textbf{Шаг 6: Свойства обратного отображения}
+
+1. \textit{Биективность:} 
+\begin{itemize}
+    \item $\forall \mathbf{y} \in W = B(0, r/2) \ \exists \mathbf{x} = g(\mathbf{y}) \in V = g(W)$
+    \item Если $F(\mathbf{x}_1) = F(\mathbf{x}_2) = \mathbf{y}$, то $\mathbf{x}_1 = \mathbf{x}_2$ по единственности неподвижной точки.
+\end{itemize}
+
+2. \textit{Непрерывность $g$:} Следует из оценки $\|g(\mathbf{y})\| \leq 2\|\mathbf{y}\|$.
+
+3. \textit{Дифференцируемость:} В точке $\mathbf{y}=0$:
+\[
+g(\mathbf{y}) = \mathbf{y} - r(g(\mathbf{y})), \quad \text{где} \quad \frac{\|r(\mathbf{x})\|}{\|\mathbf{x}\|} \to 0.
+\]
+Оценка:
+\[
+\frac{\|r(g(\mathbf{y}))\|}{\|\mathbf{y}\|} \leq 2 \cdot \frac{\|r(g(\mathbf{y}))\|}{\|g(\mathbf{y})\|} \to 0.
+\]
+Значит, $\mathrm{d}g_{0} = I$. Для произвольной $\mathbf{y}_1 \in W$ рассмотрим сдвиг:
+\[
+G(\mathbf{z}) = F(\mathbf{z} + g(\mathbf{y}_1)) - \mathbf{y}_1.
+\]
+Тогда $g(\mathbf{y}) = g(\mathbf{y}_1) + H(\mathbf{y} - \mathbf{y}_1)$, где $H$ обратно к $G$.
+
+4. \textit{Формула для дифференциала:} 
+\[
+\mathrm{d}g_{\mathbf{y}} = [\mathrm{d}F_{g(\mathbf{y})}]^{-1}.
+\]
+
+5. \textit{Класс $C^1$:} Следует из непрерывности $g$, $\mathbf{x} \mapsto \mathrm{d}F_{\mathbf{x}}$ и $A \mapsto A^{-1}$.
+\end{proof}
+
+\begin{theorem}[О среднем значении]
+Пусть $F: \mathscr{U} \subseteq \mathbb{R}^n \to \mathbb{R}^m$ дифференцируема на открытом выпуклом $\mathscr{U}$, и $\|\mathrm{d}F_{\xi}\|_{\mathrm{op}} \leq M$ для всех $\xi \in \mathscr{U}$. Тогда:
+\[
+\|F(\mathbf{x}_1) - F(\mathbf{x}_2)\| \leq M \|\mathbf{x}_1 - \mathbf{x}_2\| \quad \forall \mathbf{x}_1, \mathbf{x}_2 \in \mathscr{U}.
+\]
+\end{theorem}
+\begin{proof}
+Для $\mathbf{v} \in \mathbb{R}^m$ рассмотрим $\varphi(t) = \langle \mathbf{v}, F((1-t)\mathbf{x}_1 + t \mathbf{x}_2) \rangle$. По теореме Лагранжа:
+\[
+|\varphi(1) - \varphi(0)| = |\varphi'(\tau)| \leq \|\mathbf{v}\| \cdot \|\mathrm{d}F_{\xi_\tau}\| \cdot \|\mathbf{x}_1 - \mathbf{x}_2\|.
+\]
+Выбирая $\mathbf{v} = F(\mathbf{x}_1) - F(\mathbf{x}_2)$, получаем требуемое.
+\end{proof}
+
+
+
+
+
+
+\begin{theorem}[Теорема о неявной функции]\label{implicit_theorem}
+    Пусть $\m{x} \in \mathbb{R}^n$, $\m{y} \in \mathbb{R}^q$, $\mathscr{W}$ -- окрестность точки $(\m{x}_0, \m{y}_0) \in \mathbb{R}^n \times \mathbb{R}^q$, отображение $\Phi: \mathscr{W} \to \mathbb{R}^q$ непрерывно дифференцируемо, $\Phi(\m{x}_0, \m{y}_0) = \m{0}_m$ и якобиан отображения  $\Phi_{\m{x}_0}: \mathbb{R}^q \to \mathbb{R}^q$, $\m{y}\mapsto \Phi(\m{x}_0, \m{y})$ в точке $\m{y}_0$ отличен от нуля. Тогда найдутся открытые окрестности $\mathscr{U} \subseteq \mathbb{R}^n$ и $\mathscr{V} \subseteq \mathbb{R}^q$ точек $\m{x}_0$ и $\m{y}_0$ соответсвенно и непрерывно дифференцируемое отображение $F: \mathscr{U} \to \mathscr{V}$, обладающее следующим свойством: для точки $(\m{x}, \m{y}) \in \mathscr{U} \times \mathscr{V}$ равенство $\Phi(\m{x}, \m{y}) = 0$ эквивалентно равенству $\m{y} = F(\m{x}).$
+
+    Для точки $\m{x} \in \mathscr{U}$ дифференциал отображения $F$ при этом можно вычислить по формуле
+    \[
+     (\mathrm{d}F)_\m{x} = - \left( \mathrm{d}_2 \Phi \right)^{-1}_{(\m{x}, F(\m{x}))} \circ (\mathrm{d}_1 \Phi)_{(\m{x}, F(\m{x}))},
+    \]
+    где $\mathrm{d}_1$ -- дифференциал отображения $\Phi$ с фиксированными переменными $\m{y}$, а $\mathrm{d}_2$ -- дифференциал отображения $\Phi$ с фиксированными переменными $\m{x}$.
+\end{theorem}
+
+\begin{proof}
+    Для заданного отображения $F(\m{x},\m{y})$ мы положим $\Phi(\m{x},\m{y}):=(\m{x}, F(\m{x},\m{y}))$. Тогда 
+    \[
+     (\mathrm{d}\Phi)_{(\m{x}_0, F(\m{x}_0, \m{y}_0))} = \begin{pmatrix}
+         E & O \\
+         O & (\mathrm{d}F)_{(\m{x}_0,\m{y}_0)}
+     \end{pmatrix}
+    \]
+Тогда $\mathrm{det} (\mathrm{d}\Phi)_{(\m{x}_0, F(\m{x}_0, \m{y}_0))} \ne 0$ и по теореме об обратной функции \ref{inverse_function_theorem} имеется обратное к $\Phi$ отображение $\Psi$, \textit{т.е.} $\Psi(\Phi(\m{x},\m{y})) = (\m{x},\m{y})$, или, другими словами, $\Psi(\m{x}, F(\m{x},\m{y})) = (\m{x},\m{y})$. Тогда если $F(\m{x},\m{y})=0$, то вектор $f(\m{x})$ -- это вектор $\Psi(\m{x}, \m{0}_m)$ без первых $n$ координат.
+\end{proof}
+
+\section*{Вывод формулы для производной (одномерный случай)}
+
+Рассмотрим частный случай $n=1$, $q=1$ ($\mathbf{x} = x \in \mathbb{R}$, $\mathbf{y} = y \in \mathbb{R}$). Уравнение $\Phi(x,y) = 0$ определяет $y$ как функцию $x$, т.е. $y = F(x)$.
+
+\subsection*{Шаг 1. Выразим дифференциал}
+По теореме:
+\begin{equation}
+(\mathrm{d}F)_{x} = - \left( \mathrm{d}_2 \Phi \right)^{-1}_{(x, F(x))} \circ (\mathrm{d}_1 \Phi)_{(x, F(x))}
+\label{eq:diff}
+\end{equation}
+
+\subsection*{Шаг 2. Вычислим компоненты}
+\begin{itemize}
+\item Дифференциал по $x$: $\mathrm{d}_1 \Phi_{(x,y)} : \mathbb{R} \to \mathbb{R}$ действует как:
+\[
+(\mathrm{d}_1 \Phi)_{(x,y)}(h) = \frac{\partial \Phi}{\partial x}(x,y) \cdot h
+\]
+
+\item Дифференциал по $y$: $\mathrm{d}_2 \Phi_{(x,y)} : \mathbb{R} \to \mathbb{R}$ действует как:
+\[
+(\mathrm{d}_2 \Phi)_{(x,y)}(k) = \frac{\partial \Phi}{\partial y}(x,y) \cdot k
+\]
+
+\item Обратный оператор (т.к. $\frac{\partial \Phi}{\partial y} \neq 0$):
+\[
+\left( \mathrm{d}_2 \Phi \right)^{-1}_{(x,y)}(z) = \frac{1}{\frac{\partial \Phi}{\partial y}(x,y)} \cdot z
+\]
+\end{itemize}
+
+\subsection*{Шаг 3. Подставим в формулу (\ref{eq:diff})}
+Для любого $h \in \mathbb{R}$:
+\begin{align*}
+(\mathrm{d}F)_{x}(h) &= - \left( \mathrm{d}_2 \Phi \right)^{-1}_{(x,F(x))} \left( (\mathrm{d}_1 \Phi)_{(x,F(x))}(h) \right) \\
+&= - \frac{1}{\frac{\partial \Phi}{\partial y}(x,F(x))} \cdot \left( \frac{\partial \Phi}{\partial x}(x,F(x)) \cdot h \right) \\
+&= - \frac{\frac{\partial \Phi}{\partial x}(x,F(x))}{\frac{\partial \Phi}{\partial y}(x,F(x))} \cdot h
+\end{align*}
+
+\subsection*{Шаг 4. Отождествим с производной}
+Поскольку $(\mathrm{d}F)_{x}(h) = F'(x) \cdot h$, получаем:
+\[
+F'(x) \cdot h = - \frac{\frac{\partial \Phi}{\partial x}(x,F(x))}{\frac{\partial \Phi}{\partial y}(x,F(x))} \cdot h
+\]
+что верно для всех $h \neq 0$, следовательно:
+\[
+F'(x) = - \frac{\frac{\partial \Phi}{\partial x}(x,F(x))}{\frac{\partial \Phi}{\partial y}(x,F(x))}
+\]
+
+\section*{Итоговая формула}
+Производная неявной функции $y = F(x)$, заданной уравнением $\Phi(x,y) = 0$, вычисляется по формуле:
+\begin{equation}
+\boxed{
+\frac{dy}{dx} = - \frac{\dfrac{\partial \Phi}{\partial x}(x,y)}{\dfrac{\partial \Phi}{\partial y}(x,y)}
+}
+\label{eq:final}
+\end{equation}
+где частные производные вычисляются в точке $(x, y)$.
+
+
+
+\begin{definition}
+        Пусть $\mathscr{U}\subseteq \mathbb{R}^n$, $\mathscr{V}\subseteq \mathbb{R}^m$  -- открытые множества. Отображение $F:\mathscr{U} \to \mathscr{V}$ называется отображением класса $C^p$, $p \ge 0$, при этом, пишут $F\in C^p(\mathscr{U},\mathscr{V})$, если оно $p$ раз дифференцируемо. В случае $p=0$, $F$ есть просто непрерывное отображение. Если же $p = \infty$, то $F$ называется \textit{гладким.}
+\end{definition}
+
+
+\begin{definition}
+    Пусть $\mathscr{U}, \mathscr{V} \subseteq \mathbb{R}^n$ -- открытые множества. Отображение $F:\mathscr{U} \to \mathscr{V}$ класса $C^p$ называется \textit{диффеоморфизмом} класса $C^p$, если $F$ -- биективно и $F^{-1} \in C^p(\mathscr{V}, \mathscr{U}).$
+\end{definition}
+
+\begin{definition}
+    Отображение $F\in C^p(\mathscr{U}, \mathscr{V})$, $\mathscr{U}, \mathscr{V} \subseteq \mathbb{R}^n$ называется \textit{этальным} в точке $\m{a} \in \mathscr{U}$ (или \textit{локальным диффеоморфизмом}) класса $C^p$, если на некоторой окрестности $\mathscr{U}'$ этой точки оно является диффеоморфизмом класса $C^p$ -- это окрестности на окрестность $F(\mathscr{U'})$ точки $F(\m{a}).$
+ \end{definition}
+
+Тогда в новых терминах \textbf{теорема об обратном отображении} утверждает, что
+\textit{если в точке $\m{a} \in \mathscr{U}$ дифференциал $(\mathrm{d}F)_\m{a}$ отображения $F \in C^p(\mathscr{U}, \mathscr{V})$ обратим, то существуют такое открытое множество $\mathscr{U}' \subseteq \mathscr{U}$, содержащее точку $\m{a}$, что $F:\mathscr{U}' \to \mathscr{V}' \subseteq \mathscr{V}$ -- диффеоморфизм на некоторое открытое множество $\mathscr{V}' \subseteq \mathscr{V}$ содержащее точку $F(\m{a})$.}
+
+
+\section{Теория условных экстремумов}
+
+
+\maketitle
+
+\section*{Утверждение}
+Пусть $f: \mathbb{R}^n \to \mathbb{R}$ -- гладкая функция, $\mathcal{L}_c = \{ \mathbf{x} \in \mathbb{R}^n \mid f(\mathbf{x}) = c \}$ -- её линия уровня. 
+Тогда в любой точке $\mathbf{x}_0 \in \mathcal{L}_c$ градиент $\grad f(\mathbf{x}_0)$ ортогонален касательному пространству к $\mathcal{L}_c$.
+
+\section*{Доказательство}
+\begin{enumerate}
+    \item \textbf{Определим касательный вектор:} Пусть $\mathbf{v}$ -- произвольный касательный вектор к $\mathcal{L}_c$ в точке $\mathbf{x}_0$. 
+    По определению, существует гладкая кривая $\boldsymbol{\gamma}: (-\varepsilon, \varepsilon) \to \mathbb{R}^n$, такая что:
+    \[
+    \boldsymbol{\gamma}(t) \in \mathcal{L}_c \quad \forall t \in (-\varepsilon, \varepsilon), \quad 
+    \boldsymbol{\gamma}(0) = \mathbf{x}_0, \quad 
+    \dot{\boldsymbol{\gamma}}(0) = \mathbf{v}
+    \]
+    где $\dot{\boldsymbol{\gamma}}$ -- производная по параметру $t$.
+
+    \item \textbf{Условие на кривой:} Так как кривая лежит на линии уровня, выполняется тождество:
+    \[
+    f(\boldsymbol{\gamma}(t)) = c \quad \forall t \in (-\varepsilon, \varepsilon)
+    \]
+
+    \item \textbf{Дифференцируем тождество:} Продифференцируем обе части по $t$ в точке $t=0$:
+    \[
+    \frac{d}{dt} f(\boldsymbol{\gamma}(t)) \Big|_{t=0} = \frac{d}{dt} c \Big|_{t=0}
+    \]
+
+    \item \textbf{Левая часть (правило цепи):} 
+    \[
+    \frac{d}{dt} f(\boldsymbol{\gamma}(t)) \Big|_{t=0} = 
+    \dotprod{\grad f(\boldsymbol{\gamma}(0))}{\dot{\boldsymbol{\gamma}}(0)} = 
+    \dotprod{\grad f(\mathbf{x}_0)}{\mathbf{v}}
+    \]
+
+    \item \textbf{Правая часть (производная константы):}
+    \[
+    \frac{d}{dt} c \Big|_{t=0} = 0
+    \]
+
+    \item \textbf{Итоговое равенство:} Приравнивая результаты, получаем:
+    \[
+    \dotprod{\grad f(\mathbf{x}_0)}{\mathbf{v}} = 0
+    \]
+\end{enumerate}
+
+\section*{Заключение}
+Таким образом, для \emph{любого} касательного вектора $\mathbf{v}$ к линии уровня $\mathcal{L}_c$ в точке $\mathbf{x}_0$ выполняется:
+\[
+\boxed{\dotprod{\grad f(\mathbf{x}_0)}{\mathbf{v}} = 0}
+\]
+Это означает, что градиент $\grad f(\mathbf{x}_0)$ ортогонален всему касательному пространству к линии уровня в точке $\mathbf{x}_0$.
+
+
+
+\begin{center}
+\large\textbf{Постановка задачи}
+\end{center}
+Требуется найти условный экстремум функции $f: \R^n \to \R$ при ограничениях:
+\[
+g_1(\mathbf{x}) = 0, \quad g_2(\mathbf{x}) = 0, \quad \dots, \quad g_m(\mathbf{x}) = 0,
+\]
+где $\mathbf{x} = (x_1, \dots, x_n)^T \in \R^n$, $m < n$. Множество допустимых точек:
+\[
+\mathcal{M} = \{ \mathbf{x} \in \R^n \mid g_i(\mathbf{x}) = 0, \, i = 1,\dots,m \}.
+\]
+
+\begin{center}
+\large\textbf{Функция Лагранжа}
+\end{center}
+Вводим функцию Лагранжа:
+\[
+\mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) = f(\mathbf{x}) - \sum_{i=1}^m \lambda_i g_i(\mathbf{x}),
+\]
+где $\boldsymbol{\lambda} = (\lambda_1, \dots, \lambda_m)^T$ -- множители Лагранжа.
+
+\begin{center}
+\large\textbf{Необходимые условия экстремума}
+\end{center}
+Точка условного экстремума $(\mathbf{x}^*, \boldsymbol{\lambda}^*)$ удовлетворяет:
+\begin{enumerate}
+    \item \textbf{Стационарность по $\mathbf{x}$}:
+    \[
+    \grad_{\mathbf{x}} \mathcal{L}(\mathbf{x}^*, \boldsymbol{\lambda}^*) = \mathbf{0}
+    \]
+    \[
+    \grad f(\mathbf{x}^*) - \sum_{i=1}^m \lambda_i^* \grad g_i(\mathbf{x}^*) = \mathbf{0}
+    \]
+    
+    \item \textbf{Выполнение ограничений}:
+    \[
+    g_i(\mathbf{x}^*) = 0, \quad i = 1, \dots, m
+    \]
+\end{enumerate}
+
+\begin{center}
+\large\textbf{Геометрическая интерпретация}
+\end{center}
+В точке условного экстремума $\mathbf{x}^*$:
+\[
+\boxed{\grad f(\mathbf{x}^*) = \sum_{i=1}^m \lambda_i^* \grad g_i(\mathbf{x}^*)}
+\]
+Это означает:
+\begin{itemize}
+    \item Градиент $\grad f$ ортогонален касательному пространству $T_{\mathbf{x}^*}\mathcal{M}$
+    \item Вектор $\grad f$ лежит в линейной оболочке градиентов ограничений
+    \item Существует линейная зависимость: $\grad f$ выражается через $\grad g_i$
+\end{itemize}
+
+\begin{center}
+\large\textbf{Условие регулярности}
+\end{center}
+Решение существует при линейной независимости градиентов ограничений:
+\[
+\text{rank} \left[ \grad g_1(\mathbf{x}^*), \dots, \grad g_m(\mathbf{x}^*) \right] = m
+\]
+Если условие нарушено, метод может не дать правильного решения.
+
+\begin{center}
+\large\textbf{Пример}
+\end{center}
+Минимизировать $f(x,y) = x^2 + y^2$ при $g(x,y) = x + y - 2 = 0$.
+
+Функция Лагранжа:
+\[
+\mathcal{L}(x,y,\lambda) = x^2 + y^2 - \lambda(x + y - 2)
+\]
+
+Условия стационарности:
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial x} &= 2x - \lambda = 0 \\
+\frac{\partial \mathcal{L}}{\partial y} &= 2y - \lambda = 0 \\
+\frac{\partial \mathcal{L}}{\partial \lambda} &= -(x + y - 2) = 0
+\end{align*}
+
+Решение: $x^* = 1$, $y^* = 1$, $\lambda^* = 2$. Проверка ортогональности:
+\[
+\grad f = (2, 2)^T, \quad \grad g = (1, 1)^T, \quad \dotprod{(2,2)}{(-1,1)} = -2 + 2 = 0
+\]
+
+\begin{center}
+\large\textbf{Заключение}
+\end{center}
+Метод множителей Лагранжа сводит задачу условной оптимизации к решению системы уравнений. Ключевое соотношение:
+\[
+\grad f(\mathbf{x}^*) \in \text{span}\{ \grad g_1(\mathbf{x}^*), \dots, \grad g_m(\mathbf{x}^*) \}
+\]
+выражает геометрическое условие ортогональности градиента целевой функции касательному пространству ограничений.
+
+
+
+
+\begin{center}
+\large\textbf{Геометрическое условие условного экстремума}
+\end{center}
+В точке $\mathbf{x}^*$ условного экстремума функции $f$ при ограничениях $g_i(\mathbf{x}) = 0$ ($i = 1,\dots,m$) градиент $\grad f$ ортогонален касательному пространству $T_{\mathbf{x}^*}\mathcal{M}$ к многообразию ограничений:
+\[
+\grad f(\mathbf{x}^*) \perp T_{\mathbf{x}^*}\mathcal{M}
+\]
+Это эквивалентно условию:
+\[
+\grad f(\mathbf{x}^*) = \sum_{i=1}^m \lambda_i^* \grad g_i(\mathbf{x}^*)
+\]
+где $\lambda_i^*$ - множители Лагранжа.
+
+\begin{center}
+\large\textbf{Функция Лагранжа как кодирующий механизм}
+\end{center}
+Функция Лагранжа объединяет целевую функцию и ограничения:
+\[
+\mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) = f(\mathbf{x}) - \sum_{i=1}^m \lambda_i g_i(\mathbf{x})
+\]
+Её стационарные точки ($\grad \mathcal{L} = 0$) автоматически дают:
+
+\begin{enumerate}[label=\Roman*.]
+    \item \textbf{Условие ортогональности} (производная по $\mathbf{x}$):
+    \[
+    \grad_{\mathbf{x}} \mathcal{L} = \grad f(\mathbf{x}) - \sum_{i=1}^m \lambda_i \grad g_i(\mathbf{x}) = 0
+    \]
+    \[
+    \Updownarrow
+    \]
+    \[
+    \grad f(\mathbf{x}) = \sum_{i=1}^m \lambda_i \grad g_i(\mathbf{x})
+    \]
+    
+    \item \textbf{Выполнение ограничений} (производная по $\lambda_i$):
+    \[
+    \frac{\partial \mathcal{L}}{\partial \lambda_i} = -g_i(\mathbf{x}) = 0 \quad \Rightarrow \quad g_i(\mathbf{x}) = 0
+    \]
+\end{enumerate}
+
+\begin{center}
+\large\textbf{Эквивалентность условий}
+\end{center}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Условный экстремум} & \textbf{Функция Лагранжа} \\
+\hline
+$\mathbf{x}^* \in \mathcal{M}$ & $\dfrac{\partial \mathcal{L}}{\partial \lambda_i} = 0$ \\
+\hline
+$\grad f(\mathbf{x}^*) \perp T_{\mathbf{x}^*}\mathcal{M}$ & $\dfrac{\partial \mathcal{L}}{\partial \mathbf{x}} = 0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\large\textbf{Почему это работает?}
+\end{center}
+\begin{itemize}
+    \item Для любого касательного вектора $\mathbf{v} \in T_{\mathbf{x}^*}\mathcal{M}$:
+    \[
+    \dotprod{\grad f(\mathbf{x}^*)}{\mathbf{v}} = \dotprod{\sum_{i=1}^m \lambda_i^* \grad g_i(\mathbf{x}^*)}{\mathbf{v}} = \sum_{i=1}^m \lambda_i^* \underbrace{\dotprod{\grad g_i(\mathbf{x}^*)}{\mathbf{v}}}_{=0} = 0
+    \]
+    
+    \item Условие $\grad_{\mathbf{x}} \mathcal{L} = 0$ гарантирует, что $\grad f$ компенсируется нормалями к ограничениям
+    
+    \item Знак "минус" в $\mathcal{L}$ обеспечивает баланс между целью и ограничениями:
+    \[
+    \mathcal{L} = f - \sum \lambda_i g_i
+    \]
+\end{itemize}
+
+\begin{center}
+\large\textbf{Физическая интерпретация}
+\end{center}
+Множители $\lambda_i$ работают как \textit{силы реакций связей}:
+\begin{itemize}
+    \item В механике: силы, удерживающие систему на многообразии ограничений
+    \item В экономике: теневые цены ресурсов
+\end{itemize}
+Стационарность $\mathcal{L}$ означает равновесие между:
+\begin{itemize}
+    \item Силой "стремления" к экстремуму ($\grad f$)
+    \item Силами "удержания" на ограничениях ($\sum \lambda_i \grad g_i$)
+\end{itemize}
+
+\begin{center}
+\large\textbf{Ключевой вывод}
+\end{center}
+Исследование функции Лагранжа на экстремум эквивалентно решению системы:
+\[
+\boxed{
+\begin{cases}
+\grad f(\mathbf{x}) = \sum\limits_{i=1}^m \lambda_i \grad g_i(\mathbf{x}) \\
+g_i(\mathbf{x}) = 0 \quad (i=1,\dots,m)
+\end{cases}
+}
+\]
+что в точности соответствует необходимым условиям условного экстремума.
+
+
+
+\section*{Постановка задачи}
+Рассмотрим задачу условной оптимизации:
+\[
+\min_{\x \in \R^n} f(\x) \quad \text{при условиях} \quad g_i(\x) = 0, \quad i=1,\dots,m
+\]
+где $f, g_i \in C^2(\R^n)$.
+
+\section*{Функция Лагранжа и условия первого порядка}
+Функция Лагранжа:
+\[
+\lagr(\x, \boldsymbol{\lambda}) = f(\x) - \sum_{i=1}^m \lambda_i g_i(\x)
+\]
+
+Необходимые условия первого порядка:
+\begin{enumerate}
+    \item $\grad_{\x} \lagr(\x^*, \boldsymbol{\lambda}^*) = 0$
+    \item $g_i(\x^*) = 0$ для всех $i=1,\dots,m$
+\end{enumerate}
+
+\section*{Условия второго порядка}
+Для определения типа стационарной точки ($\x^*, \boldsymbol{\lambda}^*)$ исследуем матрицу Гессе функции Лагранжа:
+
+\[
+\hess_{\lagr}(\x^*, \boldsymbol{\lambda}^*) = 
+\begin{pmatrix}
+\frac{\partial^2 \lagr}{\partial x_1^2} & \cdots & \frac{\partial^2 \lagr}{\partial x_1 \partial x_n} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial^2 \lagr}{\partial x_n \partial x_1} & \cdots & \frac{\partial^2 \lagr}{\partial x_n^2}
+\end{pmatrix}
+\]
+
+Рассмотрим квадратичную форму:
+\[
+Q(\mathbf{v}) = \mathbf{v}^T \hess_{\lagr}(\x^*, \boldsymbol{\lambda}^*) \mathbf{v}
+\]
+
+\subsection*{Ключевое условие}
+Пусть $T_{\x^*}\mathcal{M}$ -- касательное пространство к многообразию ограничений в $\x^*$:
+\[
+T_{\x^*}\mathcal{M} = \left\{ \mathbf{v} \in \R^n : \grad g_i(\x^*)^T \mathbf{v} = 0,  i=1,\dots,m \right\}
+\]
+
+Тогда:
+\begin{itemize}
+    \item Если $Q(\mathbf{v}) > 0$ для всех $\mathbf{v} \in T_{\x^*}\mathcal{M}$, $\mathbf{v} \neq 0$, то $\x^*$ -- \textbf{строгий локальный минимум}
+    
+    \item Если $Q(\mathbf{v}) < 0$ для всех $\mathbf{v} \in T_{\x^*}\mathcal{M}$, $\mathbf{v} \neq 0$, то $\x^*$ -- \textbf{строгий локальный максимум}
+    
+    \item Если $Q(\mathbf{v})$ меняет знак на $T_{\x^*}\mathcal{M}$, то экстремума нет
+\end{itemize}
+
+\section*{Теорема (достаточные условия)}
+Пусть $(\x^*, \boldsymbol{\lambda}^*)$ удовлетворяет условиям первого порядка. Тогда:
+\begin{align*}
+&\text{Если } \mathbf{v}^T \hess_{\lagr}(\x^*, \boldsymbol{\lambda}^*) \mathbf{v} > 0 \quad \forall \mathbf{v} \in T_{\x^*}\mathcal{M}, \mathbf{v} \neq 0 \\
+&\text{то } \x^* \text{ -- строгий локальный минимум}
+\end{align*}
+
+Аналогично для максимума при отрицательной определенности.
+
+\section*{Пример: анализ квадратичной формы}
+Минимизировать $f(x,y) = x^2 + y^2$ при $g(x,y) = x + y - 2 = 0$.
+
+\subsection*{Решение}
+\begin{enumerate}
+    \item Стационарная точка: $x^*=1, y^*=1, \lambda^*=2$
+    
+    \item Функция Лагранжа: $\lagr(x,y,\lambda) = x^2 + y^2 - \lambda(x + y - 2)$
+    
+    \item Матрица Гессе:
+    \[
+    \hess_{\lagr} = \begin{pmatrix}
+    \frac{\partial^2 \lagr}{\partial x^2} & \frac{\partial^2 \lagr}{\partial x \partial y} \\
+    \frac{\partial^2 \lagr}{\partial y \partial x} & \frac{\partial^2 \lagr}{\partial y^2}
+    \end{pmatrix} = 
+    \begin{pmatrix}
+    2 & 0 \\
+    0 & 2
+    \end{pmatrix}
+    \]
+    
+    \item Касательное пространство: $\grad g = (1,1)^T$, следовательно
+    \[
+    T_{\x^*}\mathcal{M} = \{ \mathbf{v} = (v_1, v_2)^T : v_1 + v_2 = 0 \}
+    \]
+    Базис: $\mathbf{v} = (1,-1)^T$
+    
+    \item Квадратичная форма:
+    \[
+    Q(\mathbf{v}) = (1, -1) \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} 1 \\ -1 \end{pmatrix} = 
+    (1, -1) \cdot (2, -2) = 2 - (-2) = 4 > 0
+    \]
+    
+    \item Вывод: Так как $Q(\mathbf{v}) > 0$ для ненулевого касательного вектора, точка $(1,1)$ является строгим локальным минимумом.
+\end{enumerate}
+
+\section*{Важные замечания}
+\begin{enumerate}
+    \item Анализ проводится \textbf{только на касательном пространстве}
+    
+    \item Матрица Гессе вычисляется для функции Лагранжа \textbf{со всеми множителями}
+    
+    \item Для нестрогих экстремумов требуется анализ высших производных
+    
+    \item Условия второго порядка работают только при выполнении условий первого порядка
+    
+    \item Критерий можно переформулировать через \textbf{ограниченную матрицу Гессе}
+\end{enumerate}
+
+\begin{center}
+\large\textbf{Альтернативная формулировка}
+\end{center}
+Рассмотрим матрицу:
+\[
+\mathbf{B} = \begin{pmatrix}
+\hess_{\lagr} & \nabla \mathbf{g} \\
+(\nabla \mathbf{g})^T & 0
+\end{pmatrix}
+\]
+где $\nabla \mathbf{g} = (\grad g_1, \dots, \grad g_m)$. Тогда число отрицательных собственных значений матрицы $\mathbf{B}$ должно равняться числу ограничений для минимума.
+

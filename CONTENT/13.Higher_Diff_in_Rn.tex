@@ -1,0 +1,780 @@
+\chapter{Высшие дифференциалы в $\mathbb{R}^n$}
+
+
+\section{Дифференциалы высокого порядка}
+
+Пусть дана функция $f: \mathbb{R}^n \to \mathbb{R}$ такая, что в открытом $\mathscr{U}$ у неё существуют все её частные производные $f_{x_i}' = \frac{\partial f}{\partial x_i}$. Пусть далее $\mathscr{V} \subseteq \mathscr{U}$ открыто, и пусть всюду в $\mathscr{V}$ её частные производные дифференцируемы, тогда мы получаем:
+\begin{definition}
+    Частные производные высокого порядка определяются как частные производные от частных производных, \ie
+    \begin{eqnarray*}
+        \frac{\partial^2 f}{\partial x_i \partial x_j} &:=& \frac{\partial }{\partial x_i}\left( \frac{\partial f}{\partial x_j} \right) = (f_{x_j}')'_{x_i} =: f''_{x_ix_j}. 
+    \end{eqnarray*}
+\end{definition}
+
+\begin{mydanger}{\bf{!}}
+    Выражение (если оно имеет смысл) $\frac{\partial f}{\partial x_i \partial x_j}$ называется \textit{смешанной производной}.
+\end{mydanger}
+
+\begin{lemma}\label{f''_xy}
+    Для функции $f:\mathbb{R}^2 \to \mathbb{R}$ её смешанные производные $f''_{xy}(\m{a})$, $f''_{yx}(\m{a})$ в точке $\m{a} = (x_0,y_0)$ это пределы
+\begin{eqnarray*}
+    f''_{xy}(\m{a}) &=& \lim_{h\to 0} \lim_{k\to 0} \frac{f(x_0 + h, y_0 + k) - f(x_0 + h, y_0) - f(x_0,y_0 +k) + f(x_0,y_0)}{hk} \\
+    f''_{yx}(\m{a}) &=& \lim_{k\to 0} \lim_{h\to 0} \frac{f(x_0 + h, y_0 + k) - f(x_0 + h, y_0) - f(x_0,y_0 +k) + f(x_0,y_0)}{hk}
+\end{eqnarray*}
+\end{lemma}
+
+\begin{mydangerr}{\bf !}
+    Обратите внимание на порядок вычисления пределов! Вовсе не обязательно что они должны совпадать.
+\end{mydangerr}
+
+\begin{proof}
+Докажем только первую формулу, так как вторая формула доказывается совершенно аналогично. 
+
+Итак, пусть $\m{a} = (x_0,y_0)$, тогда, по определению (\ref{partial_i(o)}), 
+\begin{eqnarray*}
+       \left. \frac{\partial^2 f}{\partial x \partial y}\right|_\m{a} &=& \left. \frac{\partial}{\partial x}\left( \frac{\partial f}{\partial y} \right) \right|_\m{a} := \lim_{h \to 0} \left( \frac{\frac{\partial f}{\partial y}(x_0+h, y_0) - \frac{\partial f}{\partial y}(x_0,y_0)  }{h}  \right).
+\end{eqnarray*}
+
+Теперь используя ещё раз определение производной, получаем
+Пусть  
+    \begin{eqnarray*}
+       \left. \frac{\partial^2 f}{\partial x \partial y}\right|_\m{a}
+       &=& \lim_{h \to 0}\left( \frac{ \lim\limits_{k\to 0} \dfrac{f(x_0+t, y_0 +k) -f(x_0+h,y_0)}{k}  - \lim\limits_{k\to 0} \dfrac{f(x_0,y_0+k) -f(x_0,y_0)}{k} } {h}  \right) \\
+       &=& \lim_{h\to 0} \lim_{k \to 0} \dfrac{f(x_0+h, y_0 +k) -f(x_0+h,y_0) - f(x_0,y_0+k) +f(x_0,y_0)}{hk},
+    \end{eqnarray*}
+    что и требовалось доказать.
+\end{proof}
+
+
+\subsection{Теорема Шварца}
+
+
+\begin{theorem}[\bf Шварц]
+    Пусть $f:\mathbb{R}^2 \to \mathbb{R}$ имеет в окрестности $\mathscr{U}$ точки $\m{a} \in \mathbb{R}^2$ смешанные производные. Если эти производные непрерывны в этой точке, то они равны в этой точке, \textit{т.е.,}
+    \[f''_{xy}(\m{a}) = f''_{yx}(\m{a}).
+    \]
+\end{theorem}
+
+\begin{proof}
+    Пусть $\m{a} = (x_0,y_0)$, рассмотрим приращение функции по переменным \( h \) и \( k \):  
+   \[
+   \Delta f := f(x_0+h, y_0+k) - f(x_0+h, y_0) - f(x_0, y_0+k) + f(x_0, y_0).
+   \]
+
+(1) Запишем \(\Delta f\) как разность приращений по \(y\):  
+\[
+\Delta f = \Bigl(f(x_0+h, y_0+k) - f(x_0+h, y_0)\Bigr) - \Bigl(f(x_0, y_0+k) - f(x_0, y_0)\Bigr).
+\]  
+
+К каждой скобке можно применить теорему Лагранжа \ref{Langrange}:
+\begin{eqnarray*}
+f(x_0+h, y_0+k) - f(x_0+h, y_0) &=& k \cdot f'_y(x_0+h, y_0 + \theta_1 k), \quad \theta_1 \in (0, 1)    \\
+f(x_0, y_0+k) - f(x_0, y_0) &=& k \cdot f'_y(x_0, y_0 + \theta_2 k), \quad \theta_2 \in (0, 1).
+\end{eqnarray*}
+
+Тогда:  
+\[
+\Delta f = k \Bigl(f'_y(x_0+h, y_0 + \theta_1 k) - f'_y(x_0, y_0 + \theta_2 k)\Bigr).
+\]
+
+(2) Далее, имеем:
+\begin{eqnarray*}
+    \frac{\Delta f}{k} &=& f'_y(x_0+h, y_0 + \theta_1 k) - f'_y(x_0, y_0 + \theta_2 k) \\
+    &=&f'_y(x_0+h, y_0 + \theta_1 k) - f'_y(x_0, y_0 + \theta_1 k) + f'_y(x_0, y_0 + \theta_1 k) - f'_y(x_0, y_0 + \theta_2 k) \\
+    &=& \Bigl(f'_y(x_0+h, y_0 + \theta_1 k) - f'_y(x_0, y_0 + \theta_1 k)\Bigr) + \Bigl( f'_y(x_0, y_0 + \theta_1 k) - f'_y(x_0, y_0 + \theta_2 k) \Bigr).
+\end{eqnarray*}
+
+
+\begin{itemize}
+\item[--] Применяем к первой скобке теорему Лагранжа \ref{Langrange}:  
+\[
+f'_y(x_0+h, y_0 + \theta_1 k) - f'_y(x_0, y_0 + \theta_1 k) = h \cdot f''_{yx}(x_0 + \theta_3 h, y_0 + \theta_1 k), \quad \theta_3 \in (0, 1).
+\]
+\item[--] Теперь применяем теорему Лагранжа \ref{Langrange} ко второй скобке:  
+\[
+f'_y(x_0, y_0 + \theta_1 k) - f'_y(x_0, y_0 + \theta_2 k) = (\theta_1 - \theta_2)k \cdot f''_{yy}(x_0, y_0 + \theta_4 k), \quad \theta_4 \in (0, 1).
+\]
+\end{itemize}
+
+Подставим в выражение для \(\Delta f\):  
+\[
+\frac{\Delta f}{k} =h \cdot f''_{yx}(x_0 + \theta_3 h, y_0 + \theta_1 k) + (\theta_1 - \theta_2)k \cdot f''_{yy}(x_0, y_0 + \theta_4 k),
+\]
+или
+
+\[
+ \frac{\Delta f}{kh} =  f''_{yx}(x_0 + \theta_3 h, y_0 + \theta_1 k) + (\theta_1 - \theta_2)\frac{k}{h} \cdot f''_{yy}(x_0, y_0 + \theta_4 k)
+\]
+
+
+(3) Согласно условию, смешанные производные существуют и непрерывны, тогда используя лемму \ref{f''_xy}, предел $f''_{yx} = \lim_{k \to 0} \lim_{h \to 0} \frac{\Delta f}{hk}$ существует. Но тогда он существует для любого подмножества в окрестности точки $(0,0)$, поэтому мы можем, например, положить, $k = h^2$. В таком случае второе слагаемое стремится к нулю из-за непрерывности \(f''_{yy}\), а первое слагаемое стремится к \(f''_{yx}(x_0, y_0)\).
+
+(4) Аналогично рассуждаем для другого порядка производных. Запишем \(\Delta f\) через приращения по \(x\):  
+\[
+\Delta(h, k) = \Bigl(f(x_0+h, y_0+k) - f(x_0, y_0+k)\Bigr) - \Bigl(f(x_0+h, y_0) - f(x_0, y_0)\Bigr).
+\]  
+
+Аналогично применяя теорему Лагранжа, получим:  
+\[
+\frac{\Delta f}{hk} = f''_{xy}(x_0 + \theta_5 h, y_0 + \theta_7 k) + (\theta_5 - \theta_6)\frac{h}{k} \cdot f''_{xx}(x_0 + \theta_8 h, y_0).
+\]  
+Устремим \(h, k \to 0\) так, что \(\frac{h}{k} \to 0\) (например, \(h = k^2\)). Второе слагаемое стремится к нулю, а первое —- к \(f''_{xy}(x_0, y_0)\).
+
+Так как пределы \(\frac{\Delta f}{hk}\) при разных порядках вычисления по $h,k$ совпадают, то:  
+\[
+f''_{xy}(x_0, y_0) = f''_{yx}(x_0, y_0).
+\]
+Что и требовалось доказать.
+\end{proof}
+
+\subsection{Теорема Юнга}
+
+
+**Теорема Юнга о равенстве смешанных производных** утверждает, что если функция \( f(x, y) \) имеет в окрестности точки \( (a, b) \) смешанные производные второго порядка \( f''_{xy} \) и \( f''_{yx} \), и эти производные непрерывны в точке \( (a, b) \), то они равны:  
+\[
+f''_{xy}(a, b) = f''_{yx}(a, b).
+\]
+
+**Доказательство:**
+
+1. **Введение вспомогательной величины:**  
+   Рассмотрим приращение функции для малых \( h \) и \( k \):  
+   \[
+   \Delta(h, k) = f(a + h, b + k) - f(a + h, b) - f(a, b + k) + f(a, b).
+   \]  
+   Поделим его на \( hk \):  
+   \[
+   \frac{\Delta(h, k)}{hk} = \frac{f(a + h, b + k) - f(a + h, b) - f(a, b + k) + f(a, b)}{hk}.
+   \]
+
+2. **Применение теоремы о среднем значении (сначала по \( x \), затем по \( y \)):**  
+   - Определим функцию \( g(x) = f(x, b + k) - f(x, b) \). Тогда:  
+     \[
+     \Delta(h, k) = g(a + h) - g(a).
+     \]  
+     По теореме о среднем значении для \( g(x) \), существует \( \theta \in (0, 1) \), такое что:  
+     \[
+     g(a + h) - g(a) = h \cdot g'(a + \theta h) = h \left[ f'_x(a + \theta h, b + k) - f'_x(a + \theta h, b) \right].
+     \]  
+   - Теперь применим теорему о среднем значении к разности по \( y \). Существует \( \phi \in (0, 1) \), такое что:  
+     \[
+     f'_x(a + \theta h, b + k) - f'_x(a + \theta h, b) = k \cdot f''_{xy}(a + \theta h, b + \phi k).
+     \]  
+   - Таким образом:  
+     \[
+     \frac{\Delta(h, k)}{hk} = f''_{xy}(a + \theta h, b + \phi k).
+     \]  
+     При \( h, k \to 0 \) непрерывность \( f''_{xy} \) даёт:  
+     \[
+     \lim_{h, k \to 0} \frac{\Delta(h, k)}{hk} = f''_{xy}(a, b).
+     \]
+
+3. **Применение теоремы о среднем значении (сначала по \( y \), затем по \( x \)):**  
+   - Определим функцию \( h(y) = f(a + h, y) - f(a, y) \). Тогда:  
+     \[
+     \Delta(h, k) = h(b + k) - h(b).
+     \]  
+     По теореме о среднем значении для \( h(y) \), существует \( \psi \in (0, 1) \), такое что:  
+     \[
+     h(b + k) - h(b) = k \cdot h'(b + \psi k) = k \left[ f'_y(a + h, b + \psi k) - f'_y(a, b + \psi k) \right].
+     \]  
+   - Применим теорему о среднем значении к разности по \( x \). Существует \( \xi \in (0, 1) \), такое что:  
+     \[
+     f'_y(a + h, b + \psi k) - f'_y(a, b + \psi k) = h \cdot f''_{yx}(a + \xi h, b + \psi k).
+     \]  
+   - Таким образом:  
+     \[
+     \frac{\Delta(h, k)}{hk} = f''_{yx}(a + \xi h, b + \psi k).
+     \]  
+     При \( h, k \to 0 \) непрерывность \( f''_{yx} \) даёт:  
+     \[
+     \lim_{h, k \to 0} \frac{\Delta(h, k)}{hk} = f''_{yx}(a, b).
+     \]
+
+4. **Заключение:**  
+   Поскольку оба предела равны одному и тому же выражению \( \frac{\Delta(h, k)}{hk} \), получаем:  
+   \[
+   f''_{xy}(a, b) = f''_{yx}(a, b).
+   \]  
+
+**Условия теоремы существенны:** Непрерывность смешанных производных гарантирует, что пределы совпадают. Без неё равенство может нарушаться.
+
+
+
+
+\begin{theorem}[Юнг]\label{Yong}
+    Пусть у функции $f:\mathbb{R}^2 \to \mathbb{R}$ в окрестности в точке $\m{a} = (a_1,a_2)^\top$ существуют частные производные $f'_{x}$ и $f'_{y}$. Если эти частные производные дифференцируемы в точке $\m{a}$, то
+    \[
+     f''_{xy}(a_1,a_2) = f''_{yx}(a_1,a_2).
+    \]
+\end{theorem}
+
+%Нужно сказать про отличие от предыдущей.
+
+
+
+
+
+
+\section{Высшие дифференциалы}
+
+\subsection{Общие замечания}
+
+Рассмотрим отображение $F: \mathbb{R}^n \to \mathbb{R}^m$, которе мы будем, для простоты предполагать дифференцируемым всюду. Тогда для каждой точки $\m{p} \in \mathbb{R}^n$ у нас есть линейное отображение (=дифференциал) $(\mathrm{d}F)_{\m{p}}: \mathbb{R}^n\to \mathbb{R}^m$. 
+
+Таким образом, мы получаем отображение
+\[
+ \mathrm{d}F: \mathbb{R}^n\to \mathrm{Hom}_\mathbb{R}(\mathbb{R}^n, \mathbb{R}^m) \qquad \m{p} \mapsto (\mathrm{d}F)_{\m{p}}.
+\]
+
+Так как линейные отображения из $\mathbb{R}^n$ в $\mathbb{R}^m$ -- это просто матрицы размера $m\times n$, а пространство матриц $\mathrm{Mat}_{m\times n}(\mathbb{R})$ есть векторное пространство, которое изоморфно $\mathbb{R}^{mn}$, то отображение $\mathrm{d}F$ это отображение между конечномерными векторными пространствами.
+
+В силу эквивалентности норм на векторных пространствах (см. Лемму \ref{all_norma_are_=}), на пространстве $\mathrm{Hom}(\mathbb{R}^n, \mathbb{R}^m)$ можно рассмотреть евклидову норму. Всё это позволяет теперь поставить вопрос о дифференцируемости отображения $\mathrm{d}F$.
+
+\begin{definition}
+Если отображение
+\[
+ \mathrm{d}F: \mathbb{R}^n\to \mathrm{Hom}_\mathbb{R}(\mathbb{R}^n, \mathbb{R}^m) \qquad \m{p} \mapsto (\mathrm{d}F)_{\m{p}}
+\]
+дифференцируемо в точке $\m{a} \in \mathbb{R}$, то его дифференциал $(\mathrm{d}(\mathrm{d}F))_\m{a}$ называют \textit{вторым дифференциалом отображения $F$} вычисленный в точке $\m{a}$, при этом пишут $(\mathrm{d}^2F)_\m{a}.$ 
+
+Таким образом, мы получаем отображения (если они существуют)
+\[
+ F:=\mathrm{d}^0F,\quad  \mathrm{d}F,\quad \mathrm{d}^2(F): = \mathrm{d}(\mathrm{d}F), \ldots, 
+\]
+среди которых $\mathrm{d}^k(F)$ при $k>1$ называются \textit{высшими дифференциалами.}
+\end{definition}
+
+Напомним что для векторных пространств $\m{V},\m{W}$ над полем $\Bbbk$, отображение $B:\m{V}\times \m{V} \to \m{W}$ называется \textit{билинейным}, если оно линейно по каждому аргументу:
+\begin{itemize}
+    \item[(1)] $B(\m{v+v'},\m{w}) = B(\m{v},\m{w}) + B(\m{v}',\m{w})$, для любых $\m{v}, \m{v}' \in \m{V}$, $\m{w \in W}$,
+    \item[(2)] $B(\m{v},\m{w+w'}) = B(\m{v},\m{w}) + B(\m{v},\m{w}')$, для любых $\m{v\in V},$ $\m{w}, \m{w}' \in \m{W}$,
+    \item[(3)] $B(\alpha \m{v}, \m{w}) = B(\m{v}, \alpha \m{w}) = \alpha B(\m{v},\m{w})$, для любых $\m{v} \in \m{V}$, $\m{w} \in \m{W}$, $\alpha \in \Bbbk.$
+\end{itemize}
+
+\begin{mydanger}{\bf !}
+    В случае когда $\m{W}$ является одномерным векторным пространством, \textit{т.е.,} $\m{W} = \Bbbk$, то мы получаем определение билинейной формы.
+\end{mydanger}
+
+
+\begin{proposition}\label{bil=hom}
+    Для любых векторных пространств $\m{V},\m{W}$ имеет место биекция
+    \[
+       \mathrm{Hom}(\m{V}, \mathrm{Hom}(\m{V}, \m{W})) \longleftrightarrow   \mathrm{Bil}(\m{V}\times \m{V}, \m{W}),
+    \]
+    где $\mathrm{Bil}(\m{V}\times \m{V}, \m{W})$ множество всех билинейных отображений $B:\m{V}\times \m{V} \to \m{W}$.
+\end{proposition}
+
+\begin{proof}~
+
+(1) Пусть $\mathscr{L}\in \mathrm{Hom}(\m{V}, \mathrm{Hom}(\m{V}, \m{W}))$, это значит, что $\mathscr{L}$ -- линейное отображение между векторными пространствами $\m{V}$ и $\mathrm{Hom}(\m{V},\m{W})$, \textit{т.е.,} для любого $\m{v \in V}$, $\mathscr{L}(\m{v}) \in \mathrm{Hom}(\m{V},\m{W})$. Другими словами, при каждом $\m{v \in V}$ мы имеем линейное отображение
+    $$\mathscr{L}(\m{v}): \m{V} \to \m{W}, \qquad \m{V} \ni  \m{v}' \mapsto (\mathscr{L}(\m{v}))(\m{v}') \in \m{W}.$$
+
+Так что, фактически, у нас имеется отображение $B_\mathscr{L}:\m{V\times V} \to \m{W}$, которое действует так
+\[
+ B_\mathscr{L}(\m{v}, \m{v'}): = (\mathscr{L}(\m{v}))(\m{v}').
+\]
+
+Так как $\mathscr{L}$ -- линейное отображение между векторными пространствами $\m{V}$ и $\mathrm{Hom}(\m{V},\m{W})$, а при каждом $\m{v\in V}$, $\mathscr{L}(\m{v})$ -- линейное отображение между $\m{V}$ и $\m{W}$, то, выходит, что $B_\mathscr{L}$ -- билинейное отображение.
+
+Итак, мы построили отображение
+ \[
+ \mathrm{Hom}(\m{V}, \mathrm{Hom}(\m{V}, \m{W})) \to   \mathrm{Bil}(\m{V}\times \m{V}, \m{W}), \qquad \mathscr{L} \mapsto B_\mathscr{L}.
+\]
+
+Проверим билинейность $B_{\mathscr{L}}$.
+
+  \begin{itemize}
+     \item \textit{Линейность по первому аргументу} (при фиксированном $\mathbf{v}'$).
+     
+        Для любых $\mathbf{v}_1, \mathbf{v}_2 \in \mathbf{V}$, $\lambda \in \Bbbk$ имеем:
+        \[
+            \begin{split}
+                B_{\mathscr{L}}(\lambda\mathbf{v}_1 + \mathbf{v}_2, \mathbf{v}')
+                &= (\mathscr{L}(\lambda\mathbf{v}_1 + \mathbf{v}_2))(\mathbf{v}') \\
+                &= (\lambda\mathscr{L}(\mathbf{v}_1) + \mathscr{L}(\mathbf{v}_2))(\mathbf{v}') \\
+                &= \lambda(\mathscr{L}(\mathbf{v}_1))(\mathbf{v}') + (\mathscr{L}(\mathbf{v}_2))(\mathbf{v}') \\
+                &= \lambda B_{\mathscr{L}}(\mathbf{v}_1, \mathbf{v}') + B_{\mathscr{L}}(\mathbf{v}_2, \mathbf{v}').
+            \end{split}
+        \]
+        
+        \item \textit{Линейность по второму аргументу} (при фиксированном $\mathbf{v}$).
+        
+        Для любых $\mathbf{v}_1', \mathbf{v}_2' \in \mathbf{V}$, $\mu \in \Bbbk$ имеем:
+        \[
+            \begin{split}
+                B_{\mathscr{L}}(\mathbf{v}, \mu\mathbf{v}_1' + \mathbf{v}_2')
+                &= (\mathscr{L}(\mathbf{v}))(\mu\mathbf{v}_1' + \mathbf{v}_2') \\
+                &= \mu(\mathscr{L}(\mathbf{v}))(\mathbf{v}_1') + (\mathscr{L}(\mathbf{v}))(\mathbf{v}_2') \\
+                &= \mu B_{\mathscr{L}}(\mathbf{v}, \mathbf{v}_1') + B_{\mathscr{L}}(\mathbf{v}, \mathbf{v}_2').
+            \end{split}
+        \]
+    \end{itemize}
+    Следовательно, $B_{\mathscr{L}} \in \mathrm{Bil}(\mathbf{V}\times \mathbf{V}, \mathbf{W})$.
+
+(2) Построим теперь обратное отображение. Пусть $B \in \mathrm{Bil}(\mathbf{V}\times \mathbf{V}, \mathbf{W})$. Для каждого $\mathbf{v} \in \mathbf{V}$ определим отображение:
+    \[
+        \mathscr{L}_B(\mathbf{v}): \mathbf{V} \to \mathbf{W}, \quad \mathbf{v}' \mapsto B(\mathbf{v}, \mathbf{v}').
+    \]
+    \begin{itemize}
+        \item $\mathscr{L}_B(\mathbf{v})$ линейно (по определению $B$), поэтому $\mathscr{L}_B(\mathbf{v}) \in \mathrm{Hom}(\mathbf{V}, \mathbf{W})$.
+        \item Проверим линейность $\mathscr{L}_B: \mathbf{V} \to \mathrm{Hom}(\mathbf{V}, \mathbf{W})$.
+        
+        Для любых $\mathbf{v}_1, \mathbf{v}_2 \in \mathbf{V}$, $\lambda \in \Bbbk$ и любого $\mathbf{v}' \in \mathbf{V}$ имеем:
+        \[
+            \begin{split}
+                \Bigl(\mathscr{L}_B(\lambda\mathbf{v}_1 + \mathbf{v}_2)\Bigr)(\mathbf{v}')
+                &= B(\lambda\mathbf{v}_1 + \mathbf{v}_2, \mathbf{v}') \\
+                &= \lambda B(\mathbf{v}_1, \mathbf{v}') + B(\mathbf{v}_2, \mathbf{v}') \\
+                &= \lambda \mathscr{L}_B(\mathbf{v}_1)(\mathbf{v}') + \mathscr{L}_B(\mathbf{v}_2)(\mathbf{v}') \\
+                &= \Bigl(\lambda \mathscr{L}_B(\mathbf{v}_1) + \mathscr{L}_B(\mathbf{v}_2)\Bigr)(\mathbf{v}').
+            \end{split}
+        \]
+    \end{itemize}
+    Следовательно, $\mathscr{L}_B \in \mathrm{Hom}(\mathbf{V}, \mathrm{Hom}(\mathbf{V}, \mathbf{W}))$.
+    
+    
+(3) Итак мы построили два отображения
+\begin{align*}
+    & B_{(\cdot)}: \mathrm{Hom}(\mathbf{V}, \mathrm{Hom}(\mathbf{V}, \mathbf{W})) \to \mathrm{Bil}(\mathbf{V}\times \mathbf{V}, \mathbf{W}), \qquad \mathscr{L} \mapsto B_\mathscr{L},\\
+    & \mathscr{L}_{(\cdot)}: \mathrm{Bil}(\mathbf{V}\times \mathbf{V}, \mathbf{W}) \to \mathrm{Hom}(\mathbf{V}, \mathrm{Hom}(\mathbf{V}, \mathbf{W})), \qquad B \mapsto \mathscr{L}_B.
+\end{align*}
+    
+Покажем их взаимную обратность, \textit{т.е.,} покажем что следующие диаграммы коммутативны
+
+
+\[
+\xymatrix{
+\mathscr{L} \ar@{|->}[r]^{B_{(\cdot)}} \ar@{=}[rd] & B_\mathscr{L} \ar@{|->}[d]^{\mathscr{L}_{(\cdot)}} \\
+& \mathscr{L}_{B_{\mathscr{L}}}
+} \qquad \xymatrix{
+B \ar@{|->}[r]^{\mathscr{L}_{(\cdot)}} \ar@{=}[rd] & \mathscr{L}_B \ar@{|->}[d]^{B_{(\cdot)}} \\
+& B_{L_{B}}
+} 
+\]
+
+Действительно, имеем
+\begin{eqnarray*}
+    \left( \mathscr{L}_{B_\mathscr{L}} (\m{v}) \right)(\m{v}') &:=& B_\mathscr{L}(\m{v},\m{v}'): = \Bigl( \mathscr{L}(\m{v})\Bigr)(\m{v}), \\
+    \left(B_{\mathscr{L}_B} \right)(\m{v},\m{v}') &:=& \left( \mathscr{L}_B (\m{v}) \right)(\m{v}') : = B(\m{v}, \m{v}),   
+\end{eqnarray*}
+\textit{т.е.,} $\mathscr{L}_{B_\mathscr{L}} = \mathscr{L}$ и $B_{\mathscr{L}_B} = B$ что и завершает доказательство.
+\end{proof}
+
+Вернёмся к дифференциалам.
+
+
+\begin{proposition}
+    Если для отображения $F:\mathbb{R}^n \to \mathbb{R}^m$ отображение $\mathrm{d}F$ всюду дифференцируемо, 
+    то для каждой точки $\mathbf{a} \in \mathbb{R}^n$ второй дифференциал $(\mathrm{d}^2F)_{\mathbf{a}}$ 
+    является билинейным отображением $(\mathrm{d}^2F)_{\mathbf{a}}: \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}^m$.
+\end{proposition}
+
+\begin{proof}
+    По условию, отображение
+    \[
+        \mathrm{d}F: \mathbb{R}^n \to \mathrm{Hom}_{\mathbb{R}}(\mathbb{R}^n, \mathbb{R}^m), \quad \mathbf{p} \mapsto (\mathrm{d}F)_{\mathbf{p}}
+    \]
+    дифференцируемо в любой точке. Фиксируем произвольную точку $\mathbf{a} \in \mathbb{R}^n$. 
+    По определению дифференцируемости, существует линейное отображение:
+    \[
+        (\mathrm{d}^2F)_{\mathbf{a}}: \mathbb{R}^n \to \mathrm{Hom}_{\mathbb{R}}(\mathbb{R}^n, \mathbb{R}^m), 
+        \quad \mathbf{h} \mapsto (\mathrm{d}(\mathrm{d}F))_{\mathbf{a}}(\mathbf{h}).
+    \]
+    Таким образом, $(\mathrm{d}^2F)_{\mathbf{a}} \in \mathrm{Hom}_{\mathbb{R}}\left(\mathbb{R}^n, \mathrm{Hom}_{\mathbb{R}}(\mathbb{R}^n, \mathbb{R}^m)\right)$.
+    
+    Согласно предыдущему предложению \ref{bil=hom}, существует биекция:
+    \[
+        \mathrm{Hom}_{\mathbb{R}}\left(\mathbb{R}^n, \mathrm{Hom}_{\mathbb{R}}(\mathbb{R}^n, \mathbb{R}^m)\right) 
+        \longleftrightarrow \mathrm{Bil}(\mathbb{R}^n \times \mathbb{R}^n, \mathbb{R}^m).
+    \]
+    Эта биекция отождествляет линейное отображение $(\mathrm{d}^2F)_{\mathbf{a}}$ с билинейным отображением 
+    $B_{\mathbf{a}}: \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}^m$, действующим по правилу:
+    \[
+        B_{\mathbf{a}}(\mathbf{v}, \mathbf{w}) = \Bigl( (\mathrm{d}^2F)_{\mathbf{a}}(\mathbf{v}) \Bigr)(\mathbf{w}).
+    \]
+    Следовательно, $(\mathrm{d}^2F)_{\mathbf{a}}$ может быть отождествлено с билинейным отображением.
+\end{proof}
+
+\begin{remark}
+    Предыдущие два предложения естественно обобщаются на случай высших дифференциалов. 
+    Если отображение $F:\mathbb{R}^n \to \mathbb{R}^m$ является $k$ раз дифференцируемо в точке $\mathbf{a} \in \mathbb{R}^n$, 
+    то $k$-й дифференциал $(\mathrm{d}^kF)_{\mathbf{a}}$ представляет собой $k$-линейное отображение:
+    \[
+    (\mathrm{d}^kF)_{\mathbf{a}}: \underbrace{\mathbb{R}^n \times \cdots \times \mathbb{R}^n}_{k} \to \mathbb{R}^m.
+    \]
+    Это следует из индуктивного применения конструкции: каждый следующий дифференциал 
+    $\mathrm{d}^{m}F$ ($m \leq k$) интерпретируется как линейное отображение в пространство $m$-линейных отображений.
+\end{remark}
+
+
+
+%сказать про случай когда не всём R^n, а на открытом.
+
+
+
+\subsection{Случай функций}
+
+Рассмотрим теперь случай функции $f:\mathbb{R}^n \to \mathbb{R}$, в таком случае, её второй дифференциал, согласно предыдущим рассуждениям, это билинейная форма 
+\[
+ \mathrm{d}^2f:\mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}.
+\]
+
+Как мы знаем из курса линейной алгебры, любая билинейная форма на конечномерных векторных пространствах задаётся своей матрицей, которая зависит от выбранного базиса.  Наша цель это вычислить эту матрицу.
+
+
+\begin{theorem}
+Пусть функция $f:\mathbb{R}^n \to \mathbb{R}$ всюду дифференцируема на $\mathbb{R}$, а отображение $\mathrm{d}f: \mathbb{R}^n \to \mathrm{Hom}(\mathbb{R}^n, \mathbb{R})$ дифференцируемо в окрестности точки $\m{a} \in \mathbb{R}^n$. Тогда матрица билинейной формы $(\mathrm{d}^2f)_\m{a}$ в стандартном базисе $\mathbb{R}^n$ имеет вид 
+ \[
+     \m{H}_\m{a}(f): = \begin{pmatrix}
+         f''_{x_1x_1}(\m{a}) & \ldots & f''_{x_1  x_n}(\m{a}) \\
+         \vdots & \ddots & \vdots \\
+         f''_{x_n x_1}(\m{a}) &  \ldots & f''_{ x_n x_n}(\m{a}).
+     \end{pmatrix}
+    \]
+Эта матрица называется \textbf{матрицей Гессе.}
+\end{theorem}
+
+
+\begin{proof}
+    Пусть $\mathbb{e}: = (\m{e}_1,\ldots, \m{e}_n)$ -- стандартный базис в $\mathbb{R}^n$, тогда, в пространстве функционалов $\mathrm{Hom}(\mathbb{R}^n, \mathbb{R})= : (\mathbb{R}^n)^*$, мы можем рассмотреть двойственный ему базис $\mathbb{e}^*: = (\m{e}_1^*,\ldots, \m{e}_n^*)$ определённый следующим образом
+    \[
+     \m{e}_i^*(\m{e}_j) = \delta_{i,j}: = \begin{cases}
+         1, & i=j \\
+         0, & i \ne j.
+     \end{cases}
+    \]
+
+В таком случае, дифференциал $(\mathrm{d}f)_\m{p} = \begin{pmatrix}
+    f_{x_1}'(\m{p}) & \ldots & f_{x_n}'(\m{p})
+\end{pmatrix}$ можно записать так
+\[
+ (\mathrm{d}f)_\m{p} = f_{x_1}'(\m{p})\m{e}_1^* + \cdots + f_{x_n}'(\m{p})\m{e}_n^*.
+\]
+
+Так как соответствия $\m{e}_i \longleftrightarrow \m{e}_i^*$, $i=1,\ldots, n$ порождают изоморфизм $\mathbb{R}^n \cong (\mathbb{R}^n)^*$, то дифференциал $(\mathrm{d}f)_\m{p} \in (\mathbb{R}^n)^*$ мы можем отождествить с вектором 
+$$\mathbf{grad}_\m{p}f : =f_{x_1}(\m{p})'\m{e}_1 + \cdots + f_{x_n}'(\m{p})\m{e}_n,\qquad \mathbf{grad}_\m{p}f = (f_{x_1}'(\m{p}),\ldots, f_{x_n}'(\m{p}))^\top.$$
+
+
+В таком случае, мы получаем отображение $\mathrm{d}f: \mathbb{R}^n \to \mathbb{R}^n$, так как мы отождествили $(\mathbb{R}^n)^*$ с $\mathbb{R}^n$ посредством изоморфизма описанного выше. При этом это отображение описывается тогда следующим образом
+\[
+ \mathrm{d}f: \mathbb{R}^n \to \mathbb{R}^n, \qquad \mathbb{R}^n \ni \m{p} \mapsto \begin{pmatrix}
+     f_{x_1}'(\m{p}) \\ \vdots \\ f_{x_n}'(\m{p}).
+ \end{pmatrix}
+\]
+
+Тогда, дифференциал этого отображения $(\mathrm{d} \mathrm{d}f)_\m{a}$, в точке $\m{a}$ это матрица Якоби отображения $\mathrm{d}f$
+\[
+ (\mathrm{d} \mathrm{d}f)_\m{a} = \begin{pmatrix}
+     \frac{\partial  f_{x_1}'}{\partial x_1}({\m{a}}) & \ldots & \frac{\partial  f_{x_1}'}{\partial x_n} ({\m{a}}) \\
+     \vdots & \ddots & \vdots \\
+     \frac{\partial  f_{x_n}'}{\partial x_1} ({\m{a}}) & \ldots & \frac{\partial  f_{x_n}'}{\partial x_n} ({\m{a}})
+     \end{pmatrix}
+\]
+после взятия частных производных мы и получаем требуемое. Это завершает доказательство.
+
+
+    
+\end{proof}
+
+\subsection{Явная формула для высших дифференциалов и формальный символизм}
+
+Итак, пусть у нас есть $n$-раз дифференцируемая функция $f:\mathbb{R}^n \to \mathbb{R}$ в окрестности $\mathscr{U}$ точки $\m{a}$. Мы знаем, что
+\[
+ (\mathrm{d}f)_\m{a}(\m{h}) = \begin{pmatrix}
+     f'_{x_1}(\m{a}) & \ldots & f'_{x_n}(\m{a})
+ \end{pmatrix} \begin{pmatrix}
+      h_1 \\ \vdots \\ h_n
+ \end{pmatrix} = f_{x_1}'(\m{a})h_1 + \cdots + f_{x_n}'(\m{a})h_n.
+\]
+
+Найдём $(\mathrm{d}^n(f))_\m{a}(\m{h}): = \mathrm{d}(\mathrm{d}^{n-1}f)_\m{a}(\m{h})$. Для этого нам понадобиться следующий формализм.
+
+Пусть $C^\infty(\mathbb{R}^n)$ есть множество гладких (=бесконечно дифференцируемых) дифференцируемых функций $f:\mathbb{R}^n \to \mathbb{R}$. Рассмотрим следующие отображения:
+\[
+ \frac{\partial}{\partial x_i}: C^\infty(\mathbb{R}^n) \to C^\infty(\mathbb{R}^n), \qquad f\mapsto f'_{x_i}, \quad 1 \le i \le n.
+\]
+
+Тогда у нас возникают их композиции 
+\[
+ \frac{\partial^k}{\partial x_{i_k} \cdots \partial x_{i_1}}:=\dfrac{\partial}{\partial x_{i_k}} \circ \cdots \circ \dfrac{\partial}{\partial x_{i_1}}:  C^\infty(\mathbb{R}^n) \to C^\infty(\mathbb{R}^n), \qquad f \mapsto \frac{\partial^k f}{\partial x_{i_k} \cdots \partial x_{i_1}}.
+\]
+
+
+
+
+\begin{theorem}\label{differential_formula}
+    Если функция $f:\mathbb{R}^n \to \mathbb{R}$ в окрестности точки $\m{a}$ $m$ раз дифференцируема, то для каждого $1 \le k \le m$
+    \[
+     \boxed{
+ (\mathrm{d}^kf)_\m{a}(\m{h})=     \left.\left(\frac{\partial}{\partial x_1} h_1 + \cdots + \frac{\partial }{\partial x_n}h_n \right)^k\right|_{\m{a}} \cdot f
+    }\]
+\end{theorem}
+\begin{proof}
+    Доказательство будет идти по индукции. Если $m=1$, то мы получаем просто определение дифференциала. Пусть формула верна при $1 \le k<m$, имеем
+    \[
+     (\mathrm{d}^kf)(\m{h}) = \sum_{p_1 + \ldots + p_n = k} \dfrac{k!}{p_1! \cdots p_n!} \frac{\partial^k f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}} h_1^{p_1}\cdots h_n^{p_n}
+    \]
+
+Дифференцируем теперь это равенство, получаем
+\begin{eqnarray*}
+    (\mathrm{d}^{k+1}f)(\m{h}) &=& (\mathrm{d}(\mathrm{d}^kf))(\m{h}) \\
+     &=& \sum_{p_1 + \ldots + p_n = k} \dfrac{k!}{p_1! \cdots p_n!} \mathrm{d}\left( \frac{\partial^k f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}} h_1^{p_1}\cdots h_n^{p_n}\right) \m{h}\\
+     &=& \sum_{p_1 + \ldots + p_n = k} \dfrac{k!}{p_1! \cdots p_n!} \left(\mathrm{d}\left( \frac{\partial^k f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}} \right)(\m{h}) \right)\cdot h_1^{p_1}\cdots h_n^{p_n} 
+\end{eqnarray*}
+    Теперь применяя формулу дифференциала, мы получим
+\[
+  (\mathrm{d}^{k+1}f)(\m{h}) = \sum_{p_1 + \ldots + p_n = k} \dfrac{k!}{p_1! \cdots p_n!} \left( \frac{\partial^{k+1}f}{\partial x_1^{p_1+1} \cdots \partial x_n^{p_n}}h_1 + \cdots +  \frac{\partial^{k+1}f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n+1}}h_n \right)\cdot h_1^{p_1}\cdots h_n^{p_n}. 
+\]
+
+Фиксируем набор $(p_1,\ldots, p_n)$ и рассмотрим соответствующую сумму
+\[
+ S(p_1,\ldots, p_n): = \frac{\partial^{k+1}f}{\partial x_1^{p_1+1} \partial x_2^{p_2} \cdots \partial x_n^{p_n}}h_1^{p+1}h_2^{p_2}\cdots h_n^{p_n} + \cdots +  \frac{\partial^{k+1}f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n+1}}h_1^{p_1}h_2^{p_2} \cdots h_n^{p_n+1}.
+\]
+тогда первое слагаемое этой суммы также присутствует в следующих суммах
+\[
+\begin{matrix}
+    S(p_1+1, p_2-1,p_3,\ldots, p_n), \\
+    S(p_1+1, p_2,p_3-1,\ldots, p_n), \\
+    \vdots \\
+    S(p_1+1, p_2,p_3,\ldots, p_n-1).
+\end{matrix}
+\]
+
+Тогда коэффициент при $\frac{\partial^{k+1}f}{\partial x_1^{p+1}\partial x_2^{p_2} \cdots \partial x_n^{p_n}} h_1^{p_1+1}h_2^{p_2}\cdots h_n^{p_n}$ есть следующее выражение
+\[
+ K = \frac{k!}{p_1! p_2! \cdots p_n!} + \frac{k!}{(p_1+1)!(p_2-1)! \cdots p_n!} + \cdots + \frac{k!}{(p_1+1)!p_2! \cdots (p_n-1)!}
+\]
+имеем
+\begin{eqnarray*}
+  K &=&   \frac{k!}{p_1! p_2! \cdots p_n!} + \frac{k!}{(p_1+1)!(p_2-1)! \cdots p_n!} + \cdots + \frac{k!}{(p_1+1)!p_2! \cdots (p_n-1)!} \\
+  &=& \frac{k!}{p_1! (p_2-1)! \cdots (p_n-1)!}\left( \frac{1}{p_2p_3 \cdots p_n} + \frac{1}{(p_1+1)p_2\cdots p_n} + \cdots + \frac{1}{(p_1+1)p_2 \cdots p_{n-1}}\right) \\
+  &=& \frac{k!}{p_1! (p_2-1)! \cdots (p_n-1)!} \cdot \frac{p_1+1 +p_2+ \cdots+ p_n}{(p_1+1)p_2\cdots p_n} \\
+  &=& \frac{k!(k+1)}{(p_1+1)! p_2! \cdots p_n!} \\
+  &=& \frac{(k+1)!}{(p_1+1)! p_2! \cdots p_n!}.
+\end{eqnarray*}
+
+Таким образом, рассуждая аналогично для остальных мономов, мы можем тогда записать
+\[
+ (\mathrm{d}^{k+1}f)(\m{h}) = \sum_{p_1 + \ldots + p_n = k+1} \dfrac{(k+1)!}{p_1! \cdots p_n!} \frac{\partial^{k+1} f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}} h_1^{p_1}\cdots h_n^{p_n},
+\]
+что и доказывает утверждение.
+
+\end{proof}
+
+
+\section{Полином Тейлора от нескольких переменных}
+
+Прежде всего рассмотрим следующую задачу. Пусть нам дана функция $\psi:\mathbb{R}^n \to \mathbb{R}$. Допустим что она дифференцируема в окрестности $\mathscr{U}$ точки $\m{a} = (a_1,\ldots, a_n)$, и пусть при $0\le t \le 1$, точка $\m{a}+t\m{h} = (a_1 + th_1, \ldots, a_n+th_n)$ также принадлежит этой же окрестности. Тогда, при фиксированных $\m{a}, \m{h}$ мы уже получаем функцию $\psi(\m{a}+t\m{h})$ от одной переменной. Как найти её производную?
+
+\begin{lemma}
+    Пусть $f:\mathbb{R}^n \to \mathbb{R}$ дифференцируема в окрестности точки $\mathscr{U}$ точки $\m{a}$, и пусть при $0\le t \le 1$, точка $\m{a}+t\m{h}\in \mathscr{U}$. Тогда, при фиксированных $\m{a}, \m{h}$, функция $\psi_{\m{a},\m{h}}(t):= f(\m{a}+t\m{h}):\mathbb{R} \to \mathbb{R}$ дифференцируема при $0 \le t \le 1$ и
+    \[
+     \psi_{\m{a},\m{h}}'(t) = \left.\frac{\partial f}{ \partial x_1}\right|_{\m{a} + t \m{h}} \cdot h_1 + \cdots + \left.\frac{\partial f}{ \partial x_n}\right|_{\m{a} + t \m{h}} \cdot h_n
+    \]
+\end{lemma}
+
+\begin{proof}
+Прежде всего мы видим, что наша функция $\psi_{\m{a},\m{h}}(t)$ есть композиция двух стрелок
+\[
+ \xymatrix{
+ \mathbb{R} \ar@{->}[rr]^{t \mapsto \m{a}+ t\m{h}} \ar@{.>}[rd]_{t \mapsto \psi_{\m{a},\m{h}}(t)} && \mathbb{R}^n \ar@{->}[ld]^{\m{x} \mapsto \psi(\m{x})} \\
+ & \mathbb{R} &
+ }
+\]
+
+Далее, для функции от одной переменной, значение её производной это есть значение дифференциала вычисленного в этой же точке. Тогда по теореме о композиции \ref{d(FG)},
+\[
+ \psi'_{\m{a},\m{h}}(t) = (\mathrm{d}\psi)_t = (\mathrm{d}f)_{\m{a}+t\m{h}} \cdot (\mathrm{d}\gamma)_t,
+\]
+где 
+\[
+ \gamma(t): = \m{a}+t\m{h} = \begin{pmatrix}
+     a_1 + th_1 \\ \vdots \\ a_n + t h_n
+ \end{pmatrix}
+\]
+Тогда её матрица Якоби (=дифференциал) имеет вид
+\[
+ \mathrm{d}\gamma = \begin{pmatrix}
+     \dot\gamma_1(t) \\ \vdots \\ \dot \gamma_n(t)
+ \end{pmatrix} = \begin{pmatrix}
+     h_1 \\ \vdots\\ h_n
+ \end{pmatrix} = \m{h},
+\]
+здесь $\gamma_1(t) = a_1 + th_1,\ldots, \gamma_n(t) = a_n+th_n.$
+Тогда, получаем
+\begin{eqnarray*}
+    \psi'_{\m{a},\m{h}}(t) & =& (\mathrm{d}\psi)_t = (\mathrm{d}f)_{\m{a}+t\m{h}} \cdot (\mathrm{d}\gamma)_t \\
+    &=& (\mathrm{d}f)_{\m{a}+t\m{h}} \m{h} \\
+    &=& \left.\frac{\partial f}{ \partial x_1}\right|_{\m{a} + t \m{h}} \cdot h_1 + \cdots + \left.\frac{\partial f}{ \partial x_n}\right|_{\m{a} + t \m{h}} \cdot h_n,
+\end{eqnarray*}
+что и требовалось доказать.
+\end{proof}
+
+\begin{corollary}\label{nice_nice}
+    Если функция $f$ является $m$-раз дифференцируемое в точке $\m{a}$, то функция $\psi_{\m{a}, \m{h}}(t)$ является тоже $m$-раз дифференцируемой при $0\le t \le 1$, и более того 
+    \[
+     \psi_{\m{a},\m{h}}^{k}(t) = (\mathrm{d}^k_{\m{a}+t\m{h}}f)(\m{h}).
+    \]
+\end{corollary}
+
+\begin{theorem}\label{Taylor_in_many}
+    Пусть $f:\mathbb{R}^n \to \mathbb{R}$ есть $m+1$ раз дифференцируемая функция в окрестности точки $\m{a} \in \mathbb{R}^n$, то для всех $\m{h}$ из окрестности точки $\m{0}_n$ верно 
+    \[
+     f(\m{a} + \m{h}) = f(\m{a}) + (\mathrm{d}f)_\m{a} \m{h} + \frac{1}{2!} (\mathrm{d}^2f)_\m{a}\m{h} + \cdots + \frac{1}{m!} (\m{d}^mf)_\m{a}\m{h} + \frac{1}{(m+1)!} (\m{d}^{m+1}f)_{\m{a}+ \theta \m{h}}\m{h},
+    \]
+    где $0 < \theta < 1$ и она зависит от $\m{a}, \m{h}$ и $m$.
+\end{theorem}
+\begin{proof}
+    Пусть $\varphi_{\m{a},\m{h}}(t): = f(\m{a}+t \m{h})$, $t \in [0,1]$, тогда согласно Следствию \ref{nice_nice}, она $m+1$ раз дифференцируема и более того 
+    \[
+     \varphi^{k}(t) = (\mathrm{d}^k_{\m{a}+t\m{h}}f)(\m{h}).
+    \]
+
+Тогда её полином Тейлора с остаточным мономом в форме Лагранже (Следствие \ref{monom_in_Langrange} имеет вид
+\[
+ \varphi(t) = \varphi(0) + \frac{\varphi'(0)}{1!}t + \frac{\varphi''(0)}{2!}t^2 + \cdots + \frac{\varphi^{(m)}(0)}{m!}t^m + \frac{\varphi^{(m+1)}(\theta)}{(m+1)!}t^{m+1}
+\]
+где $0 < \theta < t.$
+
+Тогда, используя равенство 
+ \[
+     \varphi_{\m{a},\m{h}}^{k}(t) = (\mathrm{d}^k_{\m{a}+t\m{h}}f)(\m{h}), \qquad 1 \le k \le m+1.
+    \]
+    получаем
+\begin{align*}
+    &\varphi(0) = f(\m{a}), \\
+    &\varphi^{(k)}(0) = (\mathrm{d}^k_{\m{a}}f)(\m{h}), \qquad 1 \le k \le m,\\
+    &\varphi^{(m+1)}(\theta) =(\mathrm{d}^k_{\m{a}+\theta \m{h}}f)(\m{h}).
+\end{align*}
+
+Тогда мы можем записать
+\[
+ \varphi(t) = f(\m{a}) + \sum_{k=1}^m \frac{(\mathrm{d}^k_{\m{a}}f)(\m{h})}{k!}t^k + \frac{( \mathrm{d}^k_{\m{a}+\theta \m{h}}f)(\m{h}) }{(m+1)!}t^{m+1},
+\]
+так как $\varphi(1) = f(\m{a}+\m{h})$, то подставляя $t=1$ в последней сумме мы получаем требуемое.
+ \end{proof}
+
+
+
+
+\section{Полином Тейлора в матричной записи }
+
+
+Мы будем рассматривать функции $f:\mathbb{R}^n \to \mathbb{R}$. При этом, мы считаем, что $\mathbb{R}^n$ снабжено евклидовой нормой.
+
+Напомним теорему \ref{Taylor_in_many}
+\textit{Пусть $f:\mathbb{R}^n \to \mathbb{R}$ есть $m+1$ раз дифференцируемая функция в окрестности точки $\m{a} \in \mathbb{R}^n$, то для всех $\m{h}$ из окрестности точки $\m{0}_n$ верно 
+    \[
+     f(\m{a} + \m{h}) = f(\m{a}) + (\mathrm{d}f)_\m{a} \m{h} + \frac{1}{2!} (\mathrm{d}^2f)_\m{a}\m{h} + \cdots + \frac{1}{m!} (\m{d}^mf)_\m{a}\m{h} + \frac{1}{(m+1)!} (\m{d}^{m+1}f)_{\m{a}+ \theta \m{h}}\m{h},
+    \]
+    где $0 < \theta < 1$ и она зависит от $\m{a}, \m{h}$ и $m$.
+}
+
+Получаем следующее
+\begin{corollary}\label{cor_for_Peano_in_many}
+    Пусть $f:\mathbb{R}^n \to \mathbb{R}$ есть $m$ раз дифференцируема функция в окрестности точки $\m{a}$ и все её частные производные непрерывны в этой точке, тогда
+    \[
+     f(\m{a} + \m{h}) = f(\m{a}) + (\mathrm{d}f)_\m{a} \m{h} + \frac{1}{2!} (\mathrm{d}^2f)_\m{a}\m{h} + \cdots + \frac{1}{m!} (\m{d}^mf)_\m{a}\m{h} + o(\| \m{h} \|^m), \qquad \m{h} \to \m{0}_n.
+    \]
+\end{corollary}
+
+\begin{proof}
+    По теореме \ref{Taylor_in_many}, 
+    \[
+     f(\m{a} + \m{h}) = f(\m{a}) + (\mathrm{d}f)_\m{a} \m{h} + \frac{1}{2!} (\mathrm{d}^2f)_\m{a}\m{h} + \cdots + \frac{1}{(m-1)!} (\m{d}^{m-1}f)_\m{a}\m{h} + \frac{1}{m!} (\m{d}^{m}f)_{\m{a}+ \theta \m{h}}\m{h},
+    \]
+    рассмотрим последний моном (самый правый) этого полинома, имеем
+    \[
+    (\m{d}^{m}f)_{\m{a}+ \theta \m{h}}(\m{h})= (\m{d}^{m}f)_{\m{a}}(\m{h}) +  \Bigl( (\m{d}^{m}f)_{\m{a}+ \theta \m{h}}(\m{h}) - (\m{d}^{m}f)_{\m{a}} (\m{h}) \Bigr).
+    \]
+
+Согласно Теореме \ref{differential_formula}
+    \[
+     (\mathrm{d}^mf)_{\m{b}}(\m{h}) = \sum_{p_1 + \ldots + p_n = m} \dfrac{m!}{p_1! \cdots p_n!} \left.\frac{\partial^m f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}}\right|_{\m{b}} \cdot h_1^{p_1}\cdots h_n^{p_n},
+     \]
+тогда получаем
+\begin{eqnarray*}
+    (\m{d}^{m}f)_{\m{a}+ \theta \m{h}}(\m{h}) &=& (\m{d}^{m}f)_{\m{a}}(\m{h}) +  \Bigl( (\m{d}^{m}f)_{\m{a}+ \theta \m{h}}(\m{h}) - (\m{d}^{m}f)_{\m{a}} (\m{h}) \Bigr) \\
+    &=& (\m{d}^{m}f)_{\m{a}}(\m{h}) + \sum_{p_1 + \ldots + p_n = m} \dfrac{m!}{p_1! \cdots p_n!}\left( \left.\frac{\partial^m f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}}\right|_{\m{a}+\theta \m{h}} - \left.\frac{\partial^m f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}}\right|_{\m{a}} \right)\cdot h_1^{p_1}\cdots h_n^{p_n} \\
+    &=& (\m{d}^{m}f)_{\m{a}}(\m{h})\\
+    &&+ \|h \|^m \sum_{p_1 + \ldots + p_n = m} \dfrac{m!}{p_1! \cdots p_n!}\left( \left.\frac{\partial^m f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}}\right|_{\m{a}+\theta \m{h}} - \left.\frac{\partial^m f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}}\right|_{\m{a}} \right) \frac{h_1^{p_1}}{\|h\|^{p_1}} \cdots \frac{h_n^{p_n}}{\|h\|^{p_n}}.
+\end{eqnarray*}
+
+Так как $\| h \|: = \sqrt{h_1^2 + \cdots + h_n^2}$, то 
+\[
+ \frac{h_1^{p_1}}{\| \m{h}\|^{p_1}}, \ldots, \frac{h_1^{p_1}}{\| \m{h}\|^{p_1}} \le 1 
+\]
+далее, так как все частные производные непрерывны в точке $\m{a}$, то по критерию непрерывности \ref{criteria_of_continous},
+\[
+ \lim_{\m{h} \to \m{0}_n} \left( \left.\frac{\partial^m f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}}\right|_{\m{a}+\theta \m{h}} - \left.\frac{\partial^m f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}}\right|_{\m{a}} \right) = 0, 
+\]
+при каждом разбиении $m = p_1 + \cdots + p_n$, таким образом, 
+\[
+ \lim_{\m{h} \to \m{0}_n} \sum_{p_1 + \ldots + p_n = m} \dfrac{m!}{p_1! \cdots p_n!}\left( \left.\frac{\partial^m f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}}\right|_{\m{a}+\theta \m{h}} - \left.\frac{\partial^m f}{\partial x_1^{p_1} \cdots \partial x_n^{p_n}}\right|_{\m{a}} \right) = 0,
+\]
+а это и означает, что 
+\[
+ (\m{d}^{m}f)_{\m{a}+ \theta \m{h}}(\m{h}) = (\m{d}^{m}f)_{\m{a}}(\m{h}) + \omega(\m{h}) \|h\|^m, \quad \m{h} \to \m{0}_n,
+\]
+где $\lim_{\m{h} \to \m{0}_n} \omega(\m{h}) = \m{0}_n$, \textit{т.е.,}
+\[
+ (\m{d}^{m}f)_{\m{a}+ \theta \m{h}}(\m{h}) = (\m{d}^{m}f)_{\m{a}}(\m{h}) + o(\|h\|^m), \quad \m{h} \to \m{0}_n,
+\]
+но тогда
+\begin{eqnarray*}
+    f(\m{a} + \m{h}) &=& f(\m{a}) + (\mathrm{d}f)_\m{a} \m{h} + \frac{1}{2!} (\mathrm{d}^2f)_\m{a}\m{h} + \cdots + \frac{1}{(m-1)!} (\m{d}^{m-1}f)_\m{a}\m{h} + \frac{1}{m!} (\m{d}^{m}f)_{\m{a}+ \theta \m{h}}\m{h} \\
+    &=&f(\m{a}) + (\mathrm{d}f)_\m{a} \m{h} + \frac{1}{2!} (\mathrm{d}^2f)_\m{a}\m{h} + \cdots + \frac{1}{(m-1)!} (\m{d}^{m-1}f)_\m{a}\m{h} + \frac{1}{m!}\left( (\mathrm{d}^mf)_\m{a} (\m{h}) + o(\|\m{h}\|^m) \right) \\
+    &=&f(\m{a}) + (\mathrm{d}f)_\m{a} \m{h} + \frac{1}{2!} (\mathrm{d}^2f)_\m{a}\m{h} + \cdots + \frac{1}{m!} (\m{d}^mf)_\m{a}\m{h} + o(\| \m{h} \|^m), \qquad \m{h} \to \m{0}_n
+\end{eqnarray*}
+
+что и требовалось доказать.
+\end{proof}
+
+Напомним, что если функция $f:\mathbb{R}^n \to \mathbb{R}$ дважды дифференцируема в точке $\m{a}$, тогда матрица
+    \[
+     \m{H}_\m{a}(f): = \begin{pmatrix}
+         \dfrac{\partial^2 f}{\partial x_1^2}(\m{a}) & \dfrac{\partial^2 f}{\partial x_1 \partial x_2}(\m{a}) &\ldots & \dfrac{\partial^2 f}{\partial x_1 \partial x_n}(\m{a}) \\
+         \dfrac{\partial^2 f}{\partial x_2 \partial x_1}(\m{a}) & \dfrac{\partial^2 f}{\partial x_2^2}(\m{a}) & \ldots & \dfrac{\partial^2 f}{\partial x_2 \partial x_n}(\m{a}) \\
+         \vdots & \vdots & \ddots & \vdots \\
+         \dfrac{\partial^2 f}{\partial x_n \partial x_1}(\m{a}) & \dfrac{\partial^2 f}{\partial x_n \partial x_2}(\m{a}) & \ldots &\dfrac{\partial^2 f}{ \partial x_n^2}(\m{a})
+     \end{pmatrix}
+    \]
+    называется матрицей Гессе $f$ в точке $\m{a}$.
+
+\begin{mydanger}{\bf{!}}
+    Так как функция дважды дифференцируема в точке $\m{a}$, то по теореме Шварца матрица Гессе -- симметричная матрица.
+\end{mydanger}
+
+\begin{theorem}\label{Tayl_for_2}
+    Если функция $f:\mathbb{R}^n \to \mathbb{R}$ -- дважды дифференцируема в точке $\m{a}$, то
+    \[
+     f(\m{a} + \m{h}) =f(\m{a}) + \nabla_\m{a}(f)(\m{h}) + \frac{1}{2} \m{h}^\top \m{H}_\m{a}(f) \m{h} + o(\|\m{h}\|^2), \qquad \m{h} \to \m{0}_n.
+    \]
+\end{theorem}
+\begin{proof}
+    Согласно Следствию \ref{cor_for_Peano_in_many}, 
+    \[
+     f(\m{a} + \m{h}) = f(\m{a}) + (\mathrm{d}f)_\m{a} \m{h} + \frac{1}{2} (\mathrm{d}^2f)_\m{a}\m{h} + o(\| \m{h} \|^2), \qquad \m{h} \to \m{0}_n,
+    \]
+    но $(\mathrm{d}f)_\m{a} \m{h} = \nabla_\m{a}(f)(\m{h})$. Далее, по Теореме \ref{differential_formula},
+\begin{eqnarray*}
+    (\mathrm{d}^kf)_\m{a}(\m{h})  &=& \left.\left(\frac{\partial}{\partial x_1} h_1 + \cdots + \frac{\partial }{\partial x_n}h_n \right)^2\right|_{\m{a}} \cdot f \\
+    &=& \sum_{i=1}^n \left.\dfrac{\partial^2 f}{\partial x_i^2} \right|_\m{a} h_i^2 + 2 \sum_{1\le i < j \le n}  \left.\dfrac{\partial^2 f}{\partial x_i \partial x_j} \right|_{\m{a}} h_ih_j,
+\end{eqnarray*}
+где $\m{h} = (h_1, \ldots, h_n)^n$, но последнее выражение можно записать в матричном виде следующим образом:
+\[
+ (h_1, \ldots, h_n)^\top \begin{pmatrix}
+         \dfrac{\partial^2 f}{\partial x_1^2}(\m{a}) & \dfrac{\partial^2 f}{\partial x_1 \partial x_2}(\m{a}) &\ldots & \dfrac{\partial^2 f}{\partial x_1 \partial x_n}(\m{a}) \\
+         \dfrac{\partial^2 f}{\partial x_2 \partial x_1}(\m{a}) & \dfrac{\partial^2 f}{\partial x_2^2}(\m{a}) & \ldots & \dfrac{\partial^2 f}{\partial x_2 \partial x_n}(\m{a}) \\
+         \vdots & \vdots & \ddots & \vdots \\
+         \dfrac{\partial^2 f}{\partial x_n \partial x_1}(\m{a}) & \dfrac{\partial^2 f}{\partial x_n \partial x_2}(\m{a}) & \ldots &\dfrac{\partial^2 f}{ \partial x_n^2}(\m{a})
+     \end{pmatrix} \begin{pmatrix}
+         h_1 \\ \vdots \\ h_n
+     \end{pmatrix}  =  \m{h}^\top \m{H}_\m{a}(f) \m{h} ,
+\]
+и так как матрица симметрична, это завершает доказательство.
+\end{proof}
+
+
+

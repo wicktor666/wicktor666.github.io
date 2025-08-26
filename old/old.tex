@@ -1,0 +1,686 @@
+
+\section{Задачи где нужно указать номер где для каждого эпсилона...}
+
+Такие задачи можно условно разделить на два типа; 1) задачи где это номер легко найти, 2) задачи где этот номер найти не легко.
+
+Таким образом, если перед нами задача из второго типа, то наша цель это свести её к первому типу.
+
+Рассмотрим примеры.
+
+\begin{example}
+ Пусть дана последовательность $\{x_n\} = \left\{\dfrac{5}{\sqrt{n}} \right\}$. Пусть нам нужно показать, что $\lim_{n\to \infty}x_n = 0$, это значит что мы должны для каждого $\varepsilon >0$ указать такой номер $N(\varepsilon)$ что для любого друго $n>N(\varepsilon)$ будет справедливо неравенство $\left| \dfrac{5}{\sqrt{n}} \right|<\varepsilon.$
+
+ Имеем,
+\[
+\left| \dfrac{5}{\sqrt{n}} \right|<\varepsilon \Longleftrightarrow \dfrac{\sqrt{n}}{5} > \dfrac{1}{\varepsilon} \Longleftrightarrow n > \dfrac{25}{\varepsilon^2},
+\]
+таким обазом, мы может положить что $N(\varepsilon):= \left[ \frac{25}{\varepsilon^2} \right]$. Пусть $\varepsilon=0.1$, тогда $N(0.1) = \left[ \frac{25}{0.1^2} \right] = 2500$. Это значит, что если мы рассмотрим число $\varepsilon = 0.1$, то для любого $n>2500$ мы должны будем иметь неравенство $\frac{5}{\sqrt{n}}<0.1$. Действительно, пусть, например, $n = 2501$, тогда находим $\frac{5}{\sqrt{2501}} \approx 0.09998 <0.1$.
+\end{example}
+
+
+
+\begin{example}
+    Пусть дана последовательность $\{x_n\} = \left\{ \frac{2n^2 +3}{n^3+n} \right\}$ и нам нужно показать что $\lim_{n\to \infty}x_n = 0$. Таким образом, для любого $\varepsilon>0$ от нас треубеутся предъявить такой номер $N(\varepsilon)$ что при каждом $n>N(\varepsilon)$ будет выполняться неравенство $\left| \frac{2n^2+3}{n^3+n} \right| <\varepsilon.$
+
+    Если мы будем решать это неравенство, то мы получим кубическое неравенство вида 
+    \[
+      \varepsilon n^3 -2n^2 + \varepsilon n - 4 >0,
+    \]
+    решить которое не очень легко. Поэтому, вместо этого, мы попытаемся найти другую последовательсность $\{y_n\}$ чтобы $x_n \le y_n$ при каждом $n\in \mathbb{N}$. Тогда, если мы укажем для произвольного $\varepsilon >0$ такой номер $N(\varepsilon)$ что при каждом $n>N(\varepsilon)$ будет иметь место неравенство $y_n <\varepsilon$, то значит и неравенство $x_n < \varepsilon$ будет тоже справедливо, ибо $x_n \le y_n < \varepsilon.$
+
+    Нетрудно видеть, что $\frac{2n^2 + 3}{n^3+n}< \frac{3}{n}$, при каждом $n\in\mathbb{N}$. Действительно,
+    \[
+   \frac{2n^2 + 3}{n^3+n}< \frac{3}{n} \Longleftrightarrow 2n^3 +3n < 3n^3 + 3n \Longleftrightarrow n^3 >0 \Longleftrightarrow n>0.
+    \]
+Тогда если $\frac{3}{n}<\varepsilon$ то $n > \frac{3}{\varepsilon}$, и мы можем положить $N(\varepsilon):=\left[ \frac{3}{\varepsilon} \right]$. 
+
+Пусть $\varepsilon = 0.1$, тогда $N(0.1) = 30$. Возьмём $n=32$, получаем
+\[
+ x_{32} = \frac{2 \cdot 32^2 + 3}{32^3 + 32} = \frac{205}{32800} \approx 0.0625 < 0.1.
+\]
+\end{example}
+
+\begin{example}
+Пусть нам нужно доказать что $\lim_{n \to \infty}x_n = \frac{2}{3}$, где $x_n = \frac{2n^2 + 3 n +2}{3n^2 + 7n +5}.$ Другими словами, от нас требует предоставить для любого заданного $\varepsilon >0$ такое $N(\varepsilon) \in \mathbb{N}$ что при каждом $n>N(\varepsilon)$ мы будем иметь $\left| \frac{2n^2 + 3 n +2}{3n^2 + 7n +5} - \frac{2}{3} \right|<\varepsilon.$ 
+
+Видно, что после приведения подобных мы получим квадратное неравенство в котором коэффициенты будут зависит от $\varepsilon$. Решать такое неравенство не представляется лёгким делом. Поэтому мы попробуем найти такую последовательность $y_n$, что $x_n \ge y_n$ при каждом $n\in \mathbb{N}$ и при этом чтобы мы смогли решить неравенство $|y_n - \frac{2}{3}| < \varepsilon.$
+
+Искать такую последовательность $\{y_n\}$ мы будем в виде $y_n = \frac{2n+\alpha}{3n + \beta}$, где числа $\alpha, \beta$ нужно подобрать. Другими словами, мы должны решить неравенство 
+   \[
+      \frac{2n^2 + 3 n +2}{3n^2 + 7n +5} \le \frac{2n+\alpha}{3n + \beta}.
+    \]
+
+После приведения подобных получаем
+\[
+(5-3\alpha -3 \beta)n^2 + (4+7\alpha - 3 \beta)n + 5\alpha - 2 \beta \ge 0.
+\]
+
+Давайте потребуем чтобы коэффициент при $n^2$ был $0$, то есть чтобы $5-3\alpha - 3 \beta =0$, тогда $\beta = \frac{3\alpha + 5}{3}.$ В таком случае наше неравенство примет уже такой вид
+\[
+ + (4+7\alpha - 3 \beta)n + 5\alpha - 2 \beta \ge 0,
+\]
+а учитывая что $\beta = \frac{3\alpha + 5}{3}$ мы получаем
+\[
+(4\alpha - 1) n \ge \frac{10}{3} - 3 \alpha.
+\]
+
+Таким образом, если мы попросим чтобы, скажем, $\frac{10}{3} - 3 \alpha = 0$ и чтобы левая часть не была отрицательной, мы получим что неравенство
+    \[
+      \frac{2n^2 + 3 n +2}{3n^2 + 7n +5} \le \frac{2n+\alpha}{3n + \beta}
+    \]
+будет выполняться при каждом $n\ge 1 >0$. Итак, получаем, что если $\alpha = \frac{10}{9}$, то наше неравенство пример вид
+\[
+\left(\frac{40}{9}-1\right) n \ge 0 \Longleftrightarrow n \ge 0.
+\]
+
+Далее, так как $\beta = \frac{3 \alpha + 5}{3}$, то получаем $\beta = \frac{25}{7}$. Таким образом, мы показали что при любом $n \in \mathbb{N}$ имеет место неравенство
+    \[
+      \frac{2n^2 + 3 n +2}{3n^2 + 7n +5} \le \frac{2n+\frac{10}{9}}{3n + \frac{25}{7}}.
+    \]
+    
+Осталось теперь найти такой $N(\varepsilon)$ чтобы при любом $n>N(\varepsilon)$ было верно неравество
+\[
+ \left|\frac{2n+\frac{10}{9}}{3n + \frac{25}{7}} - \frac{2}{3}  \right| < \varepsilon.
+\]
+
+Решая его, мы находим $n > \frac{1}{9}\left( \frac{240}{63\varepsilon} - \frac{75}{7} \right)$, значим мы можем положить что 
+\[
+ N(\varepsilon):=\left[\frac{1}{9}\left( \frac{240}{63\varepsilon} - \frac{75}{7} \right) \right].
+\]
+
+\end{example}
+
+
+
+\begin{example}
+Рассмотрим теперь такую последовательность $\{x_n\} = \left\{ \frac{2n^3 +n^2+n+1}{3n^3+4n^2+n +2} \right\}$ и покажем что $\lim_{n\to \infty}x_n = \frac{2}{3}$. Это значит что для любого $\varepsilon>0$ мы должны указать такой номер $N(\varepsilon)$ что при каждом $n>N(\varepsilon)$ будет иметь место неравенство $\left| \frac{2n^3 +n^2+n+1}{3n^3+4n^2+n +2} -\frac{1}{2}\right|<\varepsilon.$
+
+Видно что это неравенство эквалентно кубическому неравенству где коэффициенты будут зависит от $\varepsilon$. Ясно что решать такое неравенство не очень легко. Поэтому мы поступим также как и в предыдущем примере, а именно, мы найдём такую последовательность $\{y_n\}$ что $x_n \le y_n$ при каждом $n\in \mathbb{N}$, $\lim_{n \to \infty} y_n = \frac{2}{3}$, и при этом, чтобы мы либо смогли решить неравество $|y_n - \frac{2}{3}|<\varepsilon$, либо смогли заменить его на удобное для нас. 
+
+Также, как и в предыдущем примере, мы будем подбирать коэффиценты $\alpha_1,\alpha_2,\beta_1,\beta_2$ так чтобы имело место неравенство
+\[
+ \frac{2n^3 +n^2+n+1}{3n^3+4n^2+n +2} \le \frac{2n^2 + \alpha_1 n +\alpha_2}{3n^2 + \beta_1n +\beta_2}
+\]
+при любом $n\ge 1.$
+
+Тогда находим
+\[
+(3n^2 + \beta_1 n + \beta_2)(2n^3 + n^2 +n + 1) \le (2n^2 + \alpha_1 n + \alpha_2) (3n^3 + 4n^2 +n+2),
+\]
+раскрывая скобки будем иметь
+\begin{eqnarray*}
+    6n^5 + 3n^4 + 3n^3 + 3n^2 & & 6n^5 + 8n^4 +2n^3 + 4n^2 \\
+    +2\beta_1 n^4 + \beta_1n^3 + \beta_1 n^2 +\beta_1 n & \le & +3\alpha_1n^4 + 4\alpha_1n^3 + \alpha_1n^2 + 2\alpha_1n \\
+    +2\beta_2n^3 + \beta_2 n^2 + \beta_2 n + \beta_2 && +3\alpha_2n^3 + 4\alpha_2n^2 + \alpha_2n + 2\alpha_2,
+    \end{eqnarray*}
+собирая подобные, мы получим
+\begin{eqnarray}\label{1}
+ (5 + 3 \alpha_1 -2\beta_1) n^4 && \notag\\
+ + (-1 + 4\alpha_1 + 3\alpha_2 - \beta_1 - 2 \beta_2)n^3 && \notag\\
+ +(1+\alpha_1 + 4\alpha_2-\beta_1 -\beta_2)n^2 && \\
+ +(2\alpha_1 + \alpha_2 - \beta_1 - \beta_2)n && \notag\\
+ + 2\alpha_2 - \beta_2 &\ge & 0 \notag.
+\end{eqnarray}
+
+Так как наши коэффициенты произвольны, то мы можем потребовать чтобы первые три слагаемые исчезли, то есть мы получаем систему линейный уравнений
+\[ \left\{
+\begin{matrix}
+    3\alpha_1 & & -\beta_1 & &=& 5 \\
+    4 \alpha_1 & + 3 \alpha_2 & -\beta_1 & -2\beta_2 &=&1 \\
+    \alpha_1 &+ \alpha_2 & -\beta_1 & -\beta_2 &=& -1.
+\end{matrix} 
+\right.
+\]
+
+Решая её методом Гаусса, мы получаем
+\begin{align*}
+    &\alpha_1 = \frac{19}{23}+\frac{10}{23} \beta_2,\\
+    & \alpha_2 = \frac{11}{23} + \frac{7}{23} \beta_2,\\
+    & \beta_1 = \frac{86}{23} + \frac{15}{23} \beta_2.
+\end{align*}
+
+Таким образом, при произвольном $\beta_2$ если остальные коэффициенты выражаются через него как это было получено выше, неравенство (\ref{1}), примет вид $(2\alpha_1 +\alpha_2 -\beta_1 -\beta_2)n  + 2\alpha_2 -\beta_2 \ge 0$. С другой стороны, подставляя вместо $\alpha_1,\alpha_2,\beta_1$ выражения полученые из решения системы, мы получаем
+\[
+ n \ge \frac{\beta_2 - 2 \left( \frac{11}{23} + \frac{7}{23} \beta_2 \right)}{\frac{12}{23}\beta_2 -\frac{37}{23}},
+\]
+пусть теперь выражение стоящее справа будет равно $1$, тогда мы получаем уравнение для $\beta_2$,
+\[
+\beta_2 - 2 \left( \frac{11}{23} + \frac{7}{23} \beta_2 \right) = \frac{12}{23}\beta_2 -\frac{37}{23},
+\]
+откуда $\beta_2 = 5$, и тогда находим $\alpha_1 = \frac{69}{23} = 3$, $\alpha_2 = \frac{46}{23} = 2$, $\beta_1 = \frac{161}{23} = 7$. Таким образом, при любом $n\ge 1$, мы получили неравенство
+\[
+ \frac{2n^3 +n^2+n+1}{3n^3+4n^2+n +2} \le \frac{2n^2 + 3 n +2}{3n^2 + 7n +5}.
+\]
+
+Но мы уже знаем из предыдущего примера, что неравенство $\left| \frac{2n^2 + 3 n +2}{3n^2 + 7n +5} - \frac{2}{3} \right|<\varepsilon$ выполняется при любом $n>N(\varepsilon)$, где $N(\varepsilon):=\left[\frac{1}{9}\left( \frac{240}{63\varepsilon} - \frac{75}{7} \right) \right].$
+
+\end{example}
+
+
+    \item Пусть $E = \mathbb{R}$, $E' =\mathbb{R}_{>0}$, с одинаковым расстояниями $d(x,y): = |x-y|$. Пусть $A = (0,1)$, и $f:(0,1) \to \mathbb{R}_{>0}$ задаётся как $f(x) = \frac{1}{x}$. Тогда $\lim_{x \to 1, x \in (0,1)}f(x)  = 1$. Действительно, положим 
+    \[
+     \overline{f}(x):=\begin{cases}
+         \frac{1}{x}, & x \in (0,1), \\
+         1, & x = 1.
+     \end{cases}
+    \]
+Нетрудно видеть, что это отображение непрерывно, так как прообраз $\overline{f}^{-1}((a,b))$ любого открытого интервала есть открытый интервал $(\frac{1}{b},\frac{1}{a})$.
+
+\newpage
+
+
+
+
+
+\newpage
+\begin{thebibliography}{BGLL}
+
+
+
+\end{thebibliography}
+
+\renewcommand{\refname}{Software and online repositories}
+\begin{thebibliography}{OEIS}
+
+\bibitem[MC]{MC} Matrix Calculator, \texttt{https://matrixcalc.org/ru/} 
+
+\end{thebibliography}
+
+
+
+\textit{т.е.} для каждого $1\le k \le n$ мы получили
+\[
+ f_k = \varphi_k(h_k) - \varphi_k(0) = \varphi_k'(\theta_k)h_k = f'_k(\theta_k)h_k. 
+\]
+
+
+
+
+
+
+
+Так как частные производные функции у $f$ существуют и конечные, значит все $\varphi_k(t)$, $1\le k \le n$ -- дифференцируемы на отрезке $[0,h_k]$. Нетрудно видеть, что $\varphi_k(h_k) - \varphi_k(0) = f_k.$ Тогда по теореме Лагранжа \ref{Langrange}, существует $\vartheta_k \in (0, h_k)$ такой, что 
+\[
+ f_k = \varphi_k(h_k) - \varphi(0) = \varphi'_k(\vartheta_k)h_k.
+\]
+
+Полагая теперь $\widetilde{\vartheta}: = \frac{\vartheta}{h_k}$, мы завершаем доказательство.
+
+
+
+
+
+
+
+Доказывать будем по индукции. Случай $m =1$ тривиален. Случай же $m =2$ верен согласно теореме Юнга \ref{Yong}. Пусть утверждение верно для $m-1$.
+
+Возьмём произвольную перестановку $\pi \in \mathfrak{S}_n$, тогда, по определению и по предположению индукции,
+\begin{eqnarray*}
+    \frac{\partial^m f}{\partial x_{\pi(1)} \cdots x_{\pi(n)}} &:=& \left(\frac{\partial^{m-1} f}{\partial x_{\pi(2)} \cdots \partial x_{\pi(n)}} \right)'_{x_{\pi(1)}} \\
+    &=& \left(\frac{\partial^{m-1} f}{\partial x_{2} \cdots \partial x_{n}} \right)'_{x_{\pi(1)}}
+\end{eqnarray*}
+
+
+
+\begin{definition}
+    Говорят, что отображение (не обязательно линейное) $F:\mathbb{R}^n \to \mathbb{R}^m$ \textit{ограничено} в каком-то открытом $\mathscr{U}\subseteq \mathbb{R}^n$, если существует $C\in \mathbb{R}_{\ge 0}$ такое, что $|| F(\m{v})|| \le C $ для всех $\m{v} \in \mathscr{U}.$
+\end{definition}
+
+\begin{mydanger}{\bf{!}}
+    Геометрически это означает, что образ всего $\mathscr{U}$ попадает в замкнутый шар $\overline{B(\m{0}_m, C)}.$
+\end{mydanger}
+
+
+
+\begin{remark}
+    Если линейное отображение ограничено, то оно ограничено как просто отображение. Действительно, 
+\end{remark}
+
+
+
+
+
+
+\begin{lemma}\label{metric=hausdorff}
+    Любое метрическое пространство удовлетворяет \boxed{\textbf{аксиоме отделимости Хаусдорфа}}; для любых двух различных точек найдутся непересекающиеся их окрестности.
+\end{lemma}
+\begin{proof}
+    Пусть $(E,d)$ -- метрическое пространство, и пусть $x_1,x_2 \in E$ -- две его различные точки. Нужно показать что найдётся два открытых множества $\mathscr{U}_1, \mathscr{U}_2 \subset E$, такие, что $x_1\in \mathscr{U}_1$, $x_2\in \mathscr{U}_2$ и $\mathscr{U}_1\cap \mathscr{U}_2 = \varnothing.$
+
+   Пусть $y \in B(x_1,r_1) \cap B(x_2,r_2)$, тогда $d(x_1,y)<r_1$ и $d(x_2,y)<r_2$. По неравенству треугольника, получаем
+    \[
+     d(x_1,x_2) \le d(x_1,y) + d(x_2,y)< r_1 +r_2.
+    \]
+
+    Это означает, что $B(x_1,r_1) \cap B(x_2,r_2) \ne \varnothing$ если и только если $r_1+r_2 > d(x_1,x_2)$, а если $r_1+r_2 \le d(x_1,x_2)$, то $B(x_1,r_1) \cap B(x_2,r_2) = \varnothing$. Таким образом, для данных двух различных точек $x_1,x_2$, полагаем $\mathscr{U}_1: = B(x_1,r_1)$, $\mathscr{U}_2:=B(x_2,r_2)$, и требуем чтобы $r_1+r_2 \le d(x_1,x_2)$. Это доказывает хаусдорфовость метрических пространств. 
+\end{proof}
+
+\begin{definition}
+\textit{Компактом} (или компактным множеством) в метрическом пространстве $(E,d)$ называется такое множество $K$, для которого метрическое подпространство $(K,d|_K)$ пространства $(E,d)$ компактно.
+\end{definition}
+
+\begin{proposition}\label{for_compact}
+    Если $K$ -- компакт в метрическом пространстве $E$ и $y \in E \setminus K$, то найдутся такие открытые $\mathscr{B}, \mathscr{U} \subseteq E$, что $K \subseteq \mathscr{B}$, $y \in \mathscr{U}$, и $\mathscr{B}\cap \mathscr{U} = \varnothing.$ 
+\end{proposition}
+
+\begin{proof}
+    Так как $K$ рассматривается как подпространство, то оно открыто в самом себе, а значит, согласно определению открытого множества \ref{def_of_open}, для каждой точки $x\in K$ найдётся открытый шар $B(x,r_x)$ в $K$, такой что $B(x,r_x) \subseteq K$. Тогда, согласно, лемме \ref{union_and_cap_of_open}, $K = \cup_{x \in K}B(x,r_x)$, \textit{т.е.,} мы получили покрытие для $K$.
+
+    Согласно условию, $K$ -- компакт, тогда из покрытия $\{B(x,r_x)\}_{x\in K}$ можно выделить конечное подпокрытие $\{B(x_1, r_i)\}_{i=1}^n$, где $r_i:= r_{x_i}$, тогда пусть $\mathscr{B}: = \cup_{i=1}^n B(x_i,r_i)$. По предложению \ref{open_in_subset}, $B(x_i,r_i) = \mathscr{B}_i \cap K$, где $\mathscr{B}_i$ -- открыто в $E$, $1 \le i \le n$.
+
+    Далее, согласно лемме \ref{metric=hausdorff}, $E$ -- хаусдорфово, тогда для каждого $\mathscr{B}_i \ni x$ можно найти открытое $\mathscr{U}_i$ содержащее точку $y$, такое, что $\mathscr{B}_i \cap \mathscr{U}_i = \varnothing$. Пусть $\mathscr{U}: = \cap_{i=1}^n \mathscr{U}_i$, тогда для каждого $1 \le i \le n$ получаем
+   \[
+    B(x_i,r_i) \cap \mathscr{U}_i = \left( \mathscr{B}_i \cap K \right) \cap \mathscr{U}_i = K \cap (\mathscr{B}_i \cap \mathscr{U}_i) = \varnothing.
+   \]
+
+   Это влечёт
+   \[
+    \mathscr{B} \cap \mathscr{U}= \bigcup_{i=1}^n B(x_i,r_i) \cap \bigcup_{i=1}^n \mathscr{U}_i = \varnothing.
+   \]
+
+   Итак, мы предъявили открытые множества $\mathscr{B}$, $\mathscr{U}$ удовлетворяющие утверждению, что и доказывает требуемое.
+\end{proof}
+
+\begin{definition}
+    \textit{Диаметром} произвольного непустого подмножества $S \subseteq E$ метрического пространства $S$ есть число 
+    \[
+     \mathrm{diam}(S):= \sup_{x,y \in S} d(x,y).
+    \]
+
+    \textit{Ограниченное множество } в $E$ называется непустое множество, диаметр которого конечен.
+\end{definition}
+
+\begin{lemma}\label{X<Y=>diam(X)<diam(Y)}
+    Если $X\subseteq Y$ -- два ограниченных подмножества в метрическом пространстве $E$, то $\mathrm{diam}(X) \le \mathrm{diam}(Y)$.
+\end{lemma}
+
+\begin{proof}
+    Пусть $A: = \{d(x_1,x_2),\, x_1,x_2 \in X\}$, $B: = \{d(y_1,y_2), \, y_1,y_2 \in Y\}$, тогда $A,B \subseteq \mathbb{R}$ и так как $X,Y$ -- ограничены, то и $A,B$ -- ограничены. Если $a \in A$, то найдутся такие $x_1,x_2 \in X$, что $a = d(x_1,x_2)$, а так как $X \subseteq Y$, то $x_1,x_2 \in Y$, и значит $a\in B$, таким образом $A \subseteq B$. Используя лемму \ref{A<B=sup(A)<sup(B)} мы завершаем доказательство.
+\end{proof}
+
+
+
+
+\begin{lemma}
+    Если $(x_n)$ и $(x_n')$ -- два таких ряда, что $x_n' = x_n$ почти для всех $n$, то оба они сходятся или расходятся.
+\end{lemma}
+\begin{proof}
+    Рассмотрим ряд $(x_n''): = (x_n - x_n')$, тогда почти все его элементы равны нулю, а это значит, что он сходится, \textit{т.е.,} мы имеем $ \lim_{n \to \infty} s''_n = s''$. 
+
+(1) Пусть ряд $(x_n')$ сходится и пусть $\lim_{n \to \infty}s_n' =s'$, тогда согласно Предложению \ref{ariph_for_series}, ряд $(x_n'' + x_n')$ ряд тоже сходится к сумме $s''+s'$, но $x_n''+x_n' = x_n$, \textit{т.е.,} ряд $(x_n)$ сходится.
+
+(2) Пусть теперь ряд $(x_n')$ расходится, а ряд $(x_n)$ сходится. Опять рассмотрим ряд $(x_n''): = (x_n - x_n')$ у которого почти все элементы нулевые, а значит он сходится, и мы опять положим $\lim_{n \to \infty}s_n'' = s''.$ Рассмотрим ряд $(x_n - x_n'')$, по предложению \ref{ariph_for_series}, получаем, что этот ряд сходится, но, $x_n - x_n'' = x_n'$ и мы тем самым пришли к тому, что ряд $(x_n')$ сходится, что противоречит предположению, следовательно, ряд $(x_n)$ не может быть сходящимся, \textit{т.е.,} из расходимости ряда $(x_n')$ следует расходимость ряда $(x_n).$
+\end{proof}
+
+
+ 
+ Если неравенства $x_n\le x_n'$ не выпонены для каких то конечных значений $n$, скажем, $n = n_1,\ldots, n_\ell$, то рассмотрим ряды $(y_n)$, $(y_n')$ определённые следующим образом 
+\[
+ y_n = \begin{cases}
+     x_n, & n \ne n_1,\ldots, n_\ell,\\
+     0, & n = n_1,\ldots, n_\ell,
+ \end{cases} \qquad  y'_n = \begin{cases}
+     x'_n, & n \ne n_1,\ldots, n_\ell,\\
+     0, & n = n_1,\ldots, n_\ell
+ \end{cases} 
+\]
+
+
+\begin{proposition}\label{for_compact}
+    Если $K$ -- компакт в метрическом пространстве $E$ и $y \in E \setminus K$, то найдутся такие открытые $\mathscr{B}, \mathscr{U} \subseteq E$, что $K \subseteq \mathscr{B}$, $y \in \mathscr{U}$, и $\mathscr{B}\cap \mathscr{U} = \varnothing.$ 
+\end{proposition}
+
+\begin{proof}
+    Так как $K$ рассматривается как подпространство, то оно открыто в самом себе, а значит, согласно определению открытого множества \ref{def_of_open}, для каждой точки $x\in K$ найдётся открытый шар $B(x,r_x)$ в $K$, такой что $B(x,r_x) \subseteq K$. Тогда, согласно, лемме \ref{union_and_cap_of_open}, $K = \cup_{x \in K}B(x,r_x)$, \textit{т.е.,} мы получили покрытие для $K$.
+
+    Согласно условию, $K$ -- компакт, тогда из покрытия $\{B(x,r_x)\}_{x\in K}$ можно выделить конечное подпокрытие $\{B(x_1, r_i)\}_{i=1}^n$, где $r_i:= r_{x_i}$, тогда пусть $\mathscr{B}: = \cup_{i=1}^n B(x_i,r_i)$. По предложению \ref{open_in_subset}, $B(x_i,r_i) = \mathscr{B}_i \cap K$, где $\mathscr{B}_i$ -- открыто в $E$, $1 \le i \le n$.
+
+    Далее, согласно лемме \ref{metric=hausdorff}, $E$ -- хаусдорфово, тогда для каждого $\mathscr{B}_i \ni x$ можно найти открытое $\mathscr{U}_i$ содержащее точку $y$, такое, что $\mathscr{B}_i \cap \mathscr{U}_i = \varnothing$. Пусть $\mathscr{U}: = \cap_{i=1}^n \mathscr{U}_i$, тогда для каждого $1 \le i \le n$ получаем
+   \[
+    B(x_i,r_i) \cap \mathscr{U}_i = \left( \mathscr{B}_i \cap K \right) \cap \mathscr{U}_i = K \cap (\mathscr{B}_i \cap \mathscr{U}_i) = \varnothing.
+   \]
+
+   Это влечёт
+   \[
+    \mathscr{B} \cap \mathscr{U}= \bigcup_{i=1}^n B(x_i,r_i) \cap \bigcup_{i=1}^n \mathscr{U}_i = \varnothing.
+   \]
+
+   Итак, мы предъявили открытые множества $\mathscr{B}$, $\mathscr{U}$ удовлетворяющие утверждению, что и доказывает требуемое.
+\end{proof}
+
+
+
+
+
+
+
+Так как $E$ Ясно, что $K \subseteq \cup_{x \in K} B(x,r_x)$, для каких-то $r_x >0$. Так как $K$ -- компакт, то можно найти конечное множество точек $\{x_1,\ldots, x_n\}$ такое, что $K \subseteq \cup_{i=1}^n B(x_i, r_i)$, где $r_i = r_{x_i}$, $1\le i \le n.$
+
+Пусть $y\in \overline{K}$, тогда для любого шара $B(y,r)$ имеем $B(y,r ) \cap K  \ne \varnothing$ (см. Определение \ref{limit_point}, Лемма \ref{closure}), и пусть $y\notin K$. Но тогда по Лемме \ref{metric=hausdorff} для каждого $1\le i \le n$ найдутся такие $\varepsilon_i>0$, что $B(y, \varepsilon_i) \cap B(x_i, r_i) = \varnothing$, тогда, полагая $\varepsilon: = \min \{\varepsilon_1, \ldots, \varepsilon_n\}$, получаем, что
+\[
+  B(y, \varepsilon) \cap K \subseteq B(y, \varepsilon) \cap \bigcup_{i=1}^n B(x_i,r_i) = \varnothing,
+\]
+\ie мы нашли окрестность $B(y, \varepsilon)$ точки $y$, которая не пересекается с $K$, что означает, что $y \notin \overline{K}$. Поэтому если $y\in \overline{K}$, то $y \in K$, \ie $\overline{K} = K.$
+
+   
+    \begin{eqnarray*}
+        \mathsf{S} & = & \mathsf{S}^+ - \mathsf{S}^- \qquad \mbox{(по предложению \ref{S=S^+-S^-})} \\
+        &=& \sum_{n=1}^\infty x_n^+ - \sum_{n=1}^\infty x_n^- \\
+        &=& \sum_{n=1}^\infty y_n^+ - \sum_{n=1}^\infty y_n^- \qquad \mbox{(по теореме \ref{comm_for_positive_series})} \\
+       &=& \sum_{n=1}^\infty (y_n^+ - y_n^-) \qquad \mbox{(по предложению \ref{ariph_for_series})} \\
+      &=& \sum_{n=1}^\infty y_n.
+    \end{eqnarray*}
+
+
+    такую, что для каждого $k\ge 0$ мы имеем
+\[
+ \sum_{i=1}^{p_k} x_i^+ - \sum_{j=1}^{q_k}x_j^- < \alpha < \sum_{i=1}^{p_k+1}x_i^+
+- \sum_{j=1}^{g_k}x_j^-,
+\]
+где мы для удобства положили, что $p_0 = q_0 :=0.$
+
+
+
+
+
+
+
+Напомним, что полиномом $P(x)$ от переменной $x$ над $\mathbb{R}$ называется выражение вида 
+$$
+\alpha_nx^n + \alpha_{n-1}x^{n-1} + \cdots + \alpha_1x + \alpha_0,
+$$
+где все $\alpha_i \in \mathbb{R}$ и можно положить, что $\alpha_n \ne 0$ и в таком случае говорят, что полином $P(x)$ имеет степень $n$ и пишут $\mathrm{deg}(P(x))= n.$
+
+Множество всех полиномов от переменной $x$ над $\mathbb{R}$ обозначают так $\mathbb{R}[x].$
+
+\begin{theorem}[Делимость полиномов]\label{div_of_polynmials}
+ Для любых полиномов $A(x), B(x) \in \mathbb{R}[x]$ всегда существуют однозначно определённые полиномы $Q(x), R(x) \in \mathbb{R}[x]$, такие, что
+ \[
+  A(x) = B(x) Q(x) + R(x),
+ \]
+ и $\mathrm{deg}(R(x)) < \mathrm{deg}(B(x)).$
+\end{theorem}
+\begin{proof}
+    Пусть
+    \begin{eqnarray*}
+        A(x) &=& \alpha_nx^n + \alpha_{n-1}x^{n-1} + \cdots + \alpha_1x + \alpha_0, \\
+        B(x) &=& \beta_kx^k + \beta_{k-1}x^{k-1} + \cdots + \beta_1x + \beta_0,
+    \end{eqnarray*}
+где $n = \mathrm{deg}(A(x))$, $k = \mathrm{deg}(B(x))$, так что $\alpha_n, \beta_k \ne 0$.
+
+Применим индукцию по $n$.
+
+(1) Если $n =0$ (\textit{т.е.,} $A(x) = \alpha_0$) и $0=\mathrm{deg}(A(x)) < \mathrm{deg}(B(x))$, то положим $Q(x):=0$ и $R(x) : = A(x)$, \textit{т.е.,} имеем
+\[
+ \alpha_0 = 0 \cdot B(x) + \alpha_0.
+\]
+
+(2) Если $\mathrm{deg}(A(x)) = \mathrm{deg}(B(x)) = 0$, \textit{т.е.,} $A(x) = \alpha_0, B(x) = \beta_0$, то положим $R(x) :=0$ и $R(x): = \frac{\alpha_0}{\beta_0}$, \textit{т.е.,}
+\[
+ \alpha_0 = \frac{\alpha_0}{\beta_0} \beta_0 +0.
+\]
+
+(3) Пусть теперь $n>0$. Если $\mathrm{deg}(A(x)) < \mathrm{deg}(B(x))$, то положим $Q(x) : = 0$, а $R(x):=A(x).$
+
+Итак, пусть теперь теорема доказана в случае $n>0$ и $\mathrm{deg}(A(x)) \ge \mathrm{deg}(B(x))$. Тогда можем записать
+\begin{eqnarray*}
+    A(x) &=& \alpha_nx^n + \alpha_{n-1}x^{n-1} + \cdots + \alpha_1x + \alpha_0 \\
+    &=& \frac{\alpha_n}{\beta_k} x^{n-k} (\beta_k x^k) + \alpha_{n-1}x^{n-1} + \cdots + \alpha_1x + \alpha_0 \\
+    &=& \frac{\alpha_n}{\beta_k} x^{n-k} \Bigl( B(x) - \beta_{k-1}x^{k-1} - \cdots - \beta_0  \Bigr) + \alpha_{n-1}x^{n-1} + \cdots + \alpha_1x + \alpha_0 \\
+    &=&  \frac{\alpha_n}{\beta_k}x^{n-k} B(x) + \widetilde{A}(x),
+\end{eqnarray*}
+где $\mathrm{deg}(\widetilde{A}(x)) = n-1.$ Но тогда, по предположению индукции мы можем найти такие $\widetilde{Q}(x)$ и ${R}(x)$, что
+\[
+ \widetilde{A}(x) = \widetilde{Q}(x)B(x) + {R}(x),
+\]
+и $\mathrm{deg}((x))< \mathrm{deg}(B(x))$. Тогда получаем
+\begin{eqnarray*}
+    A(x) &=& \frac{\alpha_n}{\beta_k}x^{n-k} B(x) + \widetilde{A}(x) \\
+    &=& \frac{\alpha_n}{\beta_k}x^{n-k} B(x) + \widetilde{Q}(x)B(x) + {R}(x)\\
+    &=& Q(x) B(x) + R(x),
+\end{eqnarray*}
+где $Q(x): = \frac{\alpha_n}{\beta_k}x^{n-k} + \widetilde{Q}(x)$, чем доказательство существования $Q(x)$ и $R(x)$ законченно.
+
+(4) Докажем теперь единственность. Предположим, что
+\[
+ A(x)  = Q_1(x) B(x) + R_1(x) =  Q_2(x) B(x) + R_2(x),
+\]
+где $\mathrm{deg}(R_1(x)), \mathrm{deg}(R_2(x)) < \mathrm{deg}(B(x))$. Тогда получаем
+\[
+\Bigl(Q_1(x) - Q_2(x)\Bigr) B(x) = R_2(x) - R_1(x),
+\]
+следовательно
+\[
+ \mathrm{deg}\left((Q_1(x) - Q_2(x)\Bigr) B(x) \right) = \mathrm{deg}(R_2(x) -R_1(x)),
+\]
+но
+\[
+ \mathrm{deg}\left((Q_1(x) - Q_2(x)\Bigr) B(x) \right) = \mathrm{deg}(Q_1(x) - Q_2(x)) + \mathrm{deg}(B(x)),
+\]
+и так как $\mathrm{deg}(R_2(x) - R_1(x)) < \mathrm{deg}(B(x))$, то последнее равенство возможно лишь в случае, когда $Q_1(x) = Q_2(x)$, \textit{т.е.,} $Q_1(x) = Q_2(x)$, и следовательно $R_1(x) = R_2(x)$, что и требовалось доказать.
+\end{proof}
+
+Таким образом, мы можем теперь ввести следующее определение.
+
+\begin{definition}
+    Говорят, что полином $A(x)$ \textit{делится на полином} $D(x)$ или $D(x)$ -- \textit{делитель полинома $A(x)$}, если $A(x) = D(x)Q(x)$. Множество всех делителей полинома $A(x)$ мы обозначим через $\mathrm{Div}(A(x)).$ Наконец, для любых двух ненулевых полиномов $A(x), B(x)$ положим 
+    $$
+    \mathrm{Div}(A(x),B(x)): = \mathrm{Div}(A(x)) \cap \mathrm{Div}(B(x)).
+    $$
+\end{definition}
+
+
+
+\begin{lemma}
+    Множество $\mathrm{Div}(A(x))$ конечно для любого ненулевого полинома $A(x) \in \mathbb{R}[x].$
+\end{lemma}
+\begin{proof}
+    Действительно, пусть $D(x) \in \mathrm{Div}(A(x))$, тогда, $A(x) = D(x)Q(x)$ согласно теореме \ref{div_of_polynmials}, и $Q(x)$ определён однозначно. Тогда из равенства $\mathrm{deg}(A(x))=  \mathrm{deg}(D(x)) + \mathrm{deg}(Q(x))$ вытекает, что $D(x)$
+\end{proof}
+
+
+
+
+\begin{definition}
+    Рациональная функция от одной переменной это класс эквивалентности дробей вида $\dfrac{P(x)}{Q(x)}$, где $P(x), Q(x)$ -- полиномы, $Q(x) \ne 0$, и мы считаем что две такие дроби эквиваленты
+    \[
+     \frac{P(x)}{Q(x)} \sim \frac{A(x)}{B(x)},
+    \]
+    если и только если $P(x) B(x) = A(x) Q(x).$
+\end{definition}
+
+  \[
+   \bigintsss \frac{Ax + B}{(x^2 + ax + b)^n}\mathrm{d}x = \begin{cases}
+       \frac{A}{2}\ln(x^2 + ax + b) + \frac{2B-Aa}{\sqrt{4b-a^2}}\arctan\left( \frac{2x+a}{\sqrt{2b-a^2}} \right) + C, & n=1 \\
+       - \frac{A}{2(n-1)}\cdot \frac{1}{(t^2 + a)}
+   \end{cases}
+  \]
+
+
+
+
+
+  \begin{corollary}\label{Weirstrass_mega}
+    Подмножество $F$ в метрическом пространстве $E$ замкнуто, тогда и только тогда, когда из любой последовательности $(x_n)$ в $F$, можно выбрать сходящуюся подпоследовательность $(x_{n_k})$, такую, что $\lim_{n\to \infty} x_{n_k} \in F$. 
+\end{corollary}
+
+\begin{proof}
+    По Предложению \ref{closure}, $F$ замкнуто, если и только если $F = \overline{F}$. Тогда используя лемму \ref{choice_of_seqeunce}, мы завершаем доказательство. 
+\end{proof}
+
+
+
+
+
+
+
+Рассмотрим вопрос об экстремуме функции $f:\mathbb{R}^{n+m} \to \mathbb{R}$ от $n+m$ переменных: $x_1,\ldots, x_{n+m}$ в предположении, что эти переменные подчинены ещё $m$ \textit{уравнениям связи}
+\begin{equation}\label{extr_connections}
+   \left\{\begin{matrix}
+       \Phi_1(x_1,\ldots, x_{n}, \ldots, x_{n+m}) = 0 \\
+       \Phi_2(x_1,\ldots, x_{n}, \ldots, x_{n+m}) = 0 \\
+       \vdots\\
+       \Phi_m(x_1,\ldots, x_{n}, \ldots, x_{n+m}) = 0
+   \end{matrix} \right.   
+\end{equation}
+
+\begin{definition}
+    Говорят, что \textit{в точке $\m{a} = (a_1,\ldots, a_{n+m})$, удовлетворяющей уравнением связи}, функция $f(\m{x})$, $\m{x} = (x_1,\ldots, x_{n+m})$ имеет \textit{условный (=относительный)} максимум (\textit{соотв.} минимум), если неравенство $f(\m{x}) \le f(\m{a})$ (\textit{соотв.} $f(\m{x}) \ge f(\m{a}))$ выполняется в некоторой окрестности точки $\m{a}$ для всех её точек $\m{x}$, удовлетворяющих уравнениям \ref{extr_connections}.
+\end{definition}
+
+\begin{theorem}[Необходимое условие условного экстремума] Пусть $f, \varphi_1,\ldots, \varphi_m: \mathbb{R}^{n+m} \to \mathbb{R}$ являются непрерывно дифференцируемыми фукнциями в окрестности $\mathscr{W}$ точки $\m{a}$ и пусть 
+    \[
+     \mathrm{rk} \begin{pmatrix}
+         \dfrac{\partial \varphi_1}{\partial x_1} (\m{x}) & \ldots & \dfrac{\partial \varphi_1}{\partial x_{n+m}} (\m{x}) \\
+         \vdots & \ddots & \vdots \\
+         \dfrac{\partial \varphi_m}{\partial x_1} (\m{x}) & \ldots & \dfrac{\partial \varphi_m}{\partial x_{n+m}} (\m{x})
+     \end{pmatrix} = m
+    \]
+    для всех $\m{x}\in \mathscr{W}$. Тогда, если $\m{a}$ -- точка условного экстремума функции $f$ на множестве
+    \[
+     \Omega: = \{\m{x} \in \mathbb{R}^{n+m}\,:\, \varphi_1(\m{x}) =0, \ldots, \varphi_m(\m{x}) = 0\}
+    \]
+    то найдутся такие числа $\lambda_1,\ldots, \lambda_m \in \mathbb{R}$, что
+    \[
+     \nabla_\m{a} f = \lambda_1 \nabla_\m{a} \varphi_1 + \cdots +   \lambda_m \nabla_\m{a} \varphi_m.
+     \]
+\end{theorem}
+
+\begin{proof}
+Рассмотрим отображение
+\[
+ \Phi: \mathbb{R}^{n+m} \to \mathbb{R}^{n+m}, \qquad \begin{pmatrix}
+     x_1 \\ \vdots \\ x_m \\ x_{m+1} \\ \vdots \\ x_{n+m}
+ \end{pmatrix} \mapsto \begin{pmatrix}
+     \varphi_1(x_1,\ldots, x_{n+m}) \\
+     \vdots \\
+     \varphi_m(x_1,\ldots, x_{n+m}) \\
+     x_{m+1} \\ \vdots \\x_{n+m}
+ \end{pmatrix}
+\]
+согласно условиям, оно непрерывно дифференцируемо в окрестности $\mathscr{W}$ точки $\m{a}$.
+
+Сделаем теперь замену переменных
+\begin{equation}\label{coordantes_u}
+     \begin{matrix}
+     u_1 & = & \varphi_1(x_1,\ldots, x_{n+m}) \\
+     \vdots & & \vdots\\
+     u_m & = & \varphi_m(x_1,\ldots, x_{n+m}) \\
+     u_{m+1} &=& x_{m+1} \\
+     \vdots && \vdots \\
+     u_{m+n} &=& x_{m+n}
+ \end{matrix}
+\end{equation}
+
+Если нужно, то перенумеровав переменные, можно считать, что из условия о ранге матрицы вытекает
+    \[
+     \mathrm{det} \begin{pmatrix}
+         \dfrac{\partial \varphi_1}{\partial x_{1}}(\m{x}) &\ldots& \dfrac{\partial \varphi_1}{\partial x_{m}}(\m{x}) \\
+         \vdots & \ddots & \vdots \\
+         \dfrac{\partial \varphi_m}{\partial x_{1}}(\m{x}) &\ldots & \dfrac{\partial \varphi_m}{\partial x_{m}}(\m{x})
+     \end{pmatrix} \ne 0.
+    \]
+
+Тогда по теореме об обратном отображении \ref{inverse_function_theorem}, $\Phi$ -- локально обратимо в окрестности $\mathscr{U} \subseteq \mathscr{W}$ точки $\m{a}.$ Это значит, что существуют такие непрерывно дифференцируемые функции $\psi_i: \mathscr{V} \to \mathbb{R}$, $1\le i \le n+m$, где $\mathscr{V}$ -- окрестность точки $\Phi(\m{a})$, что мы получаем обратную замену коородинат к замене (\ref{coordantes_u}) 
+\[
+ \begin{matrix}
+     x_1 & = & \psi_1(u_1,\ldots, u_{m}) \\
+     \vdots & & \vdots\\
+     x_{n+m} & = & \psi_{n+m}(u_1,\ldots, u_m)
+ \end{matrix}
+\]
+
+В итоге, мы получаем две коммутативные диаграммы
+
+\[
+ \xymatrix{
+ \mathscr{U} \ar@{->}[r]^\Phi \ar@{->}[rd]_{f} & \mathscr{V} \ar@{->}[d]^{f_u} \\
+ & \mathbb{R}
+ } \qquad 
+  \xymatrix{
+ \mathscr{V} \ar@{->}[r]^{\Phi^{-1}} \ar@{->}[rd]_{f_u} & \mathscr{U} \ar@{->}[d]^{f} \\
+ & \mathbb{R}
+ }
+\]
+\textit{т.е.}
+\[
+ f_u(u_1, \ldots, u_{n+m}) := f(\varphi_1(x_1,\ldots, x_{n+m}), \ldots, \varphi_m(x_1,\ldots, x_{n+m}), x_{m+1},\ldots, x_{m+n}),
+\]
+и
+\[
+ f(x_1,\ldots, x_{n+m})= f_u(\psi_1(u_1,\ldots, \psi_m), \ldots, \psi_{n+m}(u_1,\ldots, u_m)).
+\]
+
+Тогда, если мы ограничимся рассмотрением точек на множестве $\Omega$, то во-первых, мы получаем, что 
+\[
+ \Phi(\Omega) = \{(u_1,\ldots, u_{n+m}) \in \mathscr{U}\, : \, u_1=0,\ldots, u_m=0\},
+\]
+во-вторых, мы получаем функцию уже от $n$ переменных $f_u(0,\ldots, 0, u_{m+1},\ldots, u_{m+n})$.
+
+Далее, из диаграммы
+
+\[
+ \xymatrix{
+ \Phi(\Omega \cap \mathscr{U}) \ar@{->}[r]^{\Phi^{-1}} \ar@{->}[rd]_{f_u} & \Omega \cap \mathscr{U} \ar@{->}[d]^{f} \\
+ & \mathbb{R}
+ } 
+\]
+следует, что при $\m{y} \in \Phi(\Omega \cap \mathscr{U})$, отображение $\Phi^{-1}$ имеет вид
+\[
+ \qquad \Phi^{-1} : \begin{pmatrix}
+     0\\
+     \vdots \\
+     0\\
+     u_{m+1} \\
+     \vdots \\
+     u_{m+n}
+ \end{pmatrix} \mapsto \begin{pmatrix}
+     x_1\\
+     \vdots \\
+     x_m\\
+    x_{m+1} \\
+     \vdots \\
+     x_{m+n}
+ \end{pmatrix},
+\]
+где $x_1,\ldots, x_m \in \Omega \cap \mathscr{U}$, а так как $u_{m+1} = x_{m+1}, \ldots, u_{m+n} =x_{n+m}$, то
+\[
+ f_u(0,\ldots, 0, u_{m+1},\ldots, u_{m+n}) = f(x_1,\ldots, x_m, x_{m+1}, \ldots, x_{n+m}) \circ \Phi^{-1}.
+\]
+
+Но, тогда $\Phi(\m{a})$ -- точка экстремума функции $f_u(0,\ldots, 0, u_{m+1},\ldots, u_{m+n})$, и по необходимому признаку \ref{nessary_condition_for_extr} мы получаем
+\[
+ \dfrac{\partial f_u}{\partial{u_{m+1}}}(\Phi(\m{a})) = \cdots = \dfrac{\partial f_u}{\partial{u_{m+n}}}(\Phi(\m{a})) = 0.
+\]
+
+Это значит, что в точке $\Phi(\m{a})$ имеем
+\[
+ (\mathrm{d}f_u)_{\Phi(\m{a})} = \begin{pmatrix}
+     \lambda_1 & \ldots & \lambda_m & 0 & \ldots & 0
+ \end{pmatrix}.
+\]
+
+Наконец, из диаграммы
+\[
+ \xymatrix{
+ \Omega \cap \mathscr{U} \ar@{->}[r]^{\Phi} \ar@{->}[rd]_{f} & \Phi(\Omega \cap \mathscr{U}) \ar@{->}[d]^{f_u}\\
+ & \mathbb{R}
+ }
+\]
+и из теоремы о композиции дифференциалов \ref{d(FG)} получаем
+\begin{eqnarray*}
+    (\mathrm{d}f)_\m{a} &=& (\mathrm{d}f_u)_{\Phi(\m{a})} \cdot (\mathrm{d}\Phi)_{\m{a}} \\
+    &=& \begin{pmatrix}
+        \lambda_1 & \ldots & \lambda_m & 0 & \ldots 0
+    \end{pmatrix} \begin{pmatrix}
+        \dfrac{\partial \varphi_1}{\partial x_1}(\m{a}) & \ldots & \dfrac{\partial \varphi_1}{\partial x_m}(\m{a}) & \dfrac{\partial \varphi_1}{\partial x_{m+1}}(\m{a}) & \ldots & \dfrac{\partial \varphi_1}{\partial x_{m+n}}(\m{a}) \\
+        \vdots & \ddots & \vdots & \vdots & \ddots & \vdots\\
+        \dfrac{\partial \varphi_m}{\partial x_1}(\m{a}) & \ldots & \dfrac{\partial \varphi_m}{\partial x_m}(\m{a}) & \dfrac{\partial \varphi_n}{\partial x_{m+1}}(\m{a}) & \ldots & \dfrac{\partial \varphi_m}{\partial x_{m+n}}(\m{a}) \\
+        0 & \ldots & 0 & 1 & \ldots &0 \\
+        \vdots & \ddots & \vdots & \vdots & \ddots & \vdots\\
+        0 & \ldots & 0 & 0 & \ldots & 1
+    \end{pmatrix} \\
+    &=& \lambda_1 (\mathrm{d}\varphi_1)_{\m{a}} + \ldots + \lambda_m (\mathrm{d}\varphi_m)_{\m{a}},
+\end{eqnarray*}
+что и требовалось доказать.
+\end{proof}

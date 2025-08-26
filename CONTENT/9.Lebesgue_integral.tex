@@ -1,0 +1,545 @@
+\chapter{Интеграл Лебега; основные понятия}
+
+
+\section{Мера Лебега на прямой}
+
+\begin{definition}
+   \textit{Мера Лебега} $\mu$ промежутка $I \subseteq \overline{\mathbb{R}}$, это число
+    \[
+     \mu(I): = b-a,
+    \]
+    где $I$ принимает одно из следующих значений $(a,b), [a,b), (a,b], [a,b]$. В частности, для одноточечного множества $\{a\}$ мы полагаем $\mu(\{a\}):=0$, так так $\{a\} = [a,a]$.
+\end{definition}
+
+\begin{mydangerr}{\bf!}
+    Ввиду того что определение дано в случае подмножеств расширенной прямой, то мы допускаем бесконечные значения меры $\mu$.
+\end{mydangerr}
+
+\begin{definition}
+    Говорят, что множество $S \subseteq \overline{\mathbb{R}}$ имеет меру ноль, если для любого $\varepsilon>0$ существуют такое не более чем счётное множество интервалов $\{I_k\}_{k=1}^\infty$ что $S \subseteq \cup_{i=1}^\infty I_k$ и $\sum_{k=1}^\infty \mu(I_k) \le \varepsilon.$
+\end{definition}
+
+\begin{lemma}
+    Любое счётное множество на прямой имеет меру ноль.
+\end{lemma}
+\begin{proof}
+ Пусть множество $S$ счётно, тогда его элементы можно представить в виде последовательности
+ \[
+  S= \{s_1,s_2,\ldots,\}
+ \]
+
+Для фиксированного $\varepsilon>0$ и для любого $n\ge 1$ положим
+    \[
+     I_n:=\left( s_n-\frac{\varepsilon}{2^{n+1}}, s_n + \frac{\varepsilon}{2^{n+1}}\right).
+    \]
+
+ Так как каждый $s_n\in \mathbb{N}$ это цент интервала $I_n$, то $S \subseteq \cup_{n=1}^\infty I_n$, при этом имеем
+    \begin{eqnarray*}
+        \sum_{k=1}^\infty &=& \sum_{k=1}^\infty \left( s_n + \frac{\varepsilon}{2^{n+1}} - s_n +\frac{\varepsilon}{2^{n+1}} \right) \\
+        &=& \varepsilon \sum_{k=1}^\infty \frac{1}{2^n} = \varepsilon \frac{1/2}{1-1/2} = \varepsilon.        
+    \end{eqnarray*}
+Таким образом, мы для любого $\varepsilon>0$ предъявили такое покрытие $\{I_k\}_{k=1}^\infty$ множества $S$, что $\sum_{k=1}^\infty \mu(I_k) \le \varepsilon$, что и показывает, что множество $S$ имеет меру ноль.
+\end{proof}
+
+
+\begin{definition}
+ Пусть даны две функции $f,g: X \to \mathbb{R}$, \textit{множество несовпадений} этих функций, назовём множество
+ \[
+  N(f,g): = \{x\in X\, :\, f(x) \ne g(x)\} \subseteq X.
+ \]
+
+ Говорят, что функции \textit{почти всюду равны} на $X$, если множество $N(f,g)$ имеет меру ноль. В случае, когда $X = \mathbb{R}$, то вместо фразы ``почти всюду равны на $\mathbb{R}$'' говорят просто ``почти всюду равны''.
+\end{definition}
+
+
+
+\section{Ступенчатые функции}
+
+
+\begin{definition}
+    Пусть $I$ -- промежуток, под \textit{разбиением промежутка $I$ на промежутки} понимается \textbf{конечное} множество $\mathscr{P}(I)$ промежутков содержащихся в $I$, при этом любой $x \in I$ принадлежит одному и только одному промежутку из $\mathscr{P}(I).$
+\end{definition}
+
+\begin{mydanger}{\bf !}
+    Основное отличите этого определиния от определения разбиения данного для определения интегарала Римана, заключается в том, что нам уже нужны не только точки, но также и промежутки. 
+\end{mydanger}
+
+\begin{example}
+  Пусть $I = [1,8]$, тогда следующее множество
+  \[
+   \mathscr{P}(I) : = \{ \varnothing, \{1\}, (1,3), [3,5), \{5\}, (5,8]  \}
+  \]
+есть разбиение промежутка $I = [1,8]$, потому что любой $x \in I$ лежит в одном и только в одном из перечисленных подмножеств множества $\mathscr{P}$. А если же мы положим, что
+\[
+ \mathscr{P}'(I): = \{ \varnothing, \{1\}, [1,3), (2,7), [3,5), \{5\}, (5,8] \}
+\]
+то мы уже получаем не разбиение, поскольку, например, точка $2.5 \in [1,3)$ и $2.5 \in (2,7)$.
+
+Множество $\mathscr{P}''(I) := \{[1,4), (4,8]\}$ тоже не является разбиением промежутка $I = [1,8]$ так как $4$ не принадлежит ни одному из подмножеств множества $\mathscr{P}''(I)$. Наконец, множество $\mathscr{P}'''(I) := \{(0,5], (5,8]\}$ также не является разбиением промежутка $I = [1,8]$, потому что $(0,5]$ не содержится в $I.$
+\end{example}
+
+\begin{mydanger}{\bf !}
+    Заметим, что пустое множество может не входить в разбиение промежутка. 
+\end{mydanger}
+
+
+
+
+
+Сейчас мы опишем класс функций, которые ``очень просты'' для интегрирования\footnote{Отметим, что эти функции также ещё называются \textit{кусочно-постоянными}, в англоязычной литературе они так и называются, \textit{piecewise constant functions.}}, а потом с помощью их мы уже определим интеграл в общем виде.  
+
+\begin{definition}
+  Пусть $A \subseteq \mathbb{R}$, и пусть дана функция $f: A \to \mathbb{R}$. Говорят, что $f$ \textit{постоянная функция}, если существует такое $\alpha \in \mathbb{R}$, что $f(x) = \alpha$ для всех $x \in A$. Если $B \subseteq A$, то говорят, что $f$ \textit{постоянная на $B$}, если существует такое $\beta \in \mathbb{R}$, что $f(y) = \beta$ для всех $y \in B.$
+\end{definition}
+
+
+\begin{mydanger}{\bf !}
+ Из этого определения следует, что если функция $f$ постоянна на \textbf{непустом} множестве $A$, то она не может принимать два или более разных значения. Однако из определения пустого множества следует, что постоянная функция на пустом множестве может принимать \textbf{любое значение!}
+\end{mydanger}
+
+\begin{definition}
+    Пусть дан промежуток $I \subsetneq \mathbb{R}$, и пусть дана функция $f: I \to \mathbb{R}$, и пусть $\mathscr{P}(I)$ -- какое-то разбиение промежутка $I$. Говорят, что \textit{функция $f$ есть ступенчатая функция на $I$ относительно $\mathscr{P}(I)$}, если для каждого $J \in \mathscr{P}(I)$, $f$ является постоянной на $J$. 
+\end{definition}
+
+\begin{example}\label{int_[1,6]=10}
+    Пусть $I = [1,6]$ и определим функцию $f: [1,6]: \to \mathbb{R}$ следующим образом
+    \[
+     f(x) = \begin{cases}
+         \,7, & 1 \le x < 3 \\
+         \,4, & x = 3 \\
+         \,5, & 3 < x <6 \\
+         \,2, & x = 6.
+     \end{cases}
+    \]
+Тогда, если мы рассмотрим разбиение
+\[
+ \mathscr{P}(I) := \Bigl\{[1,3), \{3\}, (3,6), \{6\} \Bigr\}
+\]
+промежутка $I$, то получаем, что $f$ -- ступенчатая функция относительно этого разбиения. Рассмотрим теперь другое разбиение этого же промежутка
+\[
+ \mathscr{P}'(I) : = \Bigl\{\varnothing, [1,2), \{2\}, (2,3), \{3\}, (3,5), [5,6),\{6\} \Bigr\}.
+\]
+Тогда несложно видеть, что $f$ будет тоже ступенчатой относительно этого разбиения. 
+\end{example}
+
+Этот пример показывает, что понятие ступенчатой функции можно определить без привлечения разбиения промежутка.
+
+\begin{definition}\label{fiber}
+Пусть $I$ -- промежуток, и пусть $\mathscr{P}(I)$, $\mathscr{P}'(I)$ -- два его разбиения. Говорят, что разбиение $\mathscr{P}'(I)$ \textit{тоньше}, чем $\mathscr{P}(I)$, если для каждого $J' \in \mathscr{P}'(I)$ найдётся такой $J \in \mathscr{P}(I)$, что $J' \subseteq J$.
+\end{definition}
+
+\begin{example}
+ Вернёмся к предыдущему примеру с промежутком $I = [1,6]$ и разбиениями   
+ \begin{eqnarray*}
+     \mathscr{P}(I) &:=& \Bigl\{[1,3), \{3\}, (3,6), \{6\} \Bigr\},\\
+     \mathscr{P}'(I) &: =& \Bigl\{\varnothing, [1,2), \{2\}, (2,3), \{3\}, (3,5), [5,6),\{6\} \Bigr\}.
+ \end{eqnarray*}
+
+Тогда видно, что $\mathscr{P}'(I)$ тоньше, чем $\mathscr{P}(I)$.
+\end{example}
+
+
+\begin{definition}
+    Пусть дан промежуток $I \subsetneq \mathbb{R}$ и пусть дана функция $f: I \to \mathbb{R}$. Говорят, что функция $f$ \textit{ступенчатая на $I$}, если существует такое разбиение $\mathscr{P}(I)$, что $f$ -- постоянная на $I$ относительно $\mathscr{P}(I).$
+\end{definition}
+
+
+\begin{lemma}\label{fiber_for_functions}
+  Пусть $I \subsetneq \mathbb{R}$ -- промежуток и пусть $f:I \to \mathbb{R}$ -- ступенчатая функция относительно разбиения $\mathscr{P}(I)$, тогда если имеем разбиение $\mathscr{P}'(I)$, которое тоньше, чем $\mathscr{P}(I)$, то $f$ -- ступенчатая относительно $\mathscr{P}'(I).$ 
+\end{lemma}
+
+\begin{proof}
+    Действительно, пусть $A' \in \mathscr{P}'(I)$ -- произвольный элемент разбиения, тогда найдётся такой $A \in \mathscr{P}(I)$, что $A' \subseteq A$. Тогда если $f(x) = \alpha$ для всех $x \in A$, то и $f(x') = \alpha$ для всех $A'.$
+\end{proof}
+
+\begin{mydanger}{\bf !}
+    Таким образом, мы будем рассматривать просто ступенчатые функции на промежутке, не определяя какое-то конкретное разбиение.
+\end{mydanger}
+
+
+В связи с этим уместно ввести следующее важное для дальнейшего определение.
+
+\begin{definition}
+    \textit{Характеристической функцией} некоторого множества $A \subseteq X$ называется функция $\chi_A: X\to \{0,1\}$ определённая следующим образом
+    \[
+     \chi_A(x): = \begin{cases}
+         1 & x \in A, \\
+         0 & x \notin A.
+     \end{cases}
+    \]
+\end{definition}
+
+\begin{remark}
+ Таким образом, если $f: I \to \mathbb{R}$ -- ступенчатая функция на промежутке $I$ и пусть $\mathscr{P}(I)$ -- соответствующее разбиение промежутка $I$, тогда мы можем записать
+ \[
+  f =\sum_{A \in \mathscr{P}(I)} f(A) \cdot \chi_A.
+ \]
+\end{remark}
+
+\begin{mydanger}{\bf !}
+    Из определения следует, что $\chi_{\varnothing} = 0$, так как не существует такого $x$ чтобы $x \in \varnothing.$
+\end{mydanger}
+
+
+
+\begin{example}
+
+Вернёмся к примеру \ref{int_[1,6]=10}, имеем $I = [1,6]$ и функцию $f: [1,6]: \to \mathbb{R}$;
+    \[
+     f(x) = \begin{cases}
+         \,7, & 1 \le x < 3 \\
+         \,4, & x = 3 \\
+         \,5, & 3 < x <6 \\
+         \,2, & x = 6.
+     \end{cases}
+    \]
+Как мы уже видели, $f$ -- ступенчатая относительно разбиений
+\begin{align*}
+    &  \mathscr{P}(I) := \Bigl\{[1,3), \{3\}, (3,6), \{6\} \Bigr\},\\
+    &  \mathscr{P}'(I) : = \Bigl\{\varnothing, [1,2), \{2\}, (2,3), \{3\}, (3,5), [5,6),\{6\} \Bigr\}.
+\end{align*}
+
+Тогда получаем, что
+\[
+ f = 7 \cdot \chi_{[1,3)} + 4 \cdot \chi_{\{3\}} + 5 \cdot \chi_{(3,6)} + 2 \cdot \chi_{\{6\}},  
+\]
+а также
+\[
+f = \alpha \cdot \chi_{\varnothing} + 7 \cdot \chi_{[1,2)} + 7 \cdot \chi_{\{2\}} + 7 \cdot \chi_{(2,3)} + 4 \cdot \chi_{\{3\}} + 5 \cdot \chi_{(3,5)} + 5 \cdot \chi_{[5,6)} + 2 \cdot \chi_{\{6\}},
+\]
+где $\alpha \in \mathbb{R}$ -- произвольное число, но так как $\chi_\varnothing = 0$, то всё корректно.
+\end{example}
+
+\section{Интеграл Лебега от ступенчатой функции}
+
+Итак, у нас всё готово, чтобы ввести следующее важное определение.
+
+\begin{definition}\label{int_of_p.c_on_I}
+    Пусть $I \subseteq \overline{\mathbb{R}}$ -- промежуток, $\mathscr{P}(I)$ -- разбиение промежутка $I$ и пусть $f:I \to \mathbb{R}$ -- ступенчатая функция относительно этого разбиения, \textit{т.е.} $f = \sum_{A \in \mathscr{P}(I)}f(A) \cdot \chi_A$. Определим \textit{интеграл на промежутке $I$} ступенчатой функции $f:I \to \mathbb{R}$ относительно разбиения $\mathscr{P}(I)$ следующим образом
+    \[
+     \int_{\mathscr{P}(I)}f: =  \sum_{A \in \mathscr{P}(I)} f(A)\cdot \mu(A)
+    \]
+\end{definition}
+
+\begin{mydanger}{\bf !}
+     Во-первых, что стоит слева от равно нужно понимать как символ и не более того! Во-вторых, это определение может показаться некорректным если $\mathscr{P}(I)$ содержит пустое множество, но так как $|\varnothing| = 0$, то мы на самом деле получаем корректное определение.     
+\end{mydanger}
+
+\begin{remark}\label{int_via_chi}
+    Если $f = \chi_I$, и взяв разбиение $\mathscr{P}(I) = \{I\}$ то мы получаем следующее
+    \[
+     \int_{\mathscr{P}(I)}\chi_I = \mu(I).
+    \]
+И тогда мы можем записать, что если $f = \sum_{A \in \mathscr{P}(I)}f(A) \cdot \chi_A$, то
+\[
+\boxed{
+ \int_{\mathscr{P}(I)}f = \sum_{A \in \mathscr{P}(I)} f(A) \cdot \int_{\mathscr{P}(I)}\chi_A
+ }
+\]
+\end{remark}
+
+
+\begin{example}\label{int_[1,4]=10}
+    Пусть $f: [1,4] \to \mathbb{R}$ определена следующим образом
+    \[
+     f(x)  = \begin{cases}
+          \, 2 & 1 \le x <3 \\
+          \, 4 & x = 3 \\
+          \, 6 & 3< x \le 4
+     \end{cases}
+    \]
+    и пусть $\mathscr{P}(I) = \{ [1,3), \{3\}, (3,4] \}$, тогда
+ \begin{eqnarray*}
+  \int_{\mathscr{P}(I)} f  &=& \alpha_{[1,3)}\cdot | [1,3) | + \alpha_{\{3\}}\cdot |\{3\}| + \alpha_{(3,4]} \cdot | (3,4] | \\
+  &=& 2 \cdot 2 + 4 \cdot 0 + 6 \cdot 1 \\
+  &=& 10.
+ \end{eqnarray*}
+
+ С другой стороны, рассмотрим такое разбиение $\mathscr{P}'(I) = \{ \varnothing, [1,2), [2,3), \{3\}, (3,4] \}$, нетрудно видеть, что оно тоньше разбиения $\mathscr{P}(I)$. Находим
+ \begin{eqnarray*}
+     \int_{\mathscr{P}'(I)}f &=&\alpha_\varnothing \cdot |\varnothing| + \alpha_{[1,2)} \cdot | [1,2) | + \alpha_{[2,3)} \cdot |[2,3)| + \alpha_{\{3\}}\cdot |\{3\}| + \alpha_{(3,4]} \cdot | (3,4] | \\
+     &=& \alpha_\varnothing \cdot 0 + 2 \cdot 1 + 2 \cdot 1 + 4 \cdot 0 + 6 \cdot 1 \\
+     &=& 10.
+ \end{eqnarray*}
+ 
+\end{example}
+
+Итак, мы увидели, что, взяв разбиение тоньше, значение интеграла не изменилось, очевидно, что это верно и в общем случае.
+
+\begin{lemma}
+  Пусть $I \subsetneq \mathbb{R}$ -- промежуток и пусть $f:I \to \mathbb{R}$ -- ступенчатая функция относительно разбиения $\mathscr{P}(I)$, тогда если имеем разбиение $\mathscr{P}'(I)$, которое тоньше, чем $\mathscr{P}(I)$, то
+  \[
+   \int_{\mathscr{P}(I)}f = \int_{\mathscr{P}'(I)}f.
+  \]
+\end{lemma}
+
+\begin{proof}
+    Пусть $\mathscr{P}(I) = \{ A_1,\ldots, A_n \}$ и пусть 
+    \[
+     \mathscr{P}'(I) : = \Bigl\{A_{11}', \ldots, A'_{1\ell_1},\ldots, A'_{n1},\ldots, A'_{n\ell_n} \Bigr\},
+    \]
+    где $A_i$ содержит только $A'_{i1},\ldots, A'_{i\ell_i}$, $1\le i \le n$. Из определения \ref{fiber} тогда следует, что $A_i = A'_{i1} \cup \cdots \cup A'_{i\ell_i}$ и $|A_i| = |A'_{i1}| + \cdots + |A'_{i\ell_i}|$.
+    
+    Наконец, используя лемму \ref{fiber_for_functions}, получаем, что
+    \[
+     f(A'_{i1}) = \cdots = f(A'_{i\ell_i}) = f(A_i), \qquad 1 \le i \le \ell.
+    \]
+
+    Таким образом, имеем
+    \begin{eqnarray*}
+        \int_{\mathscr{P}'(I)}f &=& \Bigl(f(A_{11}') \cdot \left| A'_{11} \right| + \cdots + f(A_{1\ell_1})\cdot \left|A'_{i\ell_1}\right|\Bigr) + \cdots + \Bigl(f(A_{11}') \left|A_{11}'\right| + \cdots + f(A_{1\ell_1})\cdot \left|A'_{i\ell_1}\right| \Bigr) \\
+        &=& f(A_1) \cdot \left( \left| A'_{11}  \right| + \cdots + \left| A'_{1\ell_1} \right| \right) + \cdots + f(A_n) \cdot \left( \left| A'_{n1}  \right| + \cdots + \left| A'_{n\ell_n} \right| \right) \\
+        &=& f(A_1) |A_1| + \cdots + f(A_n)\cdot |A_n| \\
+        &=& \int_{\mathscr{P}(I)}f.
+    \end{eqnarray*}
+\end{proof}
+
+
+Таким образом, мы можем ввести следующее определение, которое будем использовать в дальнейшем.
+
+\begin{definition}\label{int_of_p.c}
+    Пусть $I \subseteq \overline{\mathbb{R}}$ -- промежуток, $f:I \to \mathbb{R}$ -- ступенчатая функция на нём. Определим \textit{интеграл на промежутке $I$} ступенчатой функции $f:I \to \mathbb{R}$ следующим образом
+    \[
+     \int_If: =  \int_{\mathscr{P}(I)}f,
+    \]
+    где $\mathscr{P}(I)$ такое разбиение промежутка $I$, что $f$ является ступенчатой относительно $\mathscr{P}(I).$
+\end{definition}
+
+
+\begin{example}
+Вернёмся к примеру \ref{int_[1,4]=10}. Пусть $f: [1,4] \to \mathbb{R}$ определена следующим образом
+    \[
+     f(x)  = \begin{cases}
+          \, 2 & 1 \le x <3 \\
+          \, 4 & x = 3 \\
+          \, 6 & 3< x \le 4
+     \end{cases}
+    \]
+    и пусть $\mathscr{P}(I) = \{ [1,3), \{3\}, (3,4] \}$, тогда
+ \begin{eqnarray*}
+  \int_{\mathscr{P}(I)} f  &=& \alpha_{[1,3)}\cdot | [1,3) | + \alpha_{\{3\}}\cdot |\{3\}| + \alpha_{(3,4]} \cdot | (3,4] | \\
+  &=& 2 \cdot 2 + 4 \cdot 0 + 6 \cdot 1 \\
+  &=& 10.
+   \end{eqnarray*}
+
+Тогда
+\[
+ \int_{[1,4]}f   =10.
+\]
+\end{example}
+
+\section{Поточечная и равномерная сходимость}
+
+Наш интерес к ступнчатым функциям связан с тем, что любую функую можно приблизить последовательностью ступенчатых. Чтобы дать более строгое утверждение, нам нужно определение
+
+\begin{definition}
+    Говорят, что полседовательность функций $(f_n)$ поточечно сходится к функции $f$, где $f, f_n : X \to \mathbb{R}$, $n\ge 1$, если для каждого $x \in X$, последовательность $(f_n(x))$ сходится к $f(x)$.
+\end{definition}
+
+Тогда возникает вопрос, допустим теперь, что все функции $f_n, f$ интегрируемы на $X$, будет ли тогда из равенств $\lim_{n\to \infty} f_n(x) = f(x)$, вытекать равенство $\lim_{n\to \infty} \int f_n \to \int f$?
+
+Но следующий пример показывает, что это не так.
+
+\begin{example}
+    Пусть $X = [0,1]$, и пусть $\mathbb{Q} \cap [0,1] = \{r_1,r_2,\ldots,\}$, рассмотрим последовательность функций 
+    \[
+     d_n(x): = \begin{cases}
+         1, & x \in \{r_1,\ldots, r_n\},\\
+         0, & x \notin\{r_1,\ldots, r_n\},
+     \end{cases}
+    \]
+    тогда $\int_X d_n = 0$, при каждом $n \ge 1$ и более того $\lim_{n\to \infty} d_n =d$, где
+    \[
+     d(x) = \begin{cases}
+         1, & x \in \mathbb{Q}\cap [0,1] \\
+         0, & x \notin \mathbb{Q} \cap [0,1]
+     \end{cases}
+    \]
+    это так называемая \textit{функция Дирихле}, нетрудно видеть что $\overline{\int}_X d = 1$, $\underline{\int}_I d  =0$, \textit{т.е.,} функция $d$ не интегрируема.
+\end{example}
+
+Итак из сходимости функций не следует, вообще говоря, сходимость интегралов, тем не менее при определённых условиях последовательность интегририруемых функций всё же сходится к интегрируемой функции и более того последовательность интегралов сходится к интегралу.
+
+\begin{definition}
+    Говрят, что последовательность функций $(f_n)$, $f_n:X \to \mathbb{R}$ \textit{сходится равномерно} на $X$ к функции $f:X \to \mathbb{R}$, если для любого $\varepsilon>0$ существует такое $N \ge 1$, что при всех $n \ge N$ имеем
+    \[
+     |f_n(x) -f(x)| <\varepsilon
+    \]
+    для всех $x \in X.$
+\end{definition}
+
+\begin{remark}
+    Ясно, что каждая равномерно сходящаяся последовательность сходится и поточечно. Разница между этими двмя понятиями заключается в следующем. Если оследовательность $(f_n)$ сходится поточечно на $X$, то существует функция $f$, такая, что для любого $\varepsilon>0$ и \textbf{для каждого} $x \in X$ существует число $N\ge 1$, которое зависит как от $\varepsilon$ так и от $x$, такое что $|f_n(x) -f(x)| <\varepsilon$ при всех $n \ge N$. А в случае, когда $(f_n)$ сходится равномерно к $f$, то можно при каждом $\varepsilon>0$ найти \textbf{одно число} $N\ge 1$, которое будет годится \textbf{для всех} $x \in X$.
+\end{remark}
+
+\begin{theorem}
+    Если последовательность функций $(f_n)$, интегрируемых на отрезке $[a,b]$, равномерно сходится на этом отрезке к функции $f$, то функция $f$ интегрируема и более того
+    \[
+     \lim_{n\to \infty}\int_a^b f_n = \int_a^b f. 
+    \]
+
+    Более того, последовательность функций $F_n$ равномерно сходится к функции $F$, где
+    \[
+     F_n(x) : = \int_a^x f_n, \qquad F(x) : = \int_a^x f.
+    \]
+\end{theorem}
+
+
+\begin{proof}~ Доказательство разобьём на несколько шагов.
+
+(1) Покажем ограниченность функции $f$. 
+
+Так как каждая функция $f_n$ интегрируема на $[a,b]$, она ограничена. Поскольку $f_n$ равномерно сходится к $f$, для $\varepsilon = 1$ найдется номер $N$ такой, что для всех $n \geq N$ и всех $x \in [a,b]$ выполняется $|f_n(x) - f(x)| < 1$. В частности, для $n = N$ имеем $|f_N(x) - f(x)| < 1$. Функция $f_N$ ограничена, поэтому существует константа $C_N > 0$ такая, что $|f_N(x)| \leq C_N$ для всех $x \in [a,b]$. Тогда 
+\[
+|f(x)| \leq |f(x) - f_N(x)| + |f_N(x)| < 1 + C_N
+\]
+для всех $x \in [a,b]$. Следовательно, $f$ ограничена.
+
+(2) Покажем интегрируемость функции $f$
+
+Зафиксируем $\varepsilon > 0$. Поскольку $f_n$ равномерно сходится к $f$, найдется номер $N$ такой, что для всех $n \geq N$ и всех $x \in [a,b]$ выполняется 
+\[
+|f_n(x) - f(x)| < \frac{\varepsilon}{3(b-a)}.
+\]
+Зафиксируем $n = N$. Так как $f_N$ интегрируема, то, согласно критерию интегрируемости (см. Теорема \ref{criteria_for_Rieman}), существует разбиение $\mathsf{P}'$ отрезка $[a,b]$, для которого 
+\[
+\overline{\mathcal{R}}(\mathsf{P}',f_N) - \underline{\mathcal{R}}(\mathsf{P}',f_N) < \frac{\varepsilon}{3}.
+\]
+
+Рассмотрим разбиение $\mathsf{P}'$. Для любого отрезка $[x_{i-1}, x_i]$ разбиения $\mathsf{P}'$ и любых точек $x', x''$ из этого отрезка имеем
+\begin{align*}
+|f(x') - f(x'')| &\leq |f(x') - f_N(x')| + |f_N(x') - f_N(x'')| + |f_N(x'') - f(x'')| \\
+&< \frac{\varepsilon}{3(b-a)} + |f_N(x') - f_N(x'')| + \frac{\varepsilon}{3(b-a)}.
+\end{align*}
+Следовательно, 
+\[
+\sup_{[x_{i-1},x_i]} f - \inf_{[x_{i-1},x_i]} f \leq \frac{2\varepsilon}{3(b-a)} + \left( \sup_{[x_{i-1},x_i]} f_N - \inf_{[x_{i-1},x_i]} f_N \right).
+\]
+
+Умножая на длину отрезка $\Delta x_i:=x_i - x_{i-1}$ и суммируя по всем отрезкам разбиения, получаем
+\begin{align*}
+\overline{\mathcal{R}}(\mathsf{P}',f) - \underline{\mathcal{R}}(\mathsf{P}',f) 
+&\leq \sum_i \frac{2\varepsilon}{3(b-a)} \Delta x_i + \sum_i \left( \sup f_N - \inf f_N \right) \Delta x_i \\
+&= \frac{2\varepsilon}{3} + \left( \overline{\mathcal{R}}(\mathsf{P}',f_N) - \underline{\mathcal{R}}(\mathsf{P}',f_N) \right) \\
+&< \frac{2\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon.
+\end{align*}
+Таким образом, $f$ интегрируема по Риману на $[a,b]$.
+
+(3) Найдем теперь предел интегралов.
+
+Для произвольного $\varepsilon > 0$ выберем номер $N$ такой, что для всех $n \geq N$ и всех $x \in [a,b]$ выполняется
+\[
+|f_n(x) - f(x)| < \frac{\varepsilon}{b-a}.
+\]
+Тогда для всех $n \geq N$ получаем
+\[
+\left| \int_a^b f_n - \int_a^b f \right| \leq \int_a^b |f_n - f|  dx < \int_a^b \frac{\varepsilon}{b-a}  dx = \varepsilon.
+\]
+Следовательно, 
+\[
+\lim_{n\to \infty} \int_a^b f_n = \int_a^b f.
+\]
+
+(4) Нам осталось доказать равномерную сходимость $F_n$ к $F$. 
+Для произвольного $\varepsilon > 0$ выберем номер $N$ такой, что для всех $n \geq N$ и всех $t \in [a,b]$ выполняется
+\[
+|f_n(t) - f(t)| < \frac{\varepsilon}{b-a}.
+\]
+Тогда для всех $n \geq N$, всех $x \in [a,b]$ и всех $t \in [a,x]$ имеем $|f_n(t) - f(t)| < \frac{\varepsilon}{b-a}$. Следовательно,
+\[
+|F_n(x) - F(x)| = \left| \int_a^x (f_n - f) \right| \leq \int_a^x |f_n - f|  dt < \int_a^x \frac{\varepsilon}{b-a}  dt = \frac{\varepsilon}{b-a} (x - a) \leq \varepsilon.
+\]
+Таким образом, $F_n$ равномерно сходится к $F$ на $[a,b]$. Это завершает доказательство.
+
+\end{proof}
+
+
+\section{Интеграл Лебега}
+
+Мы объясним что такое интеграл Лебега от функции используя подход Даниелля -- Риса. Этот подход заключается в следующем. Если мы хотим интегрировать функцию $f$, то мы должны найти последовательсность ступенчатых функций $\{\phi_n\}$, которые поточечно сходятся к функии $f$ и для которых последовательность $(\int_I \phi_n )$ сходится, тогда предел последовательности этих интегралов и есть интеграл Лебега функции $f.$
+
+Будем считать, что $f\ge 0$
+
+
+\begin{definition}
+    Пусть $(\phi_n(x))$ последовательность неубывающих ступенчатых функций которые поточечно сходятся к фукнкции $f:X \to \mathbb{R}$ при каждом $x \in X$. Тогда интеграл Лебега от этой функции это предел
+    \[
+     \int_X f \mathrm{d}x: = \lim_{n \to \infty} \int_X\phi_n(x) \mathrm{d}\mu.
+    \]
+\end{definition}
+
+Это определение эквивлентно следующему определению.
+
+\begin{definition}
+    Пусть $\mathcal{S}^+$ -- множество всех ступечатых функций $\phi(x)$ таких что $\phi(x) \le f(x)$ для всех $x \in X$, тогда интеграл Лебега от функции $f$ определяется так 
+    \[
+     \int_Xf\mathrm{d}\mu : = \sup \left\{ \int_X \phi_n(x) \mathrm{d}\mu,\,\, \phi \in \mathcal{S}^+ \right\}.
+    \]
+\end{definition}
+
+
+\begin{lemma}
+    Пусть $f,g$ интегрируемы по Лебегу на $X$, тогда
+    \begin{itemize}
+        \item[(1)] если $f =g$ почти всюду на $X$, то $\int_Xf \mathrm{d}\mu = \int_X g\mathrm{d}\mu$,
+        \item [(2)] если $f \le g$ почти всюду на $X$, то $\int_Xf \mathrm{d}\mu \le \int_X g\mathrm{d}\mu$.
+    \end{itemize}
+\end{lemma}
+
+\begin{proof}
+Любую ступенчаю функцию $\phi:X \to [0,+\infty]$ определённую следующим образом
+    \[
+     \phi(x) : = \sum_{i=1}^n c_i \cdot \chi_{A_i}(x),
+    \]
+    можно записать так
+    \[
+     \phi(x) = \sum_{\alpha \in \phi(X)} \alpha\cdot \chi_{\{ x \in X\, :\, \phi(x) = \alpha \}}.
+    \]
+
+    Тогда
+    \[
+     \int_X \phi \mathrm{d}\mu = \sum_{\alpha \in \phi(X)} \alpha\cdot \mu(\{ x \in X\, :\, \phi(x) = \alpha \}).
+    \]
+
+    Тогда если $X = X'\sqcup X''$, где $\mu(X'') = 0$, то пусть 
+    \[
+     \widetilde{\phi}(x): = \begin{cases}
+         \phi(x), & x \in X'\\
+         0, & x \in X'',
+     \end{cases}
+    \]
+    \textit{т.е.,} имеем равенство $\phi = \widetilde{\phi}$ почти всюду на $X$. 
+    
+(1) Так как $\mu(X) = \mu(X') + \mu(X'')$, то получаем
+\begin{eqnarray*}
+ \int_X \widetilde{\phi} \mathrm{d}\mu &:=& \sum_{\alpha \in \widetilde{\phi}(X)} \alpha\cdot \mu(\{ x \in X\, :\, \widetilde{\phi}(x) = \alpha \}) \\
+ &=& \sum_{\alpha \in \phi(X)} \alpha\cdot \mu(\{ x \in X'\, :\, \phi(x) = \alpha \}) + 0\cdot \mu(X'')\\
+ &=&\sum_{\alpha \in \phi(X)} \alpha\cdot \mu(\{ x \in X\, :\, \phi(x) = \alpha \})\\
+ &=:& \int_X \phi \mathrm{d}\mu.
+\end{eqnarray*}
+    
+Это означает, что если ступенчатые функции почти всюду совпадают, то совпадают их интегралы Лебега. Но тогда и интегралы $\int_X f \mathrm{d}\mu$, $\int_X g \mathrm{d}\mu$ совпадают ибо они определяются через интегралы ступенчатых функций.
+
+(2) Пусть $X = X_1 \sqcup X_2$, где $X_1: = \{x\in X\, :\, f(x) \le g(x)\}$, тогда, по условию $\mu(X_2) = 0.$ В силу определения интеграла Лебега 
+\begin{eqnarray*}
+    \int_X f \mathrm{d}\mu &:=& \sup \left\{ \int_X \phi \mathrm{d}\mu \, :\, \phi \in \mathcal{S}^+,\, \phi \le f \right\} \\
+    &=& \sup \left\{ \int_X \widetilde{\phi} \mathrm{d}\mu \, :\, \widetilde{\phi} \in \mathcal{S}^+,\, \widetilde{\phi} \le f \right\}.
+\end{eqnarray*}
+
+Так как $f\le g$ при любом $x \in X_1$, то $\widetilde{\phi}(x) \le f \le g$, \textit{т.е.,} $\widetilde{\phi}(x) \le g(x)$.
+
+Тогда
+\[
+\left\{ \int_X \widetilde{\phi} \mathrm{d}\mu \, :\, \widetilde{\phi} \in \mathcal{S}^+,\, \widetilde{\phi} \le f \right\} \subseteq \left\{ \int_X \widetilde{\phi} \mathrm{d}\mu \, :\, \widetilde{\phi} \in \mathcal{S}^+,\, \widetilde{\phi} \le g \right\},
+\]
+поэтому 
+\[
+ \int_Xf \mathrm{d}\mu : = \sup \left\{ \int_X \widetilde{\phi} \mathrm{d}\mu \, :\, \widetilde{\phi} \in \mathcal{S}^+,\, \widetilde{\phi} \le f \right\} \le \sup \left\{ \int_X \widetilde{\phi} \mathrm{d}\mu \, :\, \widetilde{\phi} \in \mathcal{S}^+,\, \widetilde{\phi} \le g \right\}=: \int_X g \mathrm{d}\mu,
+\]
+что завершает доказательство.    
+\end{proof}
+
+
+\begin{theorem}
+    Функция $f:I \to \mathbb{R}$ интегрируема по Риману тогда и только тогда, когда она почти всюду непрерывна на нём, и более того интеграл Римана от этой функции совпадает с интегралом Лебега.
+\end{theorem}

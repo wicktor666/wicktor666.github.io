@@ -1,0 +1,373 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{cancel}
+
+\title{Вычисление пределов функций двух переменных \\ методом полярных координат}
+\author{Ваше имя}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Теоретическая основа}
+Для исследования предела функции $f(x,y)$ при $(x,y) \to (0,0)$ используем полярные координаты:
+\[
+x = r\cos\theta, \quad y = r\sin\theta, \quad r = \sqrt{x^2 + y^2}
+\]
+Тогда:
+\[
+\lim_{(x,y)\to(0,0)} f(x,y) = \lim_{r\to 0} f(r\cos\theta, r\sin\theta)
+\]
+
+\section{Пример 1: Простая рациональная функция}
+Исследуем предел:
+\[
+\lim_{(x,y)\to(0,0)} \frac{x^2 y}{x^2 + y^2}
+\]
+
+\subsection{Решение}
+\begin{align*}
+\frac{x^2 y}{x^2 + y^2} &= \frac{r^2 \cos^2\theta \cdot r\sin\theta}{r^2 \cos^2\theta + r^2 \sin^2\theta} \\
+&= \frac{r^3 \cos^2\theta \sin\theta}{r^2 (\cos^2\theta + \sin^2\theta)} \\
+&= r \cos^2\theta \sin\theta
+\end{align*}
+Поскольку $|\cos^2\theta \sin\theta| \leq 1$ для всех $\theta$, то:
+\[
+\lim_{r\to 0} r \cos^2\theta \sin\theta = 0
+\]
+\textbf{Ответ:} $\boxed{0}$
+
+\section{Пример 2: Зависимость от пути}
+Исследуем:
+\[
+\lim_{(x,y)\to(0,0)} \frac{xy}{x^2 + y^2}
+\]
+
+\subsection{Решение}
+\begin{align*}
+\frac{xy}{x^2 + y^2} &= \frac{r\cos\theta \cdot r\sin\theta}{r^2} \\
+&= \cos\theta \sin\theta = \frac{1}{2}\sin 2\theta
+\end{align*}
+Предел зависит от $\theta$:
+\begin{itemize}
+\item При $\theta = 0$: значение $0$
+\item При $\theta = \pi/4$: значение $\frac{1}{2}$
+\end{itemize}
+\textbf{Вывод:} Предел не существует.
+
+\section{Пример 3: Кубическая функция}
+Вычислим:
+\[
+\lim_{(x,y)\to(0,0)} \frac{x^3 + y^3}{x^2 + y^2}
+\]
+
+\subsection{Решение}
+\begin{align*}
+\frac{x^3 + y^3}{x^2 + y^2} &= \frac{r^3(\cos^3\theta + \sin^3\theta)}{r^2} \\
+&= r(\cos^3\theta + \sin^3\theta)
+\end{align*}
+Так как $|\cos^3\theta + \sin^3\theta| \leq 2$:
+\[
+\lim_{r\to 0} r(\cos^3\theta + \sin^3\theta) = 0
+\]
+\textbf{Ответ:} $\boxed{0}$
+
+\section{Критерии существования предела}
+\begin{enumerate}
+\item Если выражение стремится к 0 при $r\to 0$ \textbf{независимо} от $\theta$ → предел существует
+\item Если результат зависит от $\theta$ → предел не существует
+\item Если можно выделить $r^k$ с $k>0$ → предел вероятно существует
+\end{enumerate}
+
+
+
+\newpage
+
+\section*{Принцип сжимающих отображений}
+
+\subsection*{Задача 1 (Чистая математика)}
+\textbf{Условие:} Доказать, что уравнение \(x = \cos x\) имеет единственное решение на \([0, 1]\). Найти его с точностью \(0.001\) методом итераций (\(x_0 = 0.5\)).
+
+\textbf{Решение:}
+\begin{enumerate}
+\item Функция \(g(x) = \cos x\):
+\begin{itemize}
+\item Отображает \([0, 1]\) в \([\cos 1, 1] \approx [0.54, 1] \subset [0, 1]\)
+\item \(|g'(x)| = |-\sin x| = \sin x \leq \sin 1 \approx 0.8415 < 1\)
+\end{itemize}
+Значит, \(g\) -- сжимающее отображение \(\Rightarrow\) решение существует и единственно.
+
+\item Итерации:
+\begin{align*}
+x_0 &= 0.5 \\
+x_1 &= \cos(0.5) \approx 0.8776 \\
+x_2 &= \cos(0.8776) \approx 0.6390 \\
+x_3 &= \cos(0.6390) \approx 0.8027 \\
+x_4 &= \cos(0.8027) \approx 0.6948 \\
+&\cdots \\
+x_{15} &\approx 0.7396 \quad (\text{разность с предыдущим} < 0.001)
+\end{align*}
+Ответ: \(x^* \approx 0.740\)
+\end{enumerate}
+
+\subsection*{Задача 2 (Экономика)}
+\textbf{Условие:} Спрос и предложение: 
+\[
+D(p) = \frac{100}{1 + p}, \quad S(p) = \frac{p}{2} - 5.
+\]
+Равновесная цена: \(D(p^*) = S(p^*)\).
+\begin{enumerate}
+\item Показать, что \(p = g(p) = 2\left(\frac{100}{1 + p} + 5\right)\)
+\item Доказать сжимаемость \(g(p)\) на \([15, 25]\)
+\item Найти \(p^*\) (3 итерации, \(p_0 = 15\))
+\end{enumerate}
+
+\textbf{Решение:}
+\begin{enumerate}
+\item Из \(D(p) = S(p)\):
+\[
+\frac{100}{1 + p} = \frac{p}{2} - 5 \Rightarrow p = 2\left(\frac{100}{1 + p} + 5\right)
+\]
+
+\item Производная:
+\[
+|g'(p)| = \left| -\frac{200}{(1 + p)^2} \right| \leq \frac{200}{16^2} = \frac{200}{256} \approx 0.78 < 1
+\]
+\(g([15,25]) \approx [16.25, 18.33] \subset [15,25]\)
+
+\item Итерации:
+\begin{align*}
+p_0 &= 15 \\
+p_1 &= 2\left(\frac{100}{16} + 5\right) = 22.5 \\
+p_2 &= 2\left(\frac{100}{23.5} + 5\right) \approx 18.52 \\
+p_3 &= 2\left(\frac{100}{19.52} + 5\right) \approx 20.24
+\end{align*}
+Ответ: \(p^* \approx 20.2\)
+\end{enumerate}
+
+\section*{Теорема об обратном отображении}
+
+\subsection*{Задача 3}
+\textbf{Условие:} Для \(f(x,y) = (x^2 - y^2, 2xy)\):
+\begin{enumerate}
+\item Матрица Якоби в \((1,1)\)
+\item Проверить локальную обратимость
+\item Найти \(J_{f^{-1}}\) в \(f(1,1)\)
+\end{enumerate}
+
+\textbf{Решение:}
+\begin{enumerate}
+\item 
+\[
+J_f = \begin{pmatrix}
+2x & -2y \\
+2y & 2x
+\end{pmatrix} \xrightarrow{(1,1)} \begin{pmatrix}
+2 & -2 \\
+2 & 2
+\end{pmatrix}
+\]
+
+\item \(\det J_f = 2\cdot2 - (-2)\cdot2 = 8 \neq 0 \Rightarrow\) обратимо
+
+\item \(f(1,1) = (0,2)\),
+\[
+J_{f^{-1}}(0,2) = \frac{1}{8}\begin{pmatrix}
+2 & 2 \\
+-2 & 2
+\end{pmatrix} = \begin{pmatrix}
+0.25 & 0.25 \\
+-0.25 & 0.25
+\end{pmatrix}
+\]
+\end{enumerate}
+
+\section*{Теорема о неявной функции}
+
+\subsection*{Задача 4}
+\textbf{Условие:} Для уравнения \(x^3 + y^3 - 3xy = 1\):
+\begin{enumerate}
+\item Показать, что в окрестности \((1,0)\) существует \(y = y(x)\)
+\item Найти \(\frac{dy}{dx}\) в \((1,0)\)
+\end{enumerate}
+
+\textbf{Решение:}
+\begin{enumerate}
+\item \(F(x,y) = x^3 + y^3 - 3xy - 1\)
+\begin{itemize}
+\item \(F(1,0) = 0\)
+\item \(\frac{\partial F}{\partial y} = 3y^2 - 3x \xrightarrow{(1,0)} -3 \neq 0\)
+\end{itemize}
+Условия теоремы выполнены
+
+\item 
+\[
+\frac{dy}{dx} = -\frac{F_x}{F_y} = -\frac{3x^2 - 3y}{3y^2 - 3x} \xrightarrow{(1,0)} -\frac{3}{-3} = 1
+\]
+\end{enumerate}
+
+\section*{Метод множителей Лагранжа}
+
+\subsection*{Задача 5 (Ограничение-равенство)}
+\textbf{Условие:} Найти \(\min x^2 + y^2\) при \(x + y = 1\).
+
+\textbf{Решение:}
+\begin{enumerate}
+\item Функция Лагранжа:
+\[
+\mathcal{L} = x^2 + y^2 + \lambda(1 - x - y)
+\]
+
+\item Система:
+\[
+\begin{cases}
+2x - \lambda = 0 \\
+2y - \lambda = 0 \\
+x + y = 1
+\end{cases} 
+\Rightarrow x = y = 0.5, \lambda = 1
+\]
+
+\item Значение: \(f = 0.25 + 0.25 = 0.5\) (минимум)
+\end{enumerate}
+
+\subsection*{Задача 6 (Ограничения-неравенства)}
+\textbf{Условие:} Максимизировать \(U(x,y) = xy\) при \(2x + 3y \leq 100\), \(x \geq 0\), \(y \geq 0\).
+
+\textbf{Решение:}
+\begin{enumerate}
+\item \textbf{Внутренняя область:} Нет критических точек (\(\nabla U = (y,x) \neq 0\))
+
+\item \textbf{Границы:}
+\begin{itemize}
+\item Случай \(x=0\): \(U=0\)
+\item Случай \(y=0\): \(U=0\)
+\item Случай \(2x + 3y = 100\):
+\begin{align*}
+\mathcal{L} &= xy + \lambda(100 - 2x - 3y) \\
+\begin{cases}
+y - 2\lambda = 0 \\
+x - 3\lambda = 0 \\
+2x + 3y = 100
+\end{cases} 
+&\Rightarrow x = 25,\ y \approx 16.67,\ U \approx 416.67
+\end{align*}
+\end{itemize}
+
+\item \textbf{Результат:} Максимум в \((25, 16.67)\)
+\end{enumerate}
+
+\subsection*{Задача 7 (Самостоятельно)}
+\textbf{Условие:} Максимизировать \(f(x,y) = 4x + 3y\) при \(x^2 + y^2 \leq 25\), \(x \geq 0\), \(y \geq 0\).
+
+\textbf{Подсказка:} Решить на границе \(x^2 + y^2 = 25\) методом Лагранжа.
+
+
+\section*{Задача 1}
+Найти экстремумы $f(x, y) = x^2 + y^2$ при $x + 2y = 1$.
+
+\paragraph*{Решение:}
+Функция Лагранжа:
+\[
+\mathcal{L} = x^2 + y^2 - \lambda(x + 2y - 1)
+\]
+
+Условия:
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial x} &= 2x - \lambda = 0 \\
+\frac{\partial \mathcal{L}}{\partial y} &= 2y - 2\lambda = 0 \\
+\frac{\partial \mathcal{L}}{\partial \lambda} &= -(x + 2y - 1) = 0
+\end{align*}
+
+Решение: $\lambda = 2x$, $y = 2x$, $x + 2(2x) = 1 \Rightarrow x = 0.2$, $y = 0.4$
+
+Матрица Гессе:
+$\begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$, 
+Касательный вектор $\mathbf{v} = (2, -1)$:
+\[
+(2,-1)\begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}\begin{pmatrix} 2 \\ -1 \end{pmatrix} = 10 > 0
+\]
+Локальный минимум в $(0.2, 0.4)$
+
+\section*{Задача 2}
+Найти экстремумы $f(x,y) = x^2 + 2y^2$ при $x^2 + y^2 = 1$.
+
+\paragraph*{Решение:}
+Функция Лагранжа:
+\[
+\mathcal{L} = x^2 + 2y^2 - \lambda(x^2 + y^2 - 1)
+\]
+
+Условия:
+\begin{align*}
+2x - 2\lambda x &= 0 \\
+4y - 2\lambda y &= 0 \\
+x^2 + y^2 &= 1
+\end{align*}
+
+Критические точки:
+\begin{itemize}
+\item $x=0, y=\pm1, \lambda=2, f=2$
+\item $y=0, x=\pm1, \lambda=1, f=1$
+\end{itemize}
+
+Анализ:
+\begin{itemize}
+\item Для $(1,0)$: $H = \begin{pmatrix} 0 & 0 \\ 0 & 2 \end{pmatrix}$, $Q((0,1)) = 2 > 0$ (минимум)
+\item Для $(0,1)$: $H = \begin{pmatrix} -2 & 0 \\ 0 & 0 \end{pmatrix}$, $Q((1,0)) = -2 < 0$ (максимум)
+\end{itemize}
+
+\section*{Задача 3}
+Найти точку на $y = x^2$ ближайшую к $(1,0)$.
+
+\paragraph*{Решение:}
+Минимизировать $f = (x-1)^2 + y^2$ при $y = x^2$.
+
+Функция Лагранжа:
+\[
+\mathcal{L} = (x-1)^2 + y^2 - \lambda(y - x^2)
+\]
+
+Условия:
+\begin{align*}
+2(x-1) + 2\lambda x &= 0 \\
+2y - \lambda &= 0 \\
+y - x^2 &= 0
+\end{align*}
+
+Решение: $\lambda = 2y$, $y = x^2$, $2(x-1) + 4x^3 = 0$
+Корень $x \approx 0.59$, $y \approx 0.348$
+
+Анализ: $H \approx \begin{pmatrix} 3.392 & 0 \\ 0 & 2 \end{pmatrix}$, $Q \approx 6.17 > 0$ (минимум)
+
+\section*{Задача 4}
+Для $f(x,y) = x^3 + y^3$ при $x + y = 1$ найти экстремумы.
+
+\paragraph*{Решение:}
+Функция Лагранжа:
+\[
+\mathcal{L} = x^3 + y^3 - \lambda(x + y - 1)
+\]
+
+Условия:
+\begin{align*}
+3x^2 - \lambda &= 0 \\
+3y^2 - \lambda &= 0 \\
+x + y &= 1
+\end{align*}
+
+Решение: $x^2 = y^2$, $x = y = 0.5$, $\lambda = 0.75$
+
+Матрица Гессе: $\begin{pmatrix} 3 & 0 \\ 0 & 3 \end{pmatrix}$, 
+Касательный вектор $\mathbf{v} = (1, -1)$:
+\[
+(1,-1)\begin{pmatrix} 3 & 0 \\ 0 & 3 \end{pmatrix}\begin{pmatrix} 1 \\ -1 \end{pmatrix} = 6 > 0
+\]
+Локальный минимум в $(0.5, 0.5)$
+
+\end{document}
